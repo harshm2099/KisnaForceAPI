@@ -2,9 +2,9 @@
 {
     public class ItemViewItemListParams
     {
-        public string data_id { get; set; }
-        public string data_login_type { get; set; }
-        public string page { get; set; }
+        public string? dataId { get; set; }
+        public string? dataLoginType { get; set; }
+        public string? page { get; set; }
     }
 
     public class ItemViewItemListResponse

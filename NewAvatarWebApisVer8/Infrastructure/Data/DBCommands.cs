@@ -124,6 +124,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
         public const string PieceVerify = "usp_PieceVerify";
         public const string CappingItemList = "usp_CappingItemList";
         public const string TopRecommandedItems = "usp_TopRecommendedItems";
+        public const string ItemViewList = "usp_ItemList";
 
         //WISHLIST
         public const string Wishlist_Fetch = "WISHLIST_Fetch";
