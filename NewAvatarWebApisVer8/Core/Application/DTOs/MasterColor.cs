@@ -1,0 +1,16 @@
+﻿namespace NewAvatarWebApis.Core.Application.DTOs
+{
+    public class MasterColor
+    {
+        public int ColorID { get; set; }
+        public string ColorCode { get; set; }
+        public string ColorName { get; set; }
+        public string Description { get; set; }
+        public decimal SortOrder { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime InsertedOn { get; set; }
+        public string InsertedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
+        public string UpdatedBy { get; set; }
+    }
+}
