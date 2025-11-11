@@ -338,6 +338,15 @@ namespace NewAvatarWebApis.Models
         public string? DataLoginType { get; set; }
     }
 
+    public class CappingFilterRequest
+    {
+        public string? DataId { get; set; }
+        public string? DataLoginType { get; set; }
+        public string? Type { get; set; }
+        public string? CategoryId { get; set; }
+        public string? MetalWt { get; set; }
+    }
+
     public class CappingItemListRequest
     {
         public string? DataId { get; set; }
@@ -455,5 +464,13 @@ namespace NewAvatarWebApis.Models
         public string? SalesLocation { get; set; }
         public string? DesignTimeline { get; set; }
         public string? ItemSubCategoryId { get; set; }
+    }
+
+    public class PopularItemsFilterRequest
+    {
+        public string? DataId { get; set; }
+        public string? ButtonCode { get; set; }
+        public string? MasterCommonId { get; set; }
+        public string? CategoryId { get; set; }
     }
 }

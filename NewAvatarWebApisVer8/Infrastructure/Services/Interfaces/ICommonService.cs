@@ -62,10 +62,12 @@ namespace NewAvatarWebApis.Infrastructure.Services.Interfaces
         public Task<ResponseDetails> ChatCustomerCare(ChatCustomerCareRequest param);
         public Task<ResponseDetails> FranchiseWiseStock(FranchiseWiseStockRequest param);
         public Task<ResponseDetails> CappingSortBy(CappingSortByRequest param);
+        public Task<ResponseDetails> CappingFilter(CappingFilterRequest request);
         public Task<ResponseDetails> CappingItemList(CappingItemListRequest param);
         public Task<ResponseDetails> ConsumerFormStore(ConsumerFormStoreRequest param);
         public Task<ResponseDetails> StockWiseItemData(StockWiseItemDataRequest param);
         public Task<ResponseDetails> PopularItems(PopularItemsRequest param);
+        public Task<ResponseDetails> PopularItemsFilter(PopularItemsFilterRequest request);
         public Task<ResponseDetails> TopRecommandedItems(TopRecommandedItemsRequest param);
     }
 }
