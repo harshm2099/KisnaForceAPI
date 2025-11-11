@@ -430,6 +430,13 @@ namespace NewAvatarWebApis.Presentation.Controllers
             return result;
         }
 
+        [HttpPost("capping-filter")]
+        public async Task<ResponseDetails> CappingFilter(CappingFilterRequest request)
+        {
+            var result = await _commonService.CappingFilter(request);
+            return result;
+        }
+
         [HttpPost("capping-item-list")]
         public async Task<ResponseDetails> CappingItemList(CappingItemListRequest param)
         {
@@ -455,6 +462,13 @@ namespace NewAvatarWebApis.Presentation.Controllers
         public async Task<ResponseDetails> PopularItems(PopularItemsRequest param)
         {
             var result = await _commonService.PopularItems(param);
+            return result;
+        }
+
+        [HttpPost("popular-items-filter")]
+        public async Task<ResponseDetails> PopularItemsFilter(PopularItemsFilterRequest request)
+        {
+            var result = await _commonService.PopularItemsFilter(request);
             return result;
         }
 

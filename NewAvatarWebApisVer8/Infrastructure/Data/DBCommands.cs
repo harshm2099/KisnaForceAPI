@@ -115,10 +115,12 @@ namespace NewAvatarWebApis.Infrastructure.Data
         public const string ChatCustomerCare = "usp_ChatCustomerCare";
         public const string FranchiseWiseStock = "usp_FranchiseWiseStock";
         public const string CappingSortBy = "usp_CappingSortBy";
+        public const string CappingFilter = "usp_CappingFilter";
         public const string ConsumerFromStore = "usp_ConsumerFormStore";
         public const string ExtraGoldRateWiseRate = "usp_ExtraGoldRateWiseRate";
         public const string StockWiseItemData = "usp_StockWiseItemData";
         public const string PopularItems = "usp_PopularItems";
+        public const string PopularItemsFilter = "usp_PopularItemFilter";
         public const string PieceVerify = "usp_PieceVerify";
         public const string CappingItemList = "usp_CappingItemList";
         public const string TopRecommandedItems = "usp_TopRecommendedItems";
@@ -344,5 +346,6 @@ namespace NewAvatarWebApis.Infrastructure.Data
         //Order Tracking
         public const string TotalOrderTrackingData = "usp_GetTotalOrderTrackingData";
         public const string GetTrackSingleDataList = "usp_GetTrackSingleDataList";
+        public const string GetTrackingItemDetailData = "usp_GetTrackItemDetailData";
     }
 }

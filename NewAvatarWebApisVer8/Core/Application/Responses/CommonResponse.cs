@@ -87,4 +87,155 @@
         public object? ProductTags { get; set; }
         public string? IsInFranchiseStore { get; set; }
     }
-}
+
+        public class PopularItemsFilterList
+        {
+            public IList<FilterCategoryList> categoryList { get; set; }
+            public IList<FilterDsgKtList> dsgKt { get; set; }
+            public IList<FilterAmountList> dsgAmount { get; set; }
+            public IList<FilterDsgMetalWtList> dsgMetalWeight { get; set; }
+            public IList<FilterDsgDiamondWtList> dsgDiamondWeight { get; set; }
+            public IList<FilterProductTagList> productTags { get; set; }
+            public IList<FilterBrandList> brand { get; set; }
+            public IList<FilterGenderList> gender { get; set; }
+            public IList<FilterApproxDeliveryList> approxDelivery { get; set; }
+            public IList<FilterStockList> stockFilter { get; set; }
+            public IList<FilterSubCategoryList> itemSubCategory { get; set; }
+            public IList<FilterSubSubCategoryList> itemSubSubCategory { get; set; }
+            public IList<FilterFamilyProductList> familyProduct { get; set; }
+            public IList<FilterExcludeDiscontinueList> excludeDiscontinue { get; set; }
+            public IList<FilterWearViewList> wearView { get; set; }
+            public IList<FilterTryViewList> tryView { get; set; }
+        }
+
+        public class FilterCategoryList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? categoryId { get; set; }
+            public string? subCategoryId { get; set; }
+            public string? subCategoryName { get; set; }
+            public string? subCategoryCount { get; set; }
+        }
+
+        public class FilterDsgKtList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? KT { get; set; }
+            public string? KtCount { get; set; }
+        }
+
+        public class FilterAmountList
+        {
+            public string? filterName { get; set; }
+            public string? minAmount { get; set; }
+            public string? maxAmount { get; set; }
+        }
+
+        public class FilterDsgMetalWtList
+        {
+            public string? filterName { get; set; }
+            public string? minMetalweight { get; set; }
+            public string? maxMetalWeight { get; set; }
+        }
+
+        public class FilterDsgDiamondWtList
+        {
+            public string? filterName { get; set; }
+            public string? minDiamondWeight { get; set; }
+            public string? maxDiamondWeight { get; set; }
+        }
+
+        public class FilterProductTagList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? tagName { get; set; }
+            public string? tagCount { get; set; }
+        }
+
+        public class FilterBrandList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? brandId { get; set; }
+            public string? brandName { get; set; }
+            public string? brandCount { get; set; }
+    }
+
+        public class FilterGenderList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? genderId { get; set; }
+            public string? genderName { get; set; }
+            public string? genderCount { get; set; }
+        }
+
+        public class FilterApproxDeliveryList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? ItemAproxDays { get; set; }
+            public string? ItemAproxDayCount { get; set; }
+        }
+
+        public class FilterStockList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? stockName { get; set; }
+            public string? stockId { get; set; }
+        }
+
+        public class FilterSubCategoryList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? itemSubCategoryId { get; set; }
+            public string? itemSubCategoryName { get; set; }
+            public string? itemSubCategorycounts { get; set; }
+        }
+
+        public class FilterSubSubCategoryList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? itemSubSubCategoryId { get; set; }
+            public string? itemSubSubCategoryName { get; set; }
+            public string? itemSubSubCategorycounts { get; set; }
+        }
+
+        public class FilterFamilyProductList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? familyproductName { get; set; }
+            public string? familyproductId { get; set; }
+        }
+
+        public class FilterExcludeDiscontinueList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? excludediscontinueName { get; set; }
+            public string? excludediscontinueId { get; set; }
+        }
+
+        public class FilterWearViewList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? viewName { get; set; }
+            public string? viewId { get; set; }
+        }
+
+        public class FilterTryViewList
+        {
+            public string? filterName { get; set; }
+            public string? name { get; set; }
+            public string? viewName { get; set; }
+            public string? viewId { get; set; }
+        }
+    }

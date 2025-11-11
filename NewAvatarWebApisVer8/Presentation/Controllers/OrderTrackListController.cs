@@ -23,7 +23,6 @@ namespace NewAvatarWebApis.Presentation.Controllers
         [HttpPost("get-total-order-tracking-data")]
         public async Task<ResponseDetails> GetTotalOrderTrackingData(OrderTrackingDataListParams param)
         {
-            var commonHeader = HttpContext.Items["CommonHeader"] as CommonHeader;
             var result = await _orderTrackListService.GetTotalOrderTrackingData(param);
             return result;
         }
@@ -31,8 +30,14 @@ namespace NewAvatarWebApis.Presentation.Controllers
         [HttpPost("get-track-single-data-list")]
         public async Task<ResponseDetails> GetTrackSingleDataList(OrderTrackingSingleDataListParams param)
         {
-            var commonHeader = HttpContext.Items["CommonHeader"] as CommonHeader;
             var result = await _orderTrackListService.GetTrackSingleDataList(param);
+            return result;
+        }
+
+        [HttpPost("get-track-item-detail-data")]
+        public async Task<ResponseDetails> GetTrackItemDetailData(OrderTrackingItemDetailDataRequest param)
+        {
+            var result = await _orderTrackListService.GetTrackItemDetailData(param);
             return result;
         }
     }

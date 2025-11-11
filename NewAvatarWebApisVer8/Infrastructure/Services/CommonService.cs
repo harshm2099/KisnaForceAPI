@@ -11433,6 +11433,228 @@ namespace NewAvatarWebApis.Infrastructure.Services
             }
         }
 
+        public async Task<ResponseDetails> CappingFilter(CappingFilterRequest request)
+        {
+            var responseDetails = new ResponseDetails();
+            bool hasAnyData = false;
+            PopularItemsFilterList filterDetails = new PopularItemsFilterList();
+            IList<FilterCategoryList> categoryList = new List<FilterCategoryList>();
+            IList<FilterDsgKtList> dsgKtList = new List<FilterDsgKtList>();
+            IList<FilterDsgMetalWtList> dsgMetalwtList = new List<FilterDsgMetalWtList>();
+            IList<FilterDsgDiamondWtList> dsgDiamondList = new List<FilterDsgDiamondWtList>();
+            IList<FilterProductTagList> productTagsList = new List<FilterProductTagList>();
+            IList<FilterBrandList> brandList = new List<FilterBrandList>();
+            IList<FilterGenderList> genderList = new List<FilterGenderList>();
+            IList<FilterApproxDeliveryList> approxDeliveryList = new List<FilterApproxDeliveryList>();
+            IList<FilterSubCategoryList> itemSubCategoryList = new List<FilterSubCategoryList>();
+            IList<FilterSubSubCategoryList> itemSubSubCategoryList = new List<FilterSubSubCategoryList>();
+
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(_connection))
+                {
+                    string cmdQuery = DBCommands.CappingFilter;
+                    await dbConnection.OpenAsync();
+
+                    using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
+                    {
+                        string? dataId = string.IsNullOrWhiteSpace(request.DataId) ? null : request.DataId;
+                        string? dataLoginType = string.IsNullOrWhiteSpace(request.DataLoginType) ? null : request.DataLoginType;
+                        string? type = string.IsNullOrWhiteSpace(request.Type) ? null : request.Type;
+                        string? categoryId = string.IsNullOrWhiteSpace(request.CategoryId) ? null : request.CategoryId;
+                        string? metalWt = string.IsNullOrWhiteSpace(request.MetalWt) ? null : request.MetalWt;
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@data_id", dataId);
+                        cmd.Parameters.AddWithValue("@data_login_type", dataLoginType);
+                        cmd.Parameters.AddWithValue("@type", type);
+                        cmd.Parameters.AddWithValue("@category_id", categoryId);
+                        cmd.Parameters.AddWithValue("@metalwt", metalWt);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
+                            if (ds?.Tables?.Count >= 1)
+                            {
+                                if (ds.Tables[1].Rows.Count > 0)
+                                {
+                                    hasAnyData = true;
+                                    for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
+                                    {
+                                        categoryList.Add(new FilterCategoryList
+                                        {
+                                            categoryId = Convert.ToString(ds.Tables[1].Rows[i]["category_id"]),
+                                            subCategoryId = Convert.ToString(ds.Tables[1].Rows[i]["sub_category_id"]),
+                                            subCategoryName = Convert.ToString(ds.Tables[1].Rows[i]["sub_category_name"]),
+                                            subCategoryCount = Convert.ToString(ds.Tables[1].Rows[i]["category_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[2].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[2].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        dsgKtList.Add(new FilterDsgKtList
+                                        {
+                                            KT = Convert.ToString(ds.Tables[2].Rows[i]["kt"]),
+                                            KtCount = Convert.ToString(ds.Tables[2].Rows[i]["Kt_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[3].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[3].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        dsgMetalwtList.Add(new FilterDsgMetalWtList
+                                        {
+                                            minMetalweight = Convert.ToString(ds.Tables[3].Rows[i]["minmetalwt"]),
+                                            maxMetalWeight = Convert.ToString(ds.Tables[3].Rows[i]["maxmetalwt"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[4].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[4].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        dsgDiamondList.Add(new FilterDsgDiamondWtList
+                                        {
+                                            minDiamondWeight = Convert.ToString(ds.Tables[4].Rows[i]["min_diawt"]),
+                                            maxDiamondWeight = Convert.ToString(ds.Tables[4].Rows[i]["max_diawt"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[5].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[5].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        productTagsList.Add(new FilterProductTagList
+                                        {
+                                            tagName = Convert.ToString(ds.Tables[5].Rows[i]["tag_name"]),
+                                            tagCount = Convert.ToString(ds.Tables[5].Rows[i]["tag_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[6].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[6].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        brandList.Add(new FilterBrandList
+                                        {
+                                            brandId = Convert.ToString(ds.Tables[6].Rows[i]["brand_id"]),
+                                            brandName = Convert.ToString(ds.Tables[6].Rows[i]["brand_name"]),
+                                            brandCount = Convert.ToString(ds.Tables[6].Rows[i]["brand_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[7].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[7].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        genderList.Add(new FilterGenderList
+                                        {
+                                            genderId = Convert.ToString(ds.Tables[7].Rows[i]["gender_id"]),
+                                            genderName = Convert.ToString(ds.Tables[7].Rows[i]["gender_name"]),
+                                            genderCount = Convert.ToString(ds.Tables[7].Rows[i]["gender_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[8].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[8].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        approxDeliveryList.Add(new FilterApproxDeliveryList
+                                        {
+                                            ItemAproxDays = Convert.ToString(ds.Tables[8].Rows[i]["ItemAproxDay"]),
+                                            ItemAproxDayCount = Convert.ToString(ds.Tables[8].Rows[i]["ItemAproxDay_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[9].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[9].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        itemSubCategoryList.Add(new FilterSubCategoryList
+                                        {
+                                            itemSubCategoryId = Convert.ToString(ds.Tables[9].Rows[i]["sub_category_id"]),
+                                            itemSubCategoryName = Convert.ToString(ds.Tables[9].Rows[i]["sub_category_name"]),
+                                            itemSubCategorycounts = Convert.ToString(ds.Tables[9].Rows[i]["sub_category_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[10].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[10].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        itemSubSubCategoryList.Add(new FilterSubSubCategoryList
+                                        {
+                                            itemSubSubCategoryId = Convert.ToString(ds.Tables[10].Rows[i]["sub_sub_category_id"]),
+                                            itemSubSubCategoryName = Convert.ToString(ds.Tables[10].Rows[i]["sub_sub_category_name"]),
+                                            itemSubSubCategorycounts = Convert.ToString(ds.Tables[10].Rows[i]["sub_sub_category_count"]),
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (hasAnyData)
+                {
+                    filterDetails.categoryList = categoryList;
+                    filterDetails.dsgKt = dsgKtList;
+                    filterDetails.dsgMetalWeight = dsgMetalwtList;
+                    filterDetails.dsgDiamondWeight = dsgDiamondList;
+                    filterDetails.productTags = productTagsList;
+                    filterDetails.brand = brandList;
+                    filterDetails.gender = genderList;
+                    filterDetails.approxDelivery = approxDeliveryList;
+                    filterDetails.itemSubCategory = itemSubCategoryList;
+                    filterDetails.itemSubSubCategory = itemSubSubCategoryList;
+                }
+
+                responseDetails = new ResponseDetails
+                {
+                    success = true,
+                    status = "200",
+                    message = hasAnyData ? "Successfully" : "No data found",
+                    data = filterDetails,
+                    data1 = null
+                };
+
+                return responseDetails;
+            }
+            catch (SqlException ex)
+            {
+                return new ResponseDetails
+                {
+                    success = false,
+                    status = "400",
+                    message = $"SQL error: {ex.Message}",
+                    data = new List<PopularItemsFilterList>(),
+                    data1 = null
+                };
+            }
+        }
+
         public async Task<ResponseDetails> ConsumerFormStore(ConsumerFormStoreRequest param)
         {
             var responseDetails = new ResponseDetails();
@@ -11804,6 +12026,344 @@ namespace NewAvatarWebApis.Infrastructure.Services
                 responseDetails.status = "400";
                 responseDetails.data = new List<PopularItemsResponse>();
                 return responseDetails;
+            }
+        }
+
+        public async Task<ResponseDetails> PopularItemsFilter(PopularItemsFilterRequest request)
+        {
+            var responseDetails = new ResponseDetails();
+            bool hasAnyData = false;
+            PopularItemsFilterList filterDetails = new PopularItemsFilterList();
+            IList<FilterCategoryList> categoryList = new List<FilterCategoryList>();
+            IList<FilterDsgKtList> dsgKtList = new List<FilterDsgKtList>();
+            IList<FilterAmountList> amountList = new List<FilterAmountList>();
+            IList<FilterDsgMetalWtList> dsgMetalwtList = new List<FilterDsgMetalWtList>();
+            IList<FilterDsgDiamondWtList> dsgDiamondList = new List<FilterDsgDiamondWtList>();
+            IList<FilterProductTagList> productTagsList = new List<FilterProductTagList>();
+            IList<FilterBrandList> brandList = new List<FilterBrandList>();
+            IList<FilterGenderList> genderList = new List<FilterGenderList>();
+            IList<FilterApproxDeliveryList> approxDeliveryList = new List<FilterApproxDeliveryList>();
+            IList<FilterStockList> stockList = new List<FilterStockList>();
+            IList<FilterSubCategoryList> itemSubCategoryList = new List<FilterSubCategoryList>();
+            IList<FilterSubSubCategoryList> itemSubSubCategoryList = new List<FilterSubSubCategoryList>();
+            IList<FilterFamilyProductList> familyProductList = new List<FilterFamilyProductList>();
+            IList<FilterExcludeDiscontinueList> excludeDisconList = new List<FilterExcludeDiscontinueList>();
+            IList<FilterWearViewList> wearViewList = new List<FilterWearViewList>();
+            IList<FilterTryViewList> tryViewList = new List<FilterTryViewList>();
+
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(_connection))
+                {
+                    string cmdQuery = DBCommands.PopularItemsFilter;
+                    await dbConnection.OpenAsync();
+
+                    using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
+                    {
+                        string? data_id = string.IsNullOrWhiteSpace(request.DataId) ? null : request.DataId;
+                        string? button_code = string.IsNullOrWhiteSpace(request.ButtonCode) ? null : request.ButtonCode;
+                        string? master_common_id = string.IsNullOrWhiteSpace(request.MasterCommonId) ? null : request.MasterCommonId;
+                        string? category_id = string.IsNullOrWhiteSpace(request.CategoryId) ? null : request.CategoryId;
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@data_id", data_id);
+                        cmd.Parameters.AddWithValue("@button_code", button_code);
+                        cmd.Parameters.AddWithValue("@master_common_id", master_common_id);
+                        cmd.Parameters.AddWithValue("@category_id", category_id);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
+                            if (ds?.Tables?.Count >= 1)
+                            {
+                                if (ds.Tables[1].Rows.Count > 0)
+                                {
+                                    hasAnyData = true;
+                                    for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
+                                    {
+                                        categoryList.Add(new FilterCategoryList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[1].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[1].Rows[i]["name"]),
+                                            subCategoryId = Convert.ToString(ds.Tables[1].Rows[i]["sub_category_id"]),
+                                            subCategoryName = Convert.ToString(ds.Tables[1].Rows[i]["sub_category_name"]),
+                                            subCategoryCount = Convert.ToString(ds.Tables[1].Rows[i]["category_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[2].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[2].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        dsgKtList.Add(new FilterDsgKtList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[2].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[2].Rows[i]["name"]),
+                                            KT = Convert.ToString(ds.Tables[2].Rows[i]["kt"]),
+                                            KtCount = Convert.ToString(ds.Tables[2].Rows[i]["Kt_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[3].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[3].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        amountList.Add(new FilterAmountList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[3].Rows[i]["filter_name"]),
+                                            minAmount = Convert.ToString(ds.Tables[3].Rows[i]["min_amount"]),
+                                            maxAmount = Convert.ToString(ds.Tables[3].Rows[i]["max_amount"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[4].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[4].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        dsgMetalwtList.Add(new FilterDsgMetalWtList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[4].Rows[i]["filter_name"]),
+                                            minMetalweight = Convert.ToString(ds.Tables[4].Rows[i]["min_metalwt"]),
+                                            maxMetalWeight = Convert.ToString(ds.Tables[4].Rows[i]["max_metalwt"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[5].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[5].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        dsgDiamondList.Add(new FilterDsgDiamondWtList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[5].Rows[i]["filter_name"]),
+                                            minDiamondWeight = Convert.ToString(ds.Tables[5].Rows[i]["min_diamondwt"]),
+                                            maxDiamondWeight = Convert.ToString(ds.Tables[5].Rows[i]["max_diamondwt"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[6].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[6].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        productTagsList.Add(new FilterProductTagList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[6].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[6].Rows[i]["name"]),
+                                            tagName = Convert.ToString(ds.Tables[6].Rows[i]["tag_name"]),
+                                            tagCount = Convert.ToString(ds.Tables[6].Rows[i]["tag_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[7].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[7].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        brandList.Add(new FilterBrandList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[7].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[7].Rows[i]["name"]),
+                                            brandId = Convert.ToString(ds.Tables[7].Rows[i]["brand_id"]),
+                                            brandName = Convert.ToString(ds.Tables[7].Rows[i]["brand_name"]),
+                                            brandCount = Convert.ToString(ds.Tables[7].Rows[i]["brand_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[8].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[8].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        genderList.Add(new FilterGenderList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[8].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[8].Rows[i]["name"]),
+                                            genderId = Convert.ToString(ds.Tables[8].Rows[i]["gender_id"]),
+                                            genderName = Convert.ToString(ds.Tables[8].Rows[i]["gender_name"]),
+                                            genderCount = Convert.ToString(ds.Tables[8].Rows[i]["gender_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[9].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[9].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        approxDeliveryList.Add(new FilterApproxDeliveryList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[9].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[9].Rows[i]["name"]),
+                                            ItemAproxDays = Convert.ToString(ds.Tables[9].Rows[i]["ItemAproxDay"]),
+                                            ItemAproxDayCount = Convert.ToString(ds.Tables[9].Rows[i]["ItemAproxDay_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[10].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[10].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        stockList.Add(new FilterStockList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[10].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[10].Rows[i]["name"]),
+                                            stockName = Convert.ToString(ds.Tables[10].Rows[i]["stock_name"]),
+                                            stockId = Convert.ToString(ds.Tables[10].Rows[i]["stock_id"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[11].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[11].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        itemSubCategoryList.Add(new FilterSubCategoryList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[11].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[11].Rows[i]["name"]),
+                                            itemSubCategoryId = Convert.ToString(ds.Tables[11].Rows[i]["sub_category_id"]),
+                                            itemSubCategoryName = Convert.ToString(ds.Tables[11].Rows[i]["sub_category_name"]),
+                                            itemSubCategorycounts = Convert.ToString(ds.Tables[11].Rows[i]["sub_category_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[12].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[12].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        itemSubSubCategoryList.Add(new FilterSubSubCategoryList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[12].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[12].Rows[i]["name"]),
+                                            itemSubSubCategoryId = Convert.ToString(ds.Tables[12].Rows[i]["sub_sub_category_id"]),
+                                            itemSubSubCategoryName = Convert.ToString(ds.Tables[12].Rows[i]["sub_sub_category_name"]),
+                                            itemSubSubCategorycounts = Convert.ToString(ds.Tables[12].Rows[i]["sub_sub_category_count"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[13].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[13].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        familyProductList.Add(new FilterFamilyProductList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[13].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[13].Rows[i]["name"]),
+                                            familyproductName = Convert.ToString(ds.Tables[13].Rows[i]["familyproduct_name"]),
+                                            familyproductId = Convert.ToString(ds.Tables[13].Rows[i]["familyproduct_id"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[14].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[14].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        excludeDisconList.Add(new FilterExcludeDiscontinueList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[14].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[14].Rows[i]["name"]),
+                                            excludediscontinueName = Convert.ToString(ds.Tables[14].Rows[i]["excludediscontinue_name"]),
+                                            excludediscontinueId = Convert.ToString(ds.Tables[14].Rows[i]["excludediscontinue_id"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[15].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[15].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        wearViewList.Add(new FilterWearViewList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[15].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[15].Rows[i]["name"]),
+                                            viewName = Convert.ToString(ds.Tables[15].Rows[i]["view_name"]),
+                                            viewId = Convert.ToString(ds.Tables[15].Rows[i]["view_id"]),
+                                        });
+                                    }
+                                }
+
+                                if (ds.Tables[16].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[16].Rows.Count; i++)
+                                    {
+                                        hasAnyData = true;
+                                        tryViewList.Add(new FilterTryViewList
+                                        {
+                                            filterName = Convert.ToString(ds.Tables[16].Rows[i]["filter_name"]),
+                                            name = Convert.ToString(ds.Tables[16].Rows[i]["name"]),
+                                            viewName = Convert.ToString(ds.Tables[16].Rows[i]["view_name"]),
+                                            viewId = Convert.ToString(ds.Tables[16].Rows[i]["view_id"]),
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (hasAnyData)
+                {
+                    filterDetails.categoryList = categoryList;
+                    filterDetails.dsgKt = dsgKtList;
+                    filterDetails.dsgAmount = amountList;
+                    filterDetails.dsgMetalWeight = dsgMetalwtList;
+                    filterDetails.dsgDiamondWeight = dsgDiamondList;
+                    filterDetails.productTags = productTagsList;
+                    filterDetails.brand = brandList;
+                    filterDetails.gender = genderList;
+                    filterDetails.approxDelivery = approxDeliveryList;
+                    filterDetails.stockFilter = stockList;
+                    filterDetails.itemSubCategory = itemSubCategoryList;
+                    filterDetails.itemSubSubCategory = itemSubSubCategoryList;
+                    filterDetails.familyProduct = familyProductList;
+                    filterDetails.excludeDiscontinue = excludeDisconList;
+                    filterDetails.wearView = wearViewList;
+                    filterDetails.tryView = tryViewList;
+                }
+
+                responseDetails = new ResponseDetails
+                {
+                    success = true,
+                    status = "200",
+                    message = hasAnyData ? "Successfully" : "No data found",
+                    data = filterDetails,
+                    data1 = null
+                };
+
+                return responseDetails;
+            }
+            catch (SqlException ex)
+            {
+                return new ResponseDetails
+                {
+                    success = false,
+                    status = "400",
+                    message = $"SQL error: {ex.Message}",
+                    data = new List<PopularItemsFilterList>(),
+                    data1 = null
+                };
             }
         }
 
