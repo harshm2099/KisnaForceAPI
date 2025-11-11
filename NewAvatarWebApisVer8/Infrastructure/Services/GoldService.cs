@@ -308,26 +308,26 @@ namespace NewAvatarWebApis.Infrastructure.Services
             var responseDetails = new ResponseDetails();
             bool hasAnyData = false;
             PlaingoldItemFilterList filterDetails = new PlaingoldItemFilterList();
-            IList<FilterCategoryList> categoryList = new List<FilterCategoryList>();
-            IList<FilterDsgKtList> dsgKtList = new List<FilterDsgKtList>();
-            IList<FilterProductTagList> productTagList = new List<FilterProductTagList>();
-            IList<FilterBrandList> brandList = new List<FilterBrandList>();
-            IList<FilterGenderList> genderList = new List<FilterGenderList>();
-            IList<FilterApproxDeliveryList> approxDeliveryList = new List<FilterApproxDeliveryList>();
-            IList<FilterPriceList> priceList = new List<FilterPriceList>();
-            IList<FilterDsgWeightList> dsgWeightList = new List<FilterDsgWeightList>();
-            IList<FilterStockList> stockList = new List<FilterStockList>();
-            IList<FilterFamilyProductList> familyProductList = new List<FilterFamilyProductList>();
-            IList<FilterExcludeDiscontinueList> excludeDisconList = new List<FilterExcludeDiscontinueList>();
-            IList<FilterWearItList> wearItList = new List<FilterWearItList>();
-            IList<FilterTryOnList> tryOnList = new List<FilterTryOnList>();
-            IList<FilterImageAvailList> imageAvailableList = new List<FilterImageAvailList>();
-            IList<FilterSubCategoryList> subCategoryList = new List<FilterSubCategoryList>();
-            IList<FilterSubSubCategoryList> subSubCategoryList = new List<FilterSubSubCategoryList>();
-            IList<FilterDsgMetalWtList> metalWtList = new List<FilterDsgMetalWtList>();
-            IList<FilterDsgDiamondWtList> diamondWtList = new List<FilterDsgDiamondWtList>();
-            IList<FilterBestSellerList> bestSellerList = new List<FilterBestSellerList>();
-            IList<FilterLatestDesignList> latestDesignList = new List<FilterLatestDesignList>();
+            IList<PlainGoldFilterCategoryList> categoryList = new List<PlainGoldFilterCategoryList>();
+            IList<PlainGoldFilterDsgKtList> dsgKtList = new List<PlainGoldFilterDsgKtList>();
+            IList<PlainGoldFilterProductTagList> productTagList = new List<PlainGoldFilterProductTagList>();
+            IList<PlainGoldFilterBrandList> brandList = new List<PlainGoldFilterBrandList>();
+            IList<PlainGoldFilterGenderList> genderList = new List<PlainGoldFilterGenderList>();
+            IList<PlainGoldFilterApproxDeliveryList> approxDeliveryList = new List<PlainGoldFilterApproxDeliveryList>();
+            IList<PlainGoldFilterPriceList> priceList = new List<PlainGoldFilterPriceList>();
+            IList<PlainGoldFilterDsgWeightList> dsgWeightList = new List<PlainGoldFilterDsgWeightList>();
+            IList<PlainGoldFilterStockList> stockList = new List<PlainGoldFilterStockList>();
+            IList<PlainGoldFilterFamilyProductList> familyProductList = new List<PlainGoldFilterFamilyProductList>();
+            IList<PlainGoldFilterExcludeDiscontinueList> excludeDisconList = new List<PlainGoldFilterExcludeDiscontinueList>();
+            IList<PlainGoldFilterWearItList> wearItList = new List<PlainGoldFilterWearItList>();
+            IList<PlainGoldFilterTryOnList> tryOnList = new List<PlainGoldFilterTryOnList>();
+            IList<PlainGoldFilterImageAvailList> imageAvailableList = new List<PlainGoldFilterImageAvailList>();
+            IList<PlainGoldFilterSubCategoryList> subCategoryList = new List<PlainGoldFilterSubCategoryList>();
+            IList<PlainGoldFilterSubSubCategoryList> subSubCategoryList = new List<PlainGoldFilterSubSubCategoryList>();
+            IList<PlainGoldFilterDsgMetalWtList> metalWtList = new List<PlainGoldFilterDsgMetalWtList>();
+            IList<PlainGoldFilterDsgDiamondWtList> diamondWtList = new List<PlainGoldFilterDsgDiamondWtList>();
+            IList<PlainGoldFilterBestSellerList> bestSellerList = new List<PlainGoldFilterBestSellerList>();
+            IList<PlainGoldFilterLatestDesignList> latestDesignList = new List<PlainGoldFilterLatestDesignList>();
 
             try
             {
@@ -364,7 +364,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     hasAnyData = true;
                                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                                     {
-                                        categoryList.Add(new FilterCategoryList
+                                        categoryList.Add(new PlainGoldFilterCategoryList
                                         {
                                             category_id = Convert.ToString(ds.Tables[0].Rows[i]["category_id"]),
                                             sub_category_id = Convert.ToString(ds.Tables[0].Rows[i]["sub_category_id"]),
@@ -379,7 +379,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        dsgKtList.Add(new FilterDsgKtList
+                                        dsgKtList.Add(new PlainGoldFilterDsgKtList
                                         {
                                             kt = Convert.ToString(ds.Tables[1].Rows[i]["kt"]),
                                             kt_count = Convert.ToString(ds.Tables[1].Rows[i]["kt_count"]),
@@ -392,7 +392,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[2].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        productTagList.Add(new FilterProductTagList
+                                        productTagList.Add(new PlainGoldFilterProductTagList
                                         {
                                             tag_name = Convert.ToString(ds.Tables[2].Rows[i]["tag_name"]),
                                             tag_count = Convert.ToString(ds.Tables[2].Rows[i]["tag_count"]),
@@ -405,7 +405,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[3].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        brandList.Add(new FilterBrandList
+                                        brandList.Add(new PlainGoldFilterBrandList
                                         {
                                             ItemBrandCommonID = Convert.ToString(ds.Tables[3].Rows[i]["ItemBrandCommonID"]),
                                             brand_id = Convert.ToString(ds.Tables[3].Rows[i]["brand_id"]),
@@ -420,7 +420,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[4].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        genderList.Add(new FilterGenderList
+                                        genderList.Add(new PlainGoldFilterGenderList
                                         {
                                             gender_id = Convert.ToString(ds.Tables[4].Rows[i]["gender_id"]),
                                             gender_name = Convert.ToString(ds.Tables[4].Rows[i]["gender_name"]),
@@ -434,7 +434,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[5].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        approxDeliveryList.Add(new FilterApproxDeliveryList
+                                        approxDeliveryList.Add(new PlainGoldFilterApproxDeliveryList
                                         {
                                             ItemAproxDay = Convert.ToString(ds.Tables[5].Rows[i]["ItemAproxDay"]),
                                             ItemAproxDay_count = Convert.ToString(ds.Tables[5].Rows[i]["ItemAproxDay_count"]),
@@ -447,7 +447,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[6].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        priceList.Add(new FilterPriceList
+                                        priceList.Add(new PlainGoldFilterPriceList
                                         {
                                             minprice = Convert.ToString(ds.Tables[6].Rows[i]["minprice"]),
                                             maxprice = Convert.ToString(ds.Tables[6].Rows[i]["maxprice"]),
@@ -460,7 +460,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[7].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        dsgWeightList.Add(new FilterDsgWeightList
+                                        dsgWeightList.Add(new PlainGoldFilterDsgWeightList
                                         {
                                             minWt = Convert.ToString(ds.Tables[7].Rows[i]["minWt"]),
                                             maxWt = Convert.ToString(ds.Tables[7].Rows[i]["maxWt"]),
@@ -473,7 +473,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[8].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        stockList.Add(new FilterStockList
+                                        stockList.Add(new PlainGoldFilterStockList
                                         {
                                             stock_name = Convert.ToString(ds.Tables[8].Rows[i]["stock_name"]),
                                             stock_id = Convert.ToString(ds.Tables[8].Rows[i]["stock_id"]),
@@ -486,7 +486,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[9].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        familyProductList.Add(new FilterFamilyProductList
+                                        familyProductList.Add(new PlainGoldFilterFamilyProductList
                                         {
                                             familyproduct_name = Convert.ToString(ds.Tables[9].Rows[i]["familyproduct_name"]),
                                             familyproduct_id = Convert.ToString(ds.Tables[9].Rows[i]["familyproduct_id"]),
@@ -499,7 +499,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[10].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        excludeDisconList.Add(new FilterExcludeDiscontinueList
+                                        excludeDisconList.Add(new PlainGoldFilterExcludeDiscontinueList
                                         {
                                             excludediscontinue_name = Convert.ToString(ds.Tables[10].Rows[i]["excludediscontinue_name"]),
                                             excludediscontinue_id = Convert.ToString(ds.Tables[10].Rows[i]["excludediscontinue_id"]),
@@ -512,7 +512,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[11].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        wearItList.Add(new FilterWearItList
+                                        wearItList.Add(new PlainGoldFilterWearItList
                                         {
                                             view_name = Convert.ToString(ds.Tables[11].Rows[i]["view_name"]),
                                             view_id = Convert.ToString(ds.Tables[11].Rows[i]["view_id"]),
@@ -525,7 +525,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[12].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        tryOnList.Add(new FilterTryOnList
+                                        tryOnList.Add(new PlainGoldFilterTryOnList
                                         {
                                             view_name = Convert.ToString(ds.Tables[12].Rows[i]["view_name"]),
                                             view_id = Convert.ToString(ds.Tables[12].Rows[i]["view_id"]),
@@ -538,7 +538,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[13].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        imageAvailableList.Add(new FilterImageAvailList
+                                        imageAvailableList.Add(new PlainGoldFilterImageAvailList
                                         {
                                             imageavail_name = Convert.ToString(ds.Tables[13].Rows[i]["imageavail_name"]),
                                             imageavail_id = Convert.ToString(ds.Tables[13].Rows[i]["imageavail_id"]),
@@ -551,7 +551,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[14].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        subCategoryList.Add(new FilterSubCategoryList
+                                        subCategoryList.Add(new PlainGoldFilterSubCategoryList
                                         {
                                             sub_category_id = Convert.ToString(ds.Tables[14].Rows[i]["sub_category_id"]),
                                             sub_category_name = Convert.ToString(ds.Tables[14].Rows[i]["sub_category_name"]),
@@ -565,7 +565,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[15].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        subSubCategoryList.Add(new FilterSubSubCategoryList
+                                        subSubCategoryList.Add(new PlainGoldFilterSubSubCategoryList
                                         {
                                             data = Convert.ToString(ds.Tables[15].Rows[i]["data"]),
                                         });
@@ -577,7 +577,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[16].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        metalWtList.Add(new FilterDsgMetalWtList
+                                        metalWtList.Add(new PlainGoldFilterDsgMetalWtList
                                         {
                                             metalwt = Convert.ToString(ds.Tables[16].Rows[i]["data"]),
                                         });
@@ -589,7 +589,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[17].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        diamondWtList.Add(new FilterDsgDiamondWtList
+                                        diamondWtList.Add(new PlainGoldFilterDsgDiamondWtList
                                         {
                                             diamondwt = Convert.ToString(ds.Tables[17].Rows[i]["data"]),
                                         });
@@ -601,7 +601,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[18].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        bestSellerList.Add(new FilterBestSellerList
+                                        bestSellerList.Add(new PlainGoldFilterBestSellerList
                                         {
                                             Name = Convert.ToString(ds.Tables[18].Rows[i]["Name"]),
                                             Value = Convert.ToString(ds.Tables[18].Rows[i]["Value"]),
@@ -613,7 +613,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     for (int i = 0; i < ds.Tables[19].Rows.Count; i++)
                                     {
                                         hasAnyData = true;
-                                        latestDesignList.Add(new FilterLatestDesignList
+                                        latestDesignList.Add(new PlainGoldFilterLatestDesignList
                                         {
                                             Name = Convert.ToString(ds.Tables[19].Rows[i]["Name"]),
                                             Value = Convert.ToString(ds.Tables[19].Rows[i]["Value"]),

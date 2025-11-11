@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NewAvatarWebApis.Core.Application.DTOs;
 using NewAvatarWebApis.Infrastructure.Services.Interfaces;
+using NewAvatarWebApis.Models;
 
 namespace NewAvatarWebApis.Presentation.Controllers
 {
@@ -19,9 +20,9 @@ namespace NewAvatarWebApis.Presentation.Controllers
         }
 
         [HttpPost("item-list")]
-        public Task<ItemViewItemListResponse> ItemList(ItemViewItemListParams request)
+        public async Task<ResponseDetails> ItemList(ItemViewItemListParams request)
         {
-            var result = _itemViewService.ItemList(request);
+            var result = await _itemViewService.ItemList(request);
             return result;
         }
     }
