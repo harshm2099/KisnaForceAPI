@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <History>True|2025-11-11T03:23:23.9459500Z||;True|2025-11-10T09:13:13.8920993+05:30||;True|2025-11-10T09:12:15.1431475+05:30||;False|2025-11-10T09:09:32.1097265+05:30||;False|2025-11-10T09:09:23.0146582+05:30||;True|2025-11-01T14:00:52.4300393+05:30||;False|2025-11-01T14:00:46.3000497+05:30||;True|2025-10-30T16:50:11.3681650+05:30||;True|2025-10-30T11:23:54.8260653+05:30||;True|2025-10-29T16:17:27.7729834+05:30||;True|2025-10-29T15:33:39.5687873+05:30||;False|2025-10-29T15:32:09.6776723+05:30||;True|2025-10-28T17:23:39.8626690+05:30||;False|2025-10-28T17:23:31.1514001+05:30||;</History>
+    <LastFailureDetails />
+    <_PublishTargetUrl>C:\PublishKisnaForceAPI</_PublishTargetUrl>
+  </PropertyGroup>
+</Project>
