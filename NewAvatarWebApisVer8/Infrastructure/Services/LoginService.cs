@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using System.Data;
 using System.Net;
 using System.Net.Mail;
+using Twilio.TwiML.Voice;
 namespace NewAvatarWebApis.Infrastructure.Services
 {
     public class LoginService : ILoginService
@@ -19,11 +20,13 @@ namespace NewAvatarWebApis.Infrastructure.Services
         private readonly string _Connection = DBCommands.CONNECTION_STRING;
         private readonly TokenService _tokenService;
         private readonly IConfiguration _configuration;
+        private readonly IOtpService _otpService;
 
-        public LoginService(TokenService tokenService, IConfiguration configuration)
+        public LoginService(TokenService tokenService, IConfiguration config, IOtpService otpService)
         {
             _tokenService = tokenService;
-            _configuration = configuration;
+            _configuration = config;
+            _otpService = otpService;
         }
 
         public async Task<CommonResponse> Login(LoginParams request, CommonHeader header)
@@ -314,6 +317,8 @@ namespace NewAvatarWebApis.Infrastructure.Services
 
                                 string smsmsg = reader.GetSafeString("smsmsg");
                                 string otp = reader.GetSafeString("otp");
+
+                                bool isSent = await _otpService.SendOtpAsync(mobile_no, smsmsg);
 
                                 return new CommonResponse
                                 {
