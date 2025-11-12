@@ -27,9 +27,9 @@ namespace NewAvatarWebApis.Presentation.Controllers
         }
 
         [HttpPost("wish-item-list-on")]
-        public async Task<ResponseDetails> GetWishItemList(WishItemListingParams wishitemlistparams)
+        public async Task<ResponseDetails> WishListItemOn(WishlistItemOnRequest param)
         {
-            var result = await _wishListService.GetWishItemList(wishitemlistparams);
+            var result = await _wishListService.WishListItemOn(param);
             return result;
         }
     }

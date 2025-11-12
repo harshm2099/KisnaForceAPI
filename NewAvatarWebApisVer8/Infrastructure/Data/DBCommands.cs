@@ -259,6 +259,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
         public const string FAMILYPRODUCT = "FAMILYPRODUCT";
         public const string WISH_ITEMLIST_ON = "WISH_ITEMLIST_ON";
         public const string WATCH_ITEMLIST_ON = "WATCH_ITEMLIST_ON";
+        public const string WishItemListOn = "usp_WishItemListOn";
         public const string COMMONITEMFILTER_SUBCATEGORY = "COMMONITEMFILTER_SUBCATEGORY";
         public const string COMMONITEMFILTER_DSGKT = "COMMONITEMFILTER_DSGKT";
         public const string COMMONITEMFILTER_DSGAMOUNT = "COMMONITEMFILTER_DSGAMOUNT";

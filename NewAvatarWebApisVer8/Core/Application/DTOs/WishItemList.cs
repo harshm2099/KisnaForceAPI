@@ -99,4 +99,36 @@ namespace NewAvatarWebApis.Core.Application.DTOs
         public string? limit { get; set; }
         public string? page { get; set; }
     }
+
+    public class WishlistItemOnRequest
+    {
+        public string? DataId { get; set; }
+        public string? DataLoginType { get; set; }
+        public string? Page { get; set; } = "1";
+        public string? DefaultLimitAppPage { get; set; }
+        public string? CategoryId { get; set; }
+        public string? Variant { get; set; }
+        public string? ItemName { get; set; }
+        public string? MasterCommonId { get; set; }
+        public string? SortId { get; set; }
+        public string? SubCategoryId { get; set; }
+        public string? DsgSize { get; set; }
+        public string? DsgKt { get; set; }
+        public string? DsgColor { get; set; }
+        public string? Amount { get; set; }
+        public string? MetalWt { get; set; }
+        public string? DiaWt { get; set; }
+        public string? GenderId { get; set; }
+        public string? ItemTag { get; set; }
+        public string? Brand { get; set; }
+        public string? DeliveryDays { get; set; }
+        public string? ItemId { get; set; }
+        public string? StockAv { get; set; }
+        public string? FamilyAv { get; set; }
+        public string? RegularAv { get; set; }
+        public string? WearIt { get; set; }
+        public string? TryOn { get; set; }
+        public string? ItemSubCtgIDs { get; set; }
+        public string? ItemSubSubCtgIDs { get; set; }
+    }
 }

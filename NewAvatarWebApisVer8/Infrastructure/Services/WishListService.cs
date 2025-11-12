@@ -1,11 +1,16 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Exchange.WebServices.Data;
 using NewAvatarWebApis.Common;
 using NewAvatarWebApis.Core.Application.DTOs;
+using NewAvatarWebApis.Core.Application.Responses;
 using NewAvatarWebApis.Infrastructure.Data;
 using NewAvatarWebApis.Infrastructure.Services.Interfaces;
 using NewAvatarWebApis.Models;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Data;
 using System.Web.Http;
+using Xunit.Abstractions;
 
 namespace NewAvatarWebApis.Infrastructure.Services
 {
@@ -329,6 +334,240 @@ namespace NewAvatarWebApis.Infrastructure.Services
                 response.total_items = "0";
                 response.data = new List<WishItemListing>();
                 return response;
+            }
+        }
+
+        public async Task<ResponseDetails> WishListItemOn(WishlistItemOnRequest param)
+        {
+            var responseDetails = new ResponseDetails();
+            IList<WishItemListOnResponse> wishItemList = new List<WishItemListOnResponse>();
+            int? totalItems = null;
+            int? lastPage = null;
+            int? currentPage = null;
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(_Connection))
+                {
+                    string cmdQuery = DBCommands.WishItemListOn;
+                    await dbConnection.OpenAsync();
+
+                    using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
+                    {
+                        string? dataId = string.IsNullOrWhiteSpace(param.DataId) ? null : param.DataId;
+                        string? dataLoginType = string.IsNullOrWhiteSpace(param.DataLoginType) ? null : param.DataLoginType;
+                        string? page = string.IsNullOrWhiteSpace(param.Page) ? null : param.Page;
+                        string? limit = string.IsNullOrWhiteSpace(param.DefaultLimitAppPage) ? null : param.DefaultLimitAppPage;
+                        string? categoryId = string.IsNullOrWhiteSpace(param.CategoryId) ? null : param.CategoryId;
+                        string? variant = string.IsNullOrWhiteSpace(param.Variant) ? null : param.Variant;
+                        string? itemName = string.IsNullOrWhiteSpace(param.ItemName) ? null : param.ItemName;
+                        string? masterCommonId = string.IsNullOrWhiteSpace(param.MasterCommonId) ? null : param.MasterCommonId;
+                        string? sortId = string.IsNullOrWhiteSpace(param.SortId) ? null : param.SortId;
+                        string? subCategoryId = string.IsNullOrWhiteSpace(param.SubCategoryId) ? null : param.SubCategoryId;
+                        string? dsgSize = string.IsNullOrWhiteSpace(param.DsgSize) ? null : param.DsgSize;
+                        string? dsgKt = string.IsNullOrWhiteSpace(param.DsgKt) ? null : param.DsgKt;
+                        string? dsgColor = string.IsNullOrWhiteSpace(param.DsgColor) ? null : param.DsgColor;
+                        string? amount = string.IsNullOrWhiteSpace(param.Amount) ? null : param.Amount;
+                        string? metalWt = string.IsNullOrWhiteSpace(param.MetalWt) ? null : param.MetalWt;
+                        string? diawt = string.IsNullOrWhiteSpace(param.DiaWt) ? null : param.DiaWt;
+                        string? gender = string.IsNullOrWhiteSpace(param.GenderId) ? null : param.GenderId;
+                        string? itemTag = string.IsNullOrWhiteSpace(param.ItemTag) ? null : param.ItemTag;
+                        string? brand = string.IsNullOrWhiteSpace(param.Brand) ? null : param.Brand;
+                        string? deliveryDays = string.IsNullOrWhiteSpace(param.DeliveryDays) ? null : param.DeliveryDays;
+                        string? itemId = string.IsNullOrWhiteSpace(param.ItemId) ? null : param.ItemId;
+                        string? stockAv = string.IsNullOrWhiteSpace(param.StockAv) ? null : param.StockAv;
+                        string? familyAv = string.IsNullOrWhiteSpace(param.FamilyAv) ? null : param.FamilyAv;
+                        string? regularAv = string.IsNullOrWhiteSpace(param.RegularAv) ? null : param.RegularAv;
+                        string? wearIt = string.IsNullOrWhiteSpace(param.WearIt) ? null : param.WearIt;
+                        string? tryOn = string.IsNullOrWhiteSpace(param.TryOn) ? null : param.TryOn;
+                        string? itemSubCtgIDs = string.IsNullOrWhiteSpace(param.ItemSubCtgIDs) ? null : param.ItemSubCtgIDs;
+                        string? itemSubSubCtgIDs = string.IsNullOrWhiteSpace(param.ItemSubSubCtgIDs) ? null : param.ItemSubSubCtgIDs;
+
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandTimeout = 120;
+
+                        cmd.Parameters.AddWithValue("@data_id", dataId);
+                        cmd.Parameters.AddWithValue("@data_login_type", dataLoginType);
+                        cmd.Parameters.AddWithValue("@page", page);
+                        cmd.Parameters.AddWithValue("@default_limit_app_page", limit);
+                        cmd.Parameters.AddWithValue("@category_id", categoryId);
+                        cmd.Parameters.AddWithValue("@variant", variant);
+                        cmd.Parameters.AddWithValue("@item_name", itemName);
+                        cmd.Parameters.AddWithValue("@master_common_id", masterCommonId);
+                        cmd.Parameters.AddWithValue("@sort_id", sortId);
+                        cmd.Parameters.AddWithValue("@sub_category_id", subCategoryId);
+                        cmd.Parameters.AddWithValue("@dsg_size", dsgSize);
+                        cmd.Parameters.AddWithValue("@dsg_kt", dsgKt);
+                        cmd.Parameters.AddWithValue("@dsg_color", dsgColor);
+                        cmd.Parameters.AddWithValue("@amount", amount);
+                        cmd.Parameters.AddWithValue("@metalwt", metalWt);
+                        cmd.Parameters.AddWithValue("@diawt", diawt);
+                        cmd.Parameters.AddWithValue("@gender_id", gender);
+                        cmd.Parameters.AddWithValue("@item_tag", itemTag);
+                        cmd.Parameters.AddWithValue("@brand", brand);
+                        cmd.Parameters.AddWithValue("@delivery_days", deliveryDays);
+                        cmd.Parameters.AddWithValue("@Item_ID", itemId);
+                        cmd.Parameters.AddWithValue("@Stock_Av", stockAv);
+                        cmd.Parameters.AddWithValue("@Family_Av", familyAv);
+                        cmd.Parameters.AddWithValue("@Regular_Av", regularAv);
+                        cmd.Parameters.AddWithValue("@wearit", wearIt);
+                        cmd.Parameters.AddWithValue("@tryon", tryOn);
+                        cmd.Parameters.AddWithValue("@ItemSubCtgIDs", itemSubCtgIDs);
+                        cmd.Parameters.AddWithValue("@ItemSubSubCtgIDs", itemSubSubCtgIDs);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
+
+                            if (ds.Tables.Count > 0)
+                            {
+                                if (ds.Tables[0].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                                    {
+                                        try
+                                        {
+                                            var rowdetails = ds.Tables[0].Rows[i];
+                                            string? ItemId = rowdetails["item_id"] != DBNull.Value ? Convert.ToString(rowdetails["item_id"]) : string.Empty;
+                                            string? ItemCode = rowdetails["item_code"] != DBNull.Value ? Convert.ToString(rowdetails["item_code"]) : string.Empty;
+                                            string? ItemAproxDay = rowdetails["item_aproxday"] != DBNull.Value ? Convert.ToString(rowdetails["item_aproxday"]) : string.Empty;
+                                            string? ItemSku = rowdetails["item_sku"] != DBNull.Value ? Convert.ToString(rowdetails["item_sku"]) : string.Empty;
+                                            string? ItemName = rowdetails["item_name"] != DBNull.Value ? Convert.ToString(rowdetails["item_name"]) : string.Empty;
+                                            string? ItemDescription = rowdetails["item_description"] != DBNull.Value ? Convert.ToString(rowdetails["item_description"]) : string.Empty;
+                                            string? ItemMrp = rowdetails["item_mrp"] != DBNull.Value ? Convert.ToString(rowdetails["item_mrp"]) : string.Empty;
+                                            string? DsgSfx = rowdetails["dsg_sfx"] != DBNull.Value ? Convert.ToString(rowdetails["dsg_sfx"]) : string.Empty;
+                                            string? DsgSize = rowdetails["dsg_size"] != DBNull.Value ? Convert.ToString(rowdetails["dsg_size"]) : string.Empty;
+                                            string? DsgKt = rowdetails["dsg_kt"] != DBNull.Value ? Convert.ToString(rowdetails["dsg_kt"]) : string.Empty;
+                                            string? DsgColor = rowdetails["dsg_color"] != DBNull.Value ? Convert.ToString(rowdetails["dsg_color"]) : string.Empty;
+                                            string? ItemDisLabourPer = rowdetails["itemdislabourper"] != DBNull.Value ? Convert.ToString(rowdetails["itemdislabourper"]) : string.Empty;
+                                            string? ApproxDeliveryDate = rowdetails["approxdeliverydate"] != DBNull.Value ? Convert.ToString(rowdetails["approxdeliverydate"]) : string.Empty;
+                                            string? SubCategoryId = rowdetails["sub_category_id"] != DBNull.Value ? Convert.ToString(rowdetails["sub_category_id"]) : string.Empty;
+                                            string? ItemPrice = rowdetails["item_price"] != DBNull.Value ? Convert.ToString(rowdetails["item_price"]) : string.Empty;
+                                            string? DistPrice = rowdetails["dist_price"] != DBNull.Value ? Convert.ToString(rowdetails["dist_price"]) : string.Empty;
+                                            string? ItemSoliter = rowdetails["item_soliter"] != DBNull.Value ? Convert.ToString(rowdetails["item_soliter"]) : string.Empty;
+                                            string? ImagePath = rowdetails["image_path"] != DBNull.Value ? Convert.ToString(rowdetails["image_path"]) : string.Empty;
+                                            string? Star = rowdetails["star"] != DBNull.Value ? Convert.ToString(rowdetails["star"]) : string.Empty;
+                                            string? MostOrder = rowdetails["mostorder"] != DBNull.Value ? Convert.ToString(rowdetails["mostorder"]) : string.Empty;
+                                            string? ItemAproxDayCommonId = rowdetails["itemaproxdaycommonid"] != DBNull.Value ? Convert.ToString(rowdetails["itemaproxdaycommonid"]) : string.Empty;
+                                            string? PlaingoldStatus = rowdetails["plaingold_status"] != DBNull.Value ? Convert.ToString(rowdetails["plaingold_status"]) : string.Empty;
+                                            string? ItemPlainGold = rowdetails["itemplaingold"] != DBNull.Value ? Convert.ToString(rowdetails["itemplaingold"]) : string.Empty;
+                                            string? LabourPer = rowdetails["labour_per"] != DBNull.Value ? Convert.ToString(rowdetails["labour_per"]) : string.Empty;
+                                            string? ItemWt = rowdetails["item_wt"] != DBNull.Value ? Convert.ToString(rowdetails["item_wt"]) : string.Empty;
+                                            string? CategoryId = rowdetails["category_id"] != DBNull.Value ? Convert.ToString(rowdetails["category_id"]) : string.Empty;
+                                            string? WishListId = rowdetails["wishlistid"] != DBNull.Value ? Convert.ToString(rowdetails["wishlistid"]) : string.Empty;
+                                            string? ItemFranchiseSts = rowdetails["itemfranchisests"] != DBNull.Value ? Convert.ToString(rowdetails["itemfranchisests"]) : string.Empty;
+                                            string? PriceFlag = rowdetails["priceflag"] != DBNull.Value ? Convert.ToString(rowdetails["priceflag"]) : string.Empty;
+                                            string? ItemIsSRP = rowdetails["itemissrp"] != DBNull.Value ? Convert.ToString(rowdetails["itemissrp"]) : string.Empty;
+                                            string? MrpWithTax = rowdetails["mrpwithtax"] != DBNull.Value ? Convert.ToString(rowdetails["mrpwithtax"]) : string.Empty;
+                                            string? DiamondPrice = rowdetails["diamondprice"] != DBNull.Value ? Convert.ToString(rowdetails["diamondprice"]) : string.Empty;
+                                            string? GoldPrice = rowdetails["goldprice"] != DBNull.Value ? Convert.ToString(rowdetails["goldprice"]) : string.Empty;
+                                            string? PlatinumPrice = rowdetails["platinumprice"] != DBNull.Value ? Convert.ToString(rowdetails["platinumprice"]) : string.Empty;
+                                            string? LabourPrice = rowdetails["labourprice"] != DBNull.Value ? Convert.ToString(rowdetails["labourprice"]) : string.Empty;
+                                            string? MetalPrice = rowdetails["metalprice"] != DBNull.Value ? Convert.ToString(rowdetails["metalprice"]) : string.Empty;
+                                            string? OtherPrice = rowdetails["otherprice"] != DBNull.Value ? Convert.ToString(rowdetails["otherprice"]) : string.Empty;
+                                            string? StonePrice = rowdetails["stoneprice"] != DBNull.Value ? Convert.ToString(rowdetails["stoneprice"]) : string.Empty;
+                                            string? ItemStockQty = rowdetails["itemstockqty"] != DBNull.Value ? Convert.ToString(rowdetails["itemstockqty"]) : string.Empty;
+                                            string? ItemStockColorSizeQty = rowdetails["itemstockcolorsizeqty"] != DBNull.Value ? Convert.ToString(rowdetails["itemstockcolorsizeqty"]) : string.Empty;
+                                            string? ProductTags = rowdetails["producttags"] != DBNull.Value ? Convert.ToString(rowdetails["producttags"]) : string.Empty;
+                                            totalItems = rowdetails["total_items"] as int? ?? (rowdetails["total_items"] != DBNull.Value ? Convert.ToInt32(rowdetails["total_items"]) : (int?)null);
+                                            lastPage = rowdetails["last_page"] as int? ?? (rowdetails["last_page"] != DBNull.Value ? Convert.ToInt32(rowdetails["last_page"]) : (int?)null);
+                                            currentPage = rowdetails["current_page"] as int? ?? (rowdetails["current_page"] != DBNull.Value ? Convert.ToInt32(rowdetails["current_page"]) : (int?)null);
+
+                                            List<Dictionary<string, object>> productTagsDynamic = new List<Dictionary<string, object>>();
+
+                                            if (!string.IsNullOrEmpty(ProductTags))
+                                            {
+                                                try
+                                                {
+                                                    productTagsDynamic = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(ProductTags);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Error deserializing ProductTags: " + ex.Message);
+                                                }
+                                            }
+
+                                            wishItemList.Add(new WishItemListOnResponse
+                                            {
+                                                ItemId = ItemId,
+                                                ItemCode = ItemCode,
+                                                ItemAproxDay = ItemAproxDay,
+                                                ItemSku = ItemSku,
+                                                ItemName = ItemName,
+                                                ItemDescription = ItemDescription,
+                                                ItemMrp = ItemMrp,
+                                                DsgSfx = DsgSfx,
+                                                DsgSize = DsgSize,
+                                                DsgKt = DsgKt,
+                                                DsgColor = DsgColor,
+                                                ItemDisLabourPer = ItemDisLabourPer,
+                                                ApproxDeliveryDate = ApproxDeliveryDate,
+                                                SubCategoryId = SubCategoryId,
+                                                ItemPrice = ItemPrice,
+                                                DistPrice = DistPrice,
+                                                ItemSoliter = ItemSoliter,
+                                                ImagePath = ImagePath,
+                                                Star = Star,
+                                                MostOrder = MostOrder,
+                                                ItemAproxDayCommonId = ItemAproxDayCommonId,
+                                                PlaingoldStatus = PlaingoldStatus,
+                                                ItemPlainGold = ItemPlainGold,
+                                                LabourPer = LabourPer,
+                                                ItemWt = ItemWt,
+                                                CategoryId = CategoryId,
+                                                WishListId = WishListId,
+                                                ItemFranchiseSts = ItemFranchiseSts,
+                                                PriceFlag = PriceFlag,
+                                                ItemIsSRP = ItemIsSRP,
+                                                MrpWithTax = MrpWithTax,
+                                                DiamondPrice = DiamondPrice,
+                                                GoldPrice = GoldPrice,
+                                                PlatinumPrice = PlatinumPrice,
+                                                LabourPrice = LabourPrice,
+                                                MetalPrice = MetalPrice,
+                                                OtherPrice = OtherPrice,
+                                                StonePrice = StonePrice,
+                                                ItemStockQty = ItemStockQty,
+                                                ItemStockColorSizeQty = ItemStockColorSizeQty,
+                                                ProductTags = ProductTags,
+                                            });
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (wishItemList.Any())
+                {
+                    responseDetails.success = true;
+                    responseDetails.message = "Successfully";
+                    responseDetails.status = "200";
+                    responseDetails.current_page = currentPage?.ToString();
+                    responseDetails.last_page = lastPage?.ToString();
+                    responseDetails.total_items = totalItems?.ToString();
+                    responseDetails.data = wishItemList;
+                }
+                else
+                {
+                    responseDetails.success = false;
+                    responseDetails.message = "No data found";
+                    responseDetails.status = "200";
+                    responseDetails.data = new List<WishItemListOnResponse>();
+                }
+                return responseDetails;
+            }
+            catch (SqlException sqlEx)
+            {
+                responseDetails.success = false;
+                responseDetails.message = $"SQL error: {sqlEx.Message}";
+                responseDetails.status = "400";
+                responseDetails.data = new List<WishItemListOnResponse>();
+                return responseDetails;
             }
         }
     }
