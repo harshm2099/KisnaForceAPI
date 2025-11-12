@@ -5,10 +5,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NewAvatarWebApis.Common;
 using NewAvatarWebApis.Core.Application.Common;
+using NewAvatarWebApis.Core.Application.Common.OtpApi.Models;
 using NewAvatarWebApis.Infrastructure.Services;
 using NewAvatarWebApis.Infrastructure.Services.Interfaces;
 using NewAvatarWebApis.Presentation.Middlewares;
-using System.IdentityModel.Tokens.Jwt;
+using OtpApi.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ builder.Services.AddCors(options =>
 });
 
 // Adding Dependency Injection
+builder.Services.AddScoped<IOtpService, OtpService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICollectionService, CollectionService>();
@@ -84,16 +86,13 @@ builder.Services.AddSwaggerGen(options =>
     }
 
     options.OperationFilter<AddCommonHeaderParameters>();
-
-    // Include XML comments
-    //var xmlFile = Path.Combine(AppContext.BaseDirectory, "NewAvatarWebApis.xml");
-    //options.IncludeXmlComments(xmlFile);
 });
 
 // Add TokenService and CommonHelpers
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<CommonHelpers>();
 builder.Configuration.AddEnvironmentVariables();
+
 // Add Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
