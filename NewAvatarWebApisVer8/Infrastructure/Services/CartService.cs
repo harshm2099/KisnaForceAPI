@@ -8,6 +8,7 @@ using NewAvatarWebApis.Models;
 using Newtonsoft.Json;
 using System.Data;
 using System.Globalization;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 
 namespace NewAvatarWebApis.Infrastructure.Services
@@ -1945,11 +1946,15 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                 int aiIdx = dataReader.GetOrdinal("allotted_items");
                                 if (aiIdx >= 0 && !dataReader.IsDBNull(aiIdx))
                                     responseDetails.data = dataReader.GetString(aiIdx);
+
+
+                               
+
                             }
                             else
                             {
                                 responseDetails.success = false;
-                                responseDetails.message = "No data found Found.";
+                                responseDetails.message = "No data found.";
                                 responseDetails.status = "200";
                             }
                         }
