@@ -379,7 +379,8 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public string devicetype { get; set; }
             public string devicename { get; set; }
             public string appversion { get; set; }
-        }
+            public int? consumer_form_id { get; set; }
+    }
 
         public class CheckItemIsNewPremiumCollectionListing
         {
