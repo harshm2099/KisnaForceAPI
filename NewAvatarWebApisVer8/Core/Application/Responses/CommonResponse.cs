@@ -239,6 +239,13 @@
             public string? viewId { get; set; }
         }
 
+        public class PieceVerifyResponse
+        {
+            public string? Status { get; set; }
+            public string? Message { get; set; }
+            public object? Data { get; set; }
+        }
+
         public class PieceVerifyExcelResponse
         {
             public string? Date { get; set; }

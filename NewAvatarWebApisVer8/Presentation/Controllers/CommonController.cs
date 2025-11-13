@@ -472,6 +472,13 @@ namespace NewAvatarWebApis.Presentation.Controllers
             return result;
         }
 
+        [HttpPost("piece-verify")]
+        public async Task<ResponseDetails> PieceVerify(PieceVerifyRequest param)
+        {
+            var result = await _commonService.PieceVerify(param);
+            return result;
+        }
+
         [HttpPost("piece-verify-excel")]
         public async Task<ResponseDetails> PieceVerifyExcel(PieceVerifyExcelRequest param)
         {

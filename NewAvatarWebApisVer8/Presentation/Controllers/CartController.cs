@@ -70,10 +70,18 @@ namespace NewAvatarWebApis.Presentation.Controllers
             return result;
         }
 
+        //[HttpPost("cart-insert")]
+        //public Task<ResponseDetails> CartInsert(CartInsertParams cartinsert_params)
+        //{
+        //    var result = _cartService.CartInsert(cartinsert_params);
+        //    return result;
+        //}
+
         [HttpPost("cart-insert")]
-        public Task<ResponseDetails> CartInsert(CartInsertParams cartinsert_params)
+        public async Task<ReturnResponse> CartInsert(CartInsertParams param)
         {
-            var result = _cartService.CartInsert(cartinsert_params);
+            var commonHeader = HttpContext.Items["CommonHeader"] as CommonHeader;
+            var result = await _cartService.CartInsert(param, commonHeader);
             return result;
         }
 

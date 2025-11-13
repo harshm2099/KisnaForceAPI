@@ -12376,91 +12376,97 @@ namespace NewAvatarWebApis.Infrastructure.Services
             }
         }
 
-        //public async Task<ResponseDetails> PieceVerify(PieceVerifyRequest param)
-        //{
-        //    var responseDetails = new ResponseDetails();
-        //    IList<PopularItemsResponse> details = new List<PopularItemsResponse>();
-        //    try
-        //    {
-        //        using (SqlConnection dbConnection = new SqlConnection(_connection))
-        //        {
-        //            string cmdQuery = DBCommands.PieceVerify;
-        //            await dbConnection.OpenAsync();
+        public async Task<ResponseDetails> PieceVerify(PieceVerifyRequest param)
+        {
+            var responseDetails = new ResponseDetails();
+            IList<PieceVerifyResponse> pieceVerify = new List<PieceVerifyResponse>();
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(_connection))
+                {
+                    string cmdQuery = DBCommands.PieceVerify;
+                    await dbConnection.OpenAsync();
 
-        //            using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
-        //            {
-        //                string? dataId = string.IsNullOrWhiteSpace(param.DataId) ? null : param.DataId;
-        //                string? dataLoginType = string.IsNullOrWhiteSpace(param.DataLoginType) ? null : param.DataLoginType;
-        //                string? type = string.IsNullOrWhiteSpace(param.Type) ? null : param.Type;
-        //                string? search = string.IsNullOrWhiteSpace(param.Search) ? null : param.Search;
+                    using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
+                    {
+                        string? dataId = string.IsNullOrWhiteSpace(param.DataId) ? null : param.DataId;
+                        string? dataLoginType = string.IsNullOrWhiteSpace(param.DataLoginType) ? null : param.DataLoginType;
+                        string? type = string.IsNullOrWhiteSpace(param.Type) ? null : param.Type;
+                        string? search = string.IsNullOrWhiteSpace(param.Search) ? null : param.Search;
 
-        //                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //                cmd.CommandTimeout = 120;
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandTimeout = 120;
 
-        //                cmd.Parameters.AddWithValue("@type", type);
-        //                cmd.Parameters.AddWithValue("@search", search);
-        //                cmd.Parameters.AddWithValue("@data_id", dataId);
-        //                cmd.Parameters.AddWithValue("@data_login_type", dataLoginType);
+                        cmd.Parameters.AddWithValue("@type", type);
+                        cmd.Parameters.AddWithValue("@search", search);
+                        cmd.Parameters.AddWithValue("@data_id", dataId);
+                        cmd.Parameters.AddWithValue("@data_login_type", dataLoginType);
 
-        //                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-        //                {
-        //                    DataSet ds = new DataSet();
-        //                    da.Fill(ds);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
 
-        //                    if (ds.Tables.Count > 0)
-        //                    {
-        //                        if (ds.Tables[0].Rows.Count > 0)
-        //                        {
-        //                            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-        //                            {
-        //                                try
-        //                                {
-        //                                    var rowdetails = ds.Tables[0].Rows[i];
+                            if (ds.Tables.Count > 0)
+                            {
+                                if (ds.Tables[0].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                                    {
+                                        try
+                                        {
+                                            var rowdetails = ds.Tables[0].Rows[i];
+                                            string? status = rowdetails["status"] != DBNull.Value ? Convert.ToString(rowdetails["status"]) : string.Empty;
+                                            string? message = rowdetails["message"] != DBNull.Value ? Convert.ToString(rowdetails["message"]) : string.Empty;
+                                            string? data = rowdetails["Data"] != DBNull.Value ? Convert.ToString(rowdetails["Data"]) : string.Empty;
 
+                                            List<Dictionary<string, object>> dataDynamic = new List<Dictionary<string, object>>();
 
-        //                                    details.Add(new PopularItemsResponse
-        //                                    {
+                                            if (!string.IsNullOrEmpty(data))
+                                            {
+                                                try
+                                                {
+                                                    dataDynamic = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(data);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Error deserializing data: " + ex.Message);
+                                                }
+                                            }
 
-        //                                    });
-        //                                }
-        //                                catch (Exception ex)
-        //                                {
-        //                                    Console.WriteLine(ex.Message);
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        if (details.Any())
-        //        {
-        //            responseDetails.success = true;
-        //            responseDetails.message = "Successfully";
-        //            responseDetails.status = "200";
-        //            responseDetails.current_page = currentPage?.ToString();
-        //            responseDetails.last_page = lastPage?.ToString();
-        //            responseDetails.total_items = totalItems?.ToString();
-        //            responseDetails.data = details;
-        //        }
-        //        else
-        //        {
-        //            responseDetails.success = false;
-        //            responseDetails.message = "No data found";
-        //            responseDetails.status = "200";
-        //            responseDetails.data = new List<PopularItemsResponse>();
-        //        }
-        //        return responseDetails;
-        //    }
-        //    catch (SqlException sqlEx)
-        //    {
-        //        responseDetails.success = false;
-        //        responseDetails.message = $"SQL error: {sqlEx.Message}";
-        //        responseDetails.status = "400";
-        //        responseDetails.data = new List<PopularItemsResponse>();
-        //        return responseDetails;
-        //    }
-        //}
+                                            pieceVerify.Add(new PieceVerifyResponse
+                                            {
+                                                Status = status,
+                                                Message = message,
+                                                Data = dataDynamic,
+                                            });
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (pieceVerify.Any())
+                {
+                    responseDetails.data = pieceVerify;
+                }
+                else
+                {
+                    responseDetails.data = new List<PieceVerifyResponse>();
+                }
+                return responseDetails;
+            }
+            catch (SqlException sqlEx)
+            {
+                responseDetails.data = new List<PieceVerifyResponse>();
+                return responseDetails;
+            }
+        }
 
         public async Task<ResponseDetails> PieceVerifyExcel(PieceVerifyExcelRequest param)
         {

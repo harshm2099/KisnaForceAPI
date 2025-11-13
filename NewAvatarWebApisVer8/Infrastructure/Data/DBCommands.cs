@@ -276,6 +276,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
         public const string CATEGORYBUTTONLIST = "CATEGORYBUTTONLIST";
         public const string GET_ITEMDETAILS_BYITEMID = "GET_ITEMDETAILS_BYITEMID";
         public const string CART_INSERT = "CART_INSERT";
+        public const string CartInsert = "usp_CartInsert";
         public const string CARTSTORE = "CARTSTORE";
         public const string SOLICARTSTORE = "SOLICARTSTORE";
         public const string GETUSERTYPES_FORCUSTOMERMARGINS = "GETUSERTYPES_FORCUSTOMERMARGINS";

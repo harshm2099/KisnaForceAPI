@@ -1,4 +1,5 @@
-﻿using NewAvatarWebApis.Core.Application.DTOs;
+﻿using NewAvatarWebApis.Core.Application.Common;
+using NewAvatarWebApis.Core.Application.DTOs;
 using NewAvatarWebApis.Core.Application.Responses;
 using NewAvatarWebApis.Models;
 using static NewAvatarWebApis.Infrastructure.Services.CartService;
@@ -21,7 +22,9 @@ namespace NewAvatarWebApis.Infrastructure.Services.Interfaces
 
         public Task<ResponseDetails> GetCartItemList(CartItemListingParams cartitemlistparams);
 
-        public Task<ResponseDetails> CartInsert(CartInsertParams cartinsert_params);
+        //public Task<ResponseDetails> CartInsert(CartInsertParams cartinsert_params);
+
+        public Task<ReturnResponse> CartInsert(CartInsertParams param, CommonHeader header);
 
         public Task<ResponseDetails> CartStore(CartStoreParams cartstore_params);
 

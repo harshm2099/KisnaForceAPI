@@ -1,5 +1,7 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Azure;
+using Microsoft.Data.SqlClient;
 using NewAvatarWebApis.Common;
+using NewAvatarWebApis.Core.Application.Common;
 using NewAvatarWebApis.Core.Application.DTOs;
 using NewAvatarWebApis.Core.Application.Responses;
 using NewAvatarWebApis.Infrastructure.Data;
@@ -8,7 +10,6 @@ using NewAvatarWebApis.Models;
 using Newtonsoft.Json;
 using System.Data;
 using System.Globalization;
-using System.Runtime.Intrinsics.Arm;
 using System.Text;
 
 namespace NewAvatarWebApis.Infrastructure.Services
@@ -1144,211 +1145,278 @@ namespace NewAvatarWebApis.Infrastructure.Services
             }
         }
 
-        public async Task<ResponseDetails> CartInsert(CartInsertParams cartinsert_params)
-        {
-            CartStore cartstoreDetails = new CartStore();
-            var responseDetails = new ResponseDetails();
+        //public async Task<ResponseDetails> CartInsert(CartInsertParams cartinsert_params)
+        //{
+        //    CartStore cartstoreDetails = new CartStore();
+        //    var responseDetails = new ResponseDetails();
 
+        //    try
+        //    {
+        //        using (SqlConnection dbConnection = new SqlConnection(_connection))
+        //        {
+        //            int DataId = cartinsert_params.data_id > 0 ? cartinsert_params.data_id : 0;
+        //            string NetIp = string.IsNullOrWhiteSpace(cartinsert_params.net_ip) ? "" : cartinsert_params.net_ip;
+        //            string CartRemark = string.IsNullOrWhiteSpace(cartinsert_params.cart_remark) ? "" : cartinsert_params.cart_remark;
+        //            int CartId = cartinsert_params.cart_id > 0 ? cartinsert_params.cart_id : 0;
+        //            int ItemId = cartinsert_params.item_id > 0 ? cartinsert_params.item_id : 0;
+        //            decimal CartPrice = cartinsert_params.cart_price > 0 ? cartinsert_params.cart_price : 0;
+        //            int CartQTY = cartinsert_params.cart_qty > 0 ? cartinsert_params.cart_qty : 0;
+        //            int is_stock = cartinsert_params.is_stock > 0 ? cartinsert_params.is_stock : 0;
+        //            decimal CartMRPrice = cartinsert_params.cart_mrprice > 0 ? cartinsert_params.cart_mrprice : 0;
+        //            decimal CartRPrice = cartinsert_params.cart_rprice > 0 ? cartinsert_params.cart_rprice : 0;
+        //            //decimal CartDPrice = cartinsert_params.cart_dprice > 0 ? cartinsert_params.cart_dprice : 0;
+        //            string CartDPrice_str = "";
+        //            if (string.IsNullOrWhiteSpace(cartinsert_params.cart_dprice.ToString()))
+        //            {
+        //                CartDPrice_str = "0";
+        //            }
+        //            else
+        //            {
+        //                CartDPrice_str = cartinsert_params.cart_dprice.ToString().Replace("₹", "").Trim();
+        //            }
+        //            Decimal.TryParse(CartDPrice_str, out decimal CartDPrice);
+
+        //            int CartColorCommonID = cartinsert_params.product_color_mst_id > 0 ? cartinsert_params.product_color_mst_id : 0;
+        //            int CartConfCommonID = cartinsert_params.product_size_mst_id > 0 ? cartinsert_params.product_size_mst_id : 0;
+        //            string CartItemInfoselect = string.IsNullOrWhiteSpace(cartinsert_params.product_item_remarks) ? "" : cartinsert_params.product_item_remarks;
+        //            string CartItemInfoselectIDS = string.IsNullOrWhiteSpace(cartinsert_params.product_item_remarks_ids) ? "" : cartinsert_params.product_item_remarks_ids;
+        //            string CartItemInfoCustomselect = string.IsNullOrWhiteSpace(cartinsert_params.product_item_custom_remarks) ? "" : cartinsert_params.product_item_custom_remarks;
+        //            string CartItemInfoCustomselectIDS = string.IsNullOrWhiteSpace(cartinsert_params.product_item_custom_remarks_ids) ? "" : cartinsert_params.product_item_custom_remarks_ids;
+        //            //string CatrItemCustomStatus = string.IsNullOrWhiteSpace(cartinsert_params.product_item_custom_remarks_status) ? "" : cartinsert_params.product_item_custom_remarks_status;
+        //            int CatrItemCustomStatus = cartinsert_params.product_item_custom_remarks_status > 0 ? 0 : cartinsert_params.product_item_custom_remarks_status;
+        //            decimal ExtraGold = cartinsert_params.extra_gold > 0 ? cartinsert_params.extra_gold : 0;
+        //            decimal ExtraGoldPrice = cartinsert_params.extra_gold_price > 0 ? cartinsert_params.extra_gold_price : 0;
+        //            int ItemAproxDayCommonID = cartinsert_params.ItemAproxDayCommonID > 0 ? cartinsert_params.ItemAproxDayCommonID : 0;
+        //            string devicetype = string.IsNullOrWhiteSpace(cartinsert_params.devicetype) ? "" : cartinsert_params.devicetype;
+        //            string devicename = string.IsNullOrWhiteSpace(cartinsert_params.devicename) ? "" : cartinsert_params.devicename;
+        //            string appversion = string.IsNullOrWhiteSpace(cartinsert_params.appversion) ? "" : cartinsert_params.appversion;
+
+        //            CommonHelpers objHelpers = new CommonHelpers();
+        //            string
+        //                ItemPlainGold = "",
+        //                MstType = "",
+        //                ItemOdSfx = "",
+        //                resmessage = "";
+        //            int
+        //                resstatus = 0,
+        //                resstatuscode = 400;
+
+        //            string cmdQuery = DBCommands.GET_ITEMDETAILS_BYITEMID;
+        //            dbConnection.Open();
+
+        //            using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
+        //            {
+        //                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("@DataId", DataId);
+        //                cmd.Parameters.AddWithValue("@ItemId", ItemId);
+
+        //                using (SqlDataReader dataReader = cmd.ExecuteReader())
+        //                {
+        //                    if (dataReader.HasRows)
+        //                    {
+        //                        while (dataReader.Read())
+        //                        {
+        //                            ItemPlainGold = dataReader["ItemPlainGold"] as string ?? string.Empty;
+        //                            MstType = dataReader["MstType"] as string ?? string.Empty;
+        //                            ItemOdSfx = dataReader["ItemOdSfx"] as string ?? string.Empty;
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+
+
+        //            cmdQuery = DBCommands.CART_INSERT;
+        //            using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
+        //            {
+        //                // ItemLivePriceCalculation
+        //                IList<CartItemPriceDetailListing> cartItemPriceDetailList_gold = new List<CartItemPriceDetailListing>();
+
+        //                string
+        //                    designkt = "",
+        //                    making_per_gram = "";
+        //                decimal
+        //                    Gold_price = 0,
+        //                    total_goldvalue = 0,
+        //                    finalGoldValue = 0,
+        //                    total_labour = 0,
+        //                    gst_price = 0,
+        //                    item_price = 0,
+        //                    total_price = 0;
+
+
+        //                if (ItemPlainGold == "Y")
+        //                {
+        //                    if (MstType == "F")
+        //                    {
+        //                        CartItemPriceDetailListingParams cartitempricedetaillistparams = new CartItemPriceDetailListingParams();
+        //                        cartitempricedetaillistparams.DataID = DataId;
+        //                        cartitempricedetaillistparams.ItemID = ItemId;
+        //                        cartitempricedetaillistparams.IsWeightCalcRequired = 0;
+        //                        cartItemPriceDetailList_gold = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
+
+        //                        if (cartItemPriceDetailList_gold.Count > 0)
+        //                        {
+        //                            designkt = cartItemPriceDetailList_gold[0].ItemOdSfx;
+        //                            Gold_price = cartItemPriceDetailList_gold[0].pure_gold;
+        //                            total_goldvalue = cartItemPriceDetailList_gold[0].gold_ktprice;
+        //                            finalGoldValue = cartItemPriceDetailList_gold[0].gold_price;
+        //                            making_per_gram = cartItemPriceDetailList_gold[0].labour;
+        //                            total_labour = cartItemPriceDetailList_gold[0].labour_price;
+        //                            gst_price = cartItemPriceDetailList_gold[0].GST;
+        //                            item_price = cartItemPriceDetailList_gold[0].item_price;
+        //                            total_price = cartItemPriceDetailList_gold[0].total_price;
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        designkt = ItemOdSfx;
+        //                    }
+        //                }
+
+        //                Decimal.TryParse(making_per_gram, out decimal making_per_gram_decimal);
+
+        //                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("@DataId", DataId);
+        //                cmd.Parameters.AddWithValue("@NetIp", NetIp);
+        //                cmd.Parameters.AddWithValue("@CartRemark", CartRemark);
+        //                cmd.Parameters.AddWithValue("@CartId", CartId);
+        //                cmd.Parameters.AddWithValue("@ItemId", ItemId);
+        //                cmd.Parameters.AddWithValue("@CartPrice", CartPrice);
+        //                cmd.Parameters.AddWithValue("@CartQTY", CartQTY);
+        //                cmd.Parameters.AddWithValue("@is_stock", is_stock);
+        //                cmd.Parameters.AddWithValue("@CartMRPrice", CartMRPrice);
+        //                cmd.Parameters.AddWithValue("@CartRPrice", CartRPrice);
+        //                cmd.Parameters.AddWithValue("@CartDPrice", CartDPrice);
+        //                cmd.Parameters.AddWithValue("@CartColorCommonID", CartColorCommonID);
+        //                cmd.Parameters.AddWithValue("@CartConfCommonID", CartConfCommonID);
+        //                cmd.Parameters.AddWithValue("@CartItemInfoselect", CartItemInfoselect);
+        //                cmd.Parameters.AddWithValue("@CartItemInfoselectIDS", CartItemInfoselectIDS);
+        //                cmd.Parameters.AddWithValue("@CartItemInfoCustomselect", CartItemInfoCustomselect);
+        //                cmd.Parameters.AddWithValue("@CartItemInfoCustomselectIDS", CartItemInfoCustomselectIDS);
+        //                cmd.Parameters.AddWithValue("@CatrItemCustomStatus", CatrItemCustomStatus);
+        //                cmd.Parameters.AddWithValue("@ExtraGold", ExtraGold);
+        //                cmd.Parameters.AddWithValue("@ExtraGoldPrice", ExtraGoldPrice);
+        //                cmd.Parameters.AddWithValue("@ItemAproxDayCommonID", ItemAproxDayCommonID);
+        //                cmd.Parameters.AddWithValue("@devicetype", devicetype);
+        //                cmd.Parameters.AddWithValue("@devicename", devicename);
+        //                cmd.Parameters.AddWithValue("@appversion", appversion);
+        //                cmd.Parameters.AddWithValue("@SourceType", "APP");
+        //                cmd.Parameters.AddWithValue("@designkt", designkt);
+        //                cmd.Parameters.AddWithValue("@Gold_price", Gold_price);
+        //                cmd.Parameters.AddWithValue("@total_goldvalue", total_goldvalue);
+        //                cmd.Parameters.AddWithValue("@making_per_gram", making_per_gram_decimal);
+        //                cmd.Parameters.AddWithValue("@finalGoldValue", finalGoldValue);
+        //                cmd.Parameters.AddWithValue("@total_labour", total_labour);
+        //                cmd.Parameters.AddWithValue("@item_price", item_price);
+        //                cmd.Parameters.AddWithValue("@gst_price", gst_price);
+        //                cmd.Parameters.AddWithValue("@total_price", total_price);
+
+        //                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+        //                {
+        //                    DataSet ds = new DataSet();
+        //                    da.Fill(ds);
+
+        //                    if (ds.Tables.Count > 0)
+        //                    {
+        //                        if (ds.Tables[0].Rows.Count > 0)
+        //                        {
+        //                            try
+        //                            {
+        //                                var firstRow = ds.Tables[0].Rows[0];
+        //                                resstatus = firstRow["resstatus"] as int? ?? 0;
+        //                                resstatuscode = firstRow["resstatuscode"] as int? ?? 0;
+        //                                resmessage = firstRow["resmessage"] as string ?? string.Empty;
+        //                            }
+        //                            catch (Exception ex)
+        //                            {
+        //                                Console.WriteLine(ex.Message);
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+        //            responseDetails.success = (resstatus == 1 ? true : false);
+        //            responseDetails.message = resmessage;
+        //            responseDetails.status = resstatuscode.ToString();
+        //            return responseDetails;
+        //        }
+        //    }
+        //    catch (SqlException sqlEx)
+        //    {
+        //        responseDetails.success = false;
+        //        responseDetails.message = $"SQL error: {sqlEx.Message}";
+        //        responseDetails.status = "400";
+        //        return responseDetails;
+        //    }
+        //}
+
+        public async Task<ReturnResponse> CartInsert(CartInsertParams param, CommonHeader header)
+        {
+            var response = new ReturnResponse();
             try
             {
                 using (SqlConnection dbConnection = new SqlConnection(_connection))
                 {
-                    int DataId = cartinsert_params.data_id > 0 ? cartinsert_params.data_id : 0;
-                    string NetIp = string.IsNullOrWhiteSpace(cartinsert_params.net_ip) ? "" : cartinsert_params.net_ip;
-                    string CartRemark = string.IsNullOrWhiteSpace(cartinsert_params.cart_remark) ? "" : cartinsert_params.cart_remark;
-                    int CartId = cartinsert_params.cart_id > 0 ? cartinsert_params.cart_id : 0;
-                    int ItemId = cartinsert_params.item_id > 0 ? cartinsert_params.item_id : 0;
-                    decimal CartPrice = cartinsert_params.cart_price > 0 ? cartinsert_params.cart_price : 0;
-                    int CartQTY = cartinsert_params.cart_qty > 0 ? cartinsert_params.cart_qty : 0;
-                    int is_stock = cartinsert_params.is_stock > 0 ? cartinsert_params.is_stock : 0;
-                    decimal CartMRPrice = cartinsert_params.cart_mrprice > 0 ? cartinsert_params.cart_mrprice : 0;
-                    decimal CartRPrice = cartinsert_params.cart_rprice > 0 ? cartinsert_params.cart_rprice : 0;
-                    //decimal CartDPrice = cartinsert_params.cart_dprice > 0 ? cartinsert_params.cart_dprice : 0;
-                    string CartDPrice_str = "";
-                    if (string.IsNullOrWhiteSpace(cartinsert_params.cart_dprice.ToString()))
-                    {
-                        CartDPrice_str = "0";
-                    }
-                    else
-                    {
-                        CartDPrice_str = cartinsert_params.cart_dprice.ToString().Replace("₹", "").Trim();
-                    }
-                    Decimal.TryParse(CartDPrice_str, out decimal CartDPrice);
-
-                    int CartColorCommonID = cartinsert_params.product_color_mst_id > 0 ? cartinsert_params.product_color_mst_id : 0;
-                    int CartConfCommonID = cartinsert_params.product_size_mst_id > 0 ? cartinsert_params.product_size_mst_id : 0;
-                    string CartItemInfoselect = string.IsNullOrWhiteSpace(cartinsert_params.product_item_remarks) ? "" : cartinsert_params.product_item_remarks;
-                    string CartItemInfoselectIDS = string.IsNullOrWhiteSpace(cartinsert_params.product_item_remarks_ids) ? "" : cartinsert_params.product_item_remarks_ids;
-                    string CartItemInfoCustomselect = string.IsNullOrWhiteSpace(cartinsert_params.product_item_custom_remarks) ? "" : cartinsert_params.product_item_custom_remarks;
-                    string CartItemInfoCustomselectIDS = string.IsNullOrWhiteSpace(cartinsert_params.product_item_custom_remarks_ids) ? "" : cartinsert_params.product_item_custom_remarks_ids;
-                    //string CatrItemCustomStatus = string.IsNullOrWhiteSpace(cartinsert_params.product_item_custom_remarks_status) ? "" : cartinsert_params.product_item_custom_remarks_status;
-                    int CatrItemCustomStatus = cartinsert_params.product_item_custom_remarks_status > 0 ? 0 : cartinsert_params.product_item_custom_remarks_status;
-                    decimal ExtraGold = cartinsert_params.extra_gold > 0 ? cartinsert_params.extra_gold : 0;
-                    decimal ExtraGoldPrice = cartinsert_params.extra_gold_price > 0 ? cartinsert_params.extra_gold_price : 0;
-                    int ItemAproxDayCommonID = cartinsert_params.ItemAproxDayCommonID > 0 ? cartinsert_params.ItemAproxDayCommonID : 0;
-                    string devicetype = string.IsNullOrWhiteSpace(cartinsert_params.devicetype) ? "" : cartinsert_params.devicetype;
-                    string devicename = string.IsNullOrWhiteSpace(cartinsert_params.devicename) ? "" : cartinsert_params.devicename;
-                    string appversion = string.IsNullOrWhiteSpace(cartinsert_params.appversion) ? "" : cartinsert_params.appversion;
-
-                    CommonHelpers objHelpers = new CommonHelpers();
-                    string
-                        ItemPlainGold = "",
-                        MstType = "",
-                        ItemOdSfx = "",
-                        resmessage = "";
-                    int
-                        resstatus = 0,
-                        resstatuscode = 400;
-
-                    string cmdQuery = DBCommands.GET_ITEMDETAILS_BYITEMID;
+                    string cmdQuery = DBCommands.CartInsert;
                     dbConnection.Open();
 
                     using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@DataId", DataId);
-                        cmd.Parameters.AddWithValue("@ItemId", ItemId);
+                        cmd.Parameters.AddWithValue("@data_id", param.data_id);
+                        cmd.Parameters.AddWithValue("@net_ip", param.net_ip);
+                        cmd.Parameters.AddWithValue("@item_id", param.item_id);
+                        cmd.Parameters.AddWithValue("@cart_price", param.cart_price);
+                        cmd.Parameters.AddWithValue("@cart_qty", param.cart_qty);
+                        cmd.Parameters.AddWithValue("@cart_remark", param.cart_remark);
+                        cmd.Parameters.AddWithValue("@cart_id", param.cart_id);
+                        cmd.Parameters.AddWithValue("@is_stock", param.is_stock);
+                        cmd.Parameters.AddWithValue("@cart_mrprice", param.cart_mrprice);
+                        cmd.Parameters.AddWithValue("@cart_rprice", param.cart_rprice);
+                        cmd.Parameters.AddWithValue("@cart_dprice", param.cart_dprice);
+                        cmd.Parameters.AddWithValue("@product_color_mst_id", param.product_color_mst_id);
+                        cmd.Parameters.AddWithValue("@product_size_mst_id", param.product_size_mst_id);
+                        cmd.Parameters.AddWithValue("@product_item_remarks", param.product_item_remarks);
+                        cmd.Parameters.AddWithValue("@product_item_remarks_ids", param.product_item_remarks_ids);
+                        cmd.Parameters.AddWithValue("@product_item_custom_remarks", param.product_item_custom_remarks);
+                        cmd.Parameters.AddWithValue("@product_item_custom_remarks_ids", param.product_item_custom_remarks_ids);
+                        cmd.Parameters.AddWithValue("@product_item_custom_remarks_status", param.product_item_custom_remarks_status);
+                        cmd.Parameters.AddWithValue("@extra_gold", param.extra_gold);
+                        cmd.Parameters.AddWithValue("@extra_gold_price", param.extra_gold_price);
+                        cmd.Parameters.AddWithValue("@ItemAproxDayCommonID", param.ItemAproxDayCommonID);
+                        cmd.Parameters.AddWithValue("@devicetype", header.devicetype);
+                        cmd.Parameters.AddWithValue("@devicename", header.devicename);
+                        cmd.Parameters.AddWithValue("@appversion", header.appversion);
 
-                        using (SqlDataReader dataReader = cmd.ExecuteReader())
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            if (dataReader.HasRows)
+                            if (await reader.ReadAsync())
                             {
-                                while (dataReader.Read())
-                                {
-                                    ItemPlainGold = dataReader["ItemPlainGold"] as string ?? string.Empty;
-                                    MstType = dataReader["MstType"] as string ?? string.Empty;
-                                    ItemOdSfx = dataReader["ItemOdSfx"] as string ?? string.Empty;
-                                }
-                            }
-                        }
-                    }
-
-
-
-                    cmdQuery = DBCommands.CART_INSERT;
-                    using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
-                    {
-                        // ItemLivePriceCalculation
-                        IList<CartItemPriceDetailListing> cartItemPriceDetailList_gold = new List<CartItemPriceDetailListing>();
-
-                        string
-                            designkt = "",
-                            making_per_gram = "";
-                        decimal
-                            Gold_price = 0,
-                            total_goldvalue = 0,
-                            finalGoldValue = 0,
-                            total_labour = 0,
-                            gst_price = 0,
-                            item_price = 0,
-                            total_price = 0;
-
-
-                        if (ItemPlainGold == "Y")
-                        {
-                            if (MstType == "F")
-                            {
-                                CartItemPriceDetailListingParams cartitempricedetaillistparams = new CartItemPriceDetailListingParams();
-                                cartitempricedetaillistparams.DataID = DataId;
-                                cartitempricedetaillistparams.ItemID = ItemId;
-                                cartitempricedetaillistparams.IsWeightCalcRequired = 0;
-                                cartItemPriceDetailList_gold = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
-
-                                if (cartItemPriceDetailList_gold.Count > 0)
-                                {
-                                    designkt = cartItemPriceDetailList_gold[0].ItemOdSfx;
-                                    Gold_price = cartItemPriceDetailList_gold[0].pure_gold;
-                                    total_goldvalue = cartItemPriceDetailList_gold[0].gold_ktprice;
-                                    finalGoldValue = cartItemPriceDetailList_gold[0].gold_price;
-                                    making_per_gram = cartItemPriceDetailList_gold[0].labour;
-                                    total_labour = cartItemPriceDetailList_gold[0].labour_price;
-                                    gst_price = cartItemPriceDetailList_gold[0].GST;
-                                    item_price = cartItemPriceDetailList_gold[0].item_price;
-                                    total_price = cartItemPriceDetailList_gold[0].total_price;
-                                }
+                                response.success = reader["success"]?.ToString();
+                                response.message = reader["message"]?.ToString();
                             }
                             else
                             {
-                                designkt = ItemOdSfx;
-                            }
-                        }
-
-                        Decimal.TryParse(making_per_gram, out decimal making_per_gram_decimal);
-
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@DataId", DataId);
-                        cmd.Parameters.AddWithValue("@NetIp", NetIp);
-                        cmd.Parameters.AddWithValue("@CartRemark", CartRemark);
-                        cmd.Parameters.AddWithValue("@CartId", CartId);
-                        cmd.Parameters.AddWithValue("@ItemId", ItemId);
-                        cmd.Parameters.AddWithValue("@CartPrice", CartPrice);
-                        cmd.Parameters.AddWithValue("@CartQTY", CartQTY);
-                        cmd.Parameters.AddWithValue("@is_stock", is_stock);
-                        cmd.Parameters.AddWithValue("@CartMRPrice", CartMRPrice);
-                        cmd.Parameters.AddWithValue("@CartRPrice", CartRPrice);
-                        cmd.Parameters.AddWithValue("@CartDPrice", CartDPrice);
-                        cmd.Parameters.AddWithValue("@CartColorCommonID", CartColorCommonID);
-                        cmd.Parameters.AddWithValue("@CartConfCommonID", CartConfCommonID);
-                        cmd.Parameters.AddWithValue("@CartItemInfoselect", CartItemInfoselect);
-                        cmd.Parameters.AddWithValue("@CartItemInfoselectIDS", CartItemInfoselectIDS);
-                        cmd.Parameters.AddWithValue("@CartItemInfoCustomselect", CartItemInfoCustomselect);
-                        cmd.Parameters.AddWithValue("@CartItemInfoCustomselectIDS", CartItemInfoCustomselectIDS);
-                        cmd.Parameters.AddWithValue("@CatrItemCustomStatus", CatrItemCustomStatus);
-                        cmd.Parameters.AddWithValue("@ExtraGold", ExtraGold);
-                        cmd.Parameters.AddWithValue("@ExtraGoldPrice", ExtraGoldPrice);
-                        cmd.Parameters.AddWithValue("@ItemAproxDayCommonID", ItemAproxDayCommonID);
-                        cmd.Parameters.AddWithValue("@devicetype", devicetype);
-                        cmd.Parameters.AddWithValue("@devicename", devicename);
-                        cmd.Parameters.AddWithValue("@appversion", appversion);
-                        cmd.Parameters.AddWithValue("@SourceType", "APP");
-                        cmd.Parameters.AddWithValue("@designkt", designkt);
-                        cmd.Parameters.AddWithValue("@Gold_price", Gold_price);
-                        cmd.Parameters.AddWithValue("@total_goldvalue", total_goldvalue);
-                        cmd.Parameters.AddWithValue("@making_per_gram", making_per_gram_decimal);
-                        cmd.Parameters.AddWithValue("@finalGoldValue", finalGoldValue);
-                        cmd.Parameters.AddWithValue("@total_labour", total_labour);
-                        cmd.Parameters.AddWithValue("@item_price", item_price);
-                        cmd.Parameters.AddWithValue("@gst_price", gst_price);
-                        cmd.Parameters.AddWithValue("@total_price", total_price);
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            DataSet ds = new DataSet();
-                            da.Fill(ds);
-
-                            if (ds.Tables.Count > 0)
-                            {
-                                if (ds.Tables[0].Rows.Count > 0)
-                                {
-                                    try
-                                    {
-                                        var firstRow = ds.Tables[0].Rows[0];
-                                        resstatus = firstRow["resstatus"] as int? ?? 0;
-                                        resstatuscode = firstRow["resstatuscode"] as int? ?? 0;
-                                        resmessage = firstRow["resmessage"] as string ?? string.Empty;
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine(ex.Message);
-                                    }
-                                }
+                                response.success = "0";
+                                response.message = "No data found.";
                             }
                         }
                     }
-
-                    responseDetails.success = (resstatus == 1 ? true : false);
-                    responseDetails.message = resmessage;
-                    responseDetails.status = resstatuscode.ToString();
-                    return responseDetails;
                 }
             }
             catch (SqlException sqlEx)
             {
-                responseDetails.success = false;
-                responseDetails.message = $"SQL error: {sqlEx.Message}";
-                responseDetails.status = "400";
-                return responseDetails;
+                response.success = "0";
+                response.message = $"SQL error: {sqlEx.Message}";
             }
+            catch (Exception ex)
+            {
+                response.success = "0";
+                response.message = $"Unexpected error: {ex.Message}";
+            }
+            return response;
         }
 
         public async Task<ResponseDetails> CartStore(CartStoreParams cartstore_params)
@@ -1871,7 +1939,6 @@ namespace NewAvatarWebApis.Infrastructure.Services
         //    }
         //}
 
-
         public async Task<ResponseDetails> cartCheckOutAllotNew(CartCheckoutAllotNewParams cartcheckoutallotnew_params)
         {
             var responseDetails = new ResponseDetails();
@@ -1969,7 +2036,6 @@ namespace NewAvatarWebApis.Infrastructure.Services
             }
             return responseDetails;
         }
-
 
         public static async Task<string> SendHttpRequest(string url)
         {
