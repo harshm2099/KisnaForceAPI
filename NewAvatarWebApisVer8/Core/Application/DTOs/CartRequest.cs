@@ -419,7 +419,8 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public string appversion { get; set; }
             public string SourceType { get; set; }
             public brand_data data { get; set; }
-        }
+            public int? consumer_form_id { get; set; }
+    }
 
         public class CartCheckoutNoAllotNew
         {
@@ -459,13 +460,11 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public string cart_remarks { get; set; }
             public string cart_delivery_date { get; set; }
             public string itemall { get; set; }
-
             public string devicetype { get; set; }
             public string devicename { get; set; }
             public string appversion { get; set; }
             public string SourceType { get; set; }
             public string APP_ENV { get; set; }
-
             public int oroseven_cnt { get; set; }
             public string orosevenString { get; set; }
             public int orofifty_cnt { get; set; }
@@ -476,7 +475,6 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public string orotwentyoneString { get; set; }
             public int orofive_cnt { get; set; }
             public string orofiveString { get; set; }
-
             public int kisnaseven_cnt { get; set; }
             public string kisnasevenString { get; set; }
             public int kisnafifty_cnt { get; set; }
@@ -487,7 +485,6 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public string kisnatwentyoneString { get; set; }
             public int kisnafive_cnt { get; set; }
             public string kisnafiveString { get; set; }
-
             public int kgseven_cnt { get; set; }
             public string kgsevenString { get; set; }
             public int kgfifty_cnt { get; set; }
@@ -498,7 +495,6 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public string kgtwentyoneString { get; set; }
             public int kgfive_cnt { get; set; }
             public string kgfiveString { get; set; }
-
             public int silverseven_cnt { get; set; }
             public string silversevenString { get; set; }
             public int silverfifty_cnt { get; set; }
@@ -509,7 +505,6 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public string silvertwentyoneString { get; set; }
             public int silverfive_cnt { get; set; }
             public string silverfiveString { get; set; }
-
             public int illumineseven_cnt { get; set; }
             public string illuminesevenString { get; set; }
             public int illuminefifty_cnt { get; set; }
@@ -538,6 +533,11 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public List<string> seven_day { get; set; } = new List<string>();
             public List<string> twentyone_day { get; set; } = new List<string>();
             public List<string> five_day { get; set; } = new List<string>();
+            public List<string> ten_day { get; set; } = new List<string>();
+            public List<string> twenty_day { get; set; } = new List<string>();
+            public List<string> twentyfive_day { get; set; } = new List<string>();
+            public List<string> twelve_day { get; set; } = new List<string>();
+            public List<string> thirty_day { get; set; } = new List<string>();
         }
 
         public class Kisna_Gold_Data
@@ -547,6 +547,11 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public List<string> seven_day { get; set; } = new List<string>();
             public List<string> twentyone_day { get; set; } = new List<string>();
             public List<string> five_day { get; set; } = new List<string>();
+            public List<string> ten_day { get; set; } = new List<string>();
+            public List<string> twenty_day { get; set; } = new List<string>();
+            public List<string> twentyfive_day { get; set; } = new List<string>();
+            public List<string> twelve_day { get; set; } = new List<string>();
+            public List<string> thirty_day { get; set; } = new List<string>();
         }
 
         public class Oro_Data
@@ -556,6 +561,11 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public List<string> seven_day { get; set; } = new List<string>();
             public List<string> twentyone_day { get; set; } = new List<string>();
             public List<string> five_day { get; set; } = new List<string>();
+            public List<string> ten_day { get; set; } = new List<string>();
+            public List<string> twenty_day { get; set; } = new List<string>();
+            public List<string> twentyfive_day { get; set; } = new List<string>();
+            public List<string> twelve_day { get; set; } = new List<string>();
+            public List<string> thirty_day { get; set; } = new List<string>();
         }
 
         public class Illumine_Data
@@ -565,6 +575,11 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public List<string> seven_day { get; set; } = new List<string>();
             public List<string> twentyone_day { get; set; } = new List<string>();
             public List<string> five_day { get; set; } = new List<string>();
+            public List<string> ten_day { get; set; } = new List<string>();
+            public List<string> twenty_day { get; set; } = new List<string>();
+            public List<string> twentyfive_day { get; set; } = new List<string>();
+            public List<string> twelve_day { get; set; } = new List<string>();
+            public List<string> thirty_day { get; set; } = new List<string>();
         }
 
         public class Silver_Data
@@ -574,6 +589,44 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public List<string> seven_day { get; set; } = new List<string>();
             public List<string> twentyone_day { get; set; } = new List<string>();
             public List<string> five_day { get; set; } = new List<string>();
+            public List<string> ten_day { get; set; } = new List<string>();
+            public List<string> twenty_day { get; set; } = new List<string>();
+            public List<string> twentyfive_day { get; set; } = new List<string>();
+            public List<string> twelve_day { get; set; } = new List<string>();
+            public List<string> thirty_day { get; set; } = new List<string>();
+        }
+
+        public class StockCheckResult
+        {
+            public int AvailableCount { get; set; }
+            public int NotAvailableCount { get; set; }
+            public List<string> NotAvailablePacketNos { get; set; } = new();
+        }
+
+        public class CartItemWithIllumine
+        {
+            public int ItemID { get; set; }
+            public string ItemSoliterSts { get; set; } = string.Empty;
+            public int ItemCtgCommonID { get; set; }
+            public int CartItemID { get; set; }
+            public string item_illumine { get; set; } = "N";
+        }
+
+        public class SolitaireStock
+        {
+            public string isAvailableStk { get; set; } = string.Empty;
+            public string CartSoliStkNo { get; set; } = string.Empty;
+
+        }
+
+        public class StoneData
+        {
+            public string? Status { get; set; }
+        }
+
+        public class StoneResponse
+        {
+            public StoneData[]? Data { get; set; }
         }
 
         public class CartItemDeleteParams
@@ -590,217 +643,217 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public int color_common_id { get; set; }
         }
 
-    public class CartItemPriceDetailListingParams
-    {
-        public int DataID { get; set; }
-        public int ItemID { get; set; }
-        public int SizeID { get; set; }
-        public int CategoryID { get; set; }
-        public int ItemBrandCommonID { get; set; }
-        public decimal ItemGrossWt { get; set; }
-        public decimal ItemMetalWt { get; set; }
-        public int IsWeightCalcRequired { get; set; }
-        public int ItemGenderCommonID { get; set; }
-    }
+        public class CartItemPriceDetailListingParams
+        {
+            public int DataID { get; set; }
+            public int ItemID { get; set; }
+            public int SizeID { get; set; }
+            public int CategoryID { get; set; }
+            public int ItemBrandCommonID { get; set; }
+            public decimal ItemGrossWt { get; set; }
+            public decimal ItemMetalWt { get; set; }
+            public int IsWeightCalcRequired { get; set; }
+            public int ItemGenderCommonID { get; set; }
+        }
 
-    public class CartItemPriceDetailListing
-    {
-        // Design
-        public string ItemOdSfx { get; set; }
-        public string design { get; set; }
-        public string design_kt { get; set; }
+        public class CartItemPriceDetailListing
+        {
+            // Design
+            public string ItemOdSfx { get; set; }
+            public string design { get; set; }
+            public string design_kt { get; set; }
 
-        // Gold
-        public decimal pure_gold { get; set; }
-        public decimal gold_wt { get; set; }
-        public decimal gold_ktprice { get; set; }
-        public decimal gold_price { get; set; }
+            // Gold
+            public decimal pure_gold { get; set; }
+            public decimal gold_wt { get; set; }
+            public decimal gold_ktprice { get; set; }
+            public decimal gold_price { get; set; }
 
-        // Platinum
-        public decimal platinum { get; set; }
-        public decimal platinum_wt { get; set; }
-        public decimal platinum_ktprice { get; set; }
-        public decimal platinum_price { get; set; }
+            // Platinum
+            public decimal platinum { get; set; }
+            public decimal platinum_wt { get; set; }
+            public decimal platinum_ktprice { get; set; }
+            public decimal platinum_price { get; set; }
 
-        // Diamond
-        public decimal diamond_qty { get; set; }
-        public decimal diamond_wt { get; set; }
-        public decimal diamond_price { get; set; }
+            // Diamond
+            public decimal diamond_qty { get; set; }
+            public decimal diamond_wt { get; set; }
+            public decimal diamond_price { get; set; }
 
-        // Stone
-        public decimal stone_wt { get; set; }
-        public decimal stone_qty { get; set; }
-        public decimal stone_price { get; set; }
+            // Stone
+            public decimal stone_wt { get; set; }
+            public decimal stone_qty { get; set; }
+            public decimal stone_price { get; set; }
 
-        // Metal
-        public decimal metal_price { get; set; }
+            // Metal
+            public decimal metal_price { get; set; }
 
-        // Other
-        public decimal other_price { get; set; }
+            // Other
+            public decimal other_price { get; set; }
 
-        // Labour
-        public string labour { get; set; }
-        public decimal labour_percentage { get; set; }
-        public decimal labour_price { get; set; }
+            // Labour
+            public string labour { get; set; }
+            public decimal labour_percentage { get; set; }
+            public decimal labour_price { get; set; }
 
-        // ItemPrice without GST
-        public decimal item_price { get; set; }
-        public string gst_percent { get; set; }
-        public decimal GST { get; set; }
+            // ItemPrice without GST
+            public decimal item_price { get; set; }
+            public string gst_percent { get; set; }
+            public decimal GST { get; set; }
 
-        // ItemPrice with GST
-        public decimal total_price { get; set; }
+            // ItemPrice with GST
+            public decimal total_price { get; set; }
 
-        // DP
-        public string dp_labour_Per { get; set; }
-        public string dp_labour_percentage { get; set; }
-        public decimal dp_labour_price { get; set; }
-        public decimal dp_price { get; set; }
-        public decimal DP_GST { get; set; }
-        public decimal dp_final_price { get; set; }
-        public decimal dp_maring_percent { get; set; }
-        public string dp_is_labour { get; set; }
-        public decimal dp_gold_price { get; set; }
-        public decimal dp_platinum_price { get; set; }
-        public decimal dp_metal_price { get; set; }
-        public decimal dp_diamond_price { get; set; }
-        public decimal dp_stone_price { get; set; }
-    }
+            // DP
+            public string dp_labour_Per { get; set; }
+            public string dp_labour_percentage { get; set; }
+            public decimal dp_labour_price { get; set; }
+            public decimal dp_price { get; set; }
+            public decimal DP_GST { get; set; }
+            public decimal dp_final_price { get; set; }
+            public decimal dp_maring_percent { get; set; }
+            public string dp_is_labour { get; set; }
+            public decimal dp_gold_price { get; set; }
+            public decimal dp_platinum_price { get; set; }
+            public decimal dp_metal_price { get; set; }
+            public decimal dp_diamond_price { get; set; }
+            public decimal dp_stone_price { get; set; }
+        }
 
-    public class CartItemDPRPCALCListingParams
-    {
-        public int DataID { get; set; }
-        public decimal MRP { get; set; }
-    }
+        public class CartItemDPRPCALCListingParams
+        {
+            public int DataID { get; set; }
+            public decimal MRP { get; set; }
+        }
 
-    public class CartItemDPRPCALCListing
-    {
-        public decimal D_Price { get; set; }
-        public decimal R_Price { get; set; }
-        public decimal D_M_Percentage { get; set; }
-    }
+        public class CartItemDPRPCALCListing
+        {
+            public decimal D_Price { get; set; }
+            public decimal R_Price { get; set; }
+            public decimal D_M_Percentage { get; set; }
+        }
 
-    public class CartChildListParams
-    {
-        public int data_id { get; set; }
-    }
+        public class CartChildListParams
+        {
+            public int data_id { get; set; }
+        }
 
-    public class CartChildListing
-    {
-        public string data_id { get; set; }
-        public string parent_type_id { get; set; }
-        public string parent_type_code { get; set; }
-        public string parent_type_name { get; set; }
-        public string data_code { get; set; }
-        public string data_shop_name { get; set; }
-        public string data_latitude { get; set; }
-        public string data_longitude { get; set; }
-        public string data_alt_contact_no { get; set; }
-        public string data_alt_email { get; set; }
-        public string data_tel_no { get; set; }
-        public string data_gstno { get; set; }
-        public string data_remarks { get; set; }
-        public string data_name { get; set; }
-        public string data_contact_no { get; set; }
-        public string data_email { get; set; }
-        public string profile_image { get; set; }
-        public string login_type_id { get; set; }
-        public string area_id { get; set; }
-        public string img_id { get; set; }
-        public string address { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
-        public string data_alt_name { get; set; }
-        public string CartID { get; set; }
-    }
+        public class CartChildListing
+        {
+            public string data_id { get; set; }
+            public string parent_type_id { get; set; }
+            public string parent_type_code { get; set; }
+            public string parent_type_name { get; set; }
+            public string data_code { get; set; }
+            public string data_shop_name { get; set; }
+            public string data_latitude { get; set; }
+            public string data_longitude { get; set; }
+            public string data_alt_contact_no { get; set; }
+            public string data_alt_email { get; set; }
+            public string data_tel_no { get; set; }
+            public string data_gstno { get; set; }
+            public string data_remarks { get; set; }
+            public string data_name { get; set; }
+            public string data_contact_no { get; set; }
+            public string data_email { get; set; }
+            public string profile_image { get; set; }
+            public string login_type_id { get; set; }
+            public string area_id { get; set; }
+            public string img_id { get; set; }
+            public string address { get; set; }
+            public string Latitude { get; set; }
+            public string Longitude { get; set; }
+            public string data_alt_name { get; set; }
+            public string CartID { get; set; }
+        }
 
-    public class HomeScreenMasterParams
-    {
-        public int data_id { get; set; }
-        public string type { get; set; }
-    }
+        public class HomeScreenMasterParams
+        {
+            public int data_id { get; set; }
+            public string type { get; set; }
+        }
 
-    public class HomeScreenMasterListing
-    {
-        public string home_id { get; set; }
-        public string item_id { get; set; }
-        public string cat_menu_id { get; set; }
-        public string link_url { get; set; }
-        public string HomeRef { get; set; }
-        public string image_path { get; set; }
-        public string home_mstname { get; set; }
-        public string home_mstid { get; set; }
-        public string loader_img { get; set; }
-    }
+        public class HomeScreenMasterListing
+        {
+            public string home_id { get; set; }
+            public string item_id { get; set; }
+            public string cat_menu_id { get; set; }
+            public string link_url { get; set; }
+            public string HomeRef { get; set; }
+            public string image_path { get; set; }
+            public string home_mstname { get; set; }
+            public string home_mstid { get; set; }
+            public string loader_img { get; set; }
+        }
 
-    public class OrderListParams
-    {
-        public string data_id { get; set; }
-        public string order_track_type { get; set; }
-        public string from_date { get; set; }
-        public string to_date { get; set; }
-        public string search_field { get; set; }
-    }
+        public class OrderListParams
+        {
+            public string data_id { get; set; }
+            public string order_track_type { get; set; }
+            public string from_date { get; set; }
+            public string to_date { get; set; }
+            public string search_field { get; set; }
+        }
 
-    public class OrderListResponse
-    {
-        public bool success { get; set; }
-        public string message { get; set; }
-        public int current_page { get; set; }
-        public int last_page { get; set; }
-        public int total_items { get; set; }
-        public List<OrderListData> data { get; set; }
-        public List<OrderListColor> orderColorList { get; set; }
-    }
+        public class OrderListResponse
+        {
+            public bool success { get; set; }
+            public string message { get; set; }
+            public int current_page { get; set; }
+            public int last_page { get; set; }
+            public int total_items { get; set; }
+            public List<OrderListData> data { get; set; }
+            public List<OrderListColor> orderColorList { get; set; }
+        }
 
-    public class OrderListData
-    {
-        public string cart_id { get; set; }
-        public string order_no { get; set; }
-        public string PONo { get; set; }
-        public string cart_date { get; set; }
-        public string status { get; set; }
-        public string user_name { get; set; }
-        public string cart_creater_name { get; set; }
-        public string orderColor { get; set; }
-        public string amount { get; set; }
-        public string CartChkOutDt { get; set; }
-        public string cart_total_qty { get; set; }
-        public string CartBillingDataID { get; set; }
-        public string DeliveryStatus { get; set; }
-        public OrderListApproxDays approxDays { get; set; }
-        public string gold_rate { get; set; }
-    }
+        public class OrderListData
+        {
+            public string cart_id { get; set; }
+            public string order_no { get; set; }
+            public string PONo { get; set; }
+            public string cart_date { get; set; }
+            public string status { get; set; }
+            public string user_name { get; set; }
+            public string cart_creater_name { get; set; }
+            public string orderColor { get; set; }
+            public string amount { get; set; }
+            public string CartChkOutDt { get; set; }
+            public string cart_total_qty { get; set; }
+            public string CartBillingDataID { get; set; }
+            public string DeliveryStatus { get; set; }
+            public OrderListApproxDays approxDays { get; set; }
+            public string gold_rate { get; set; }
+        }
 
-    public class OrderListApproxDays
-    {
-        public string manufactureStartDate { get; set; }
-        public string manufactureEndDate { get; set; }
-        public string deliveryStartDate { get; set; }
-        public string deliveryEndDate { get; set; }
-        public string deliveryInDays { get; set; }
-    }
+        public class OrderListApproxDays
+        {
+            public string manufactureStartDate { get; set; }
+            public string manufactureEndDate { get; set; }
+            public string deliveryStartDate { get; set; }
+            public string deliveryEndDate { get; set; }
+            public string deliveryInDays { get; set; }
+        }
 
-    public class OrderListColor
-    {
-        public string ordertype_mst_id { get; set; }
-        public string ordertype_mst_code { get; set; }
-        public string ordertype_mst_name { get; set; }
-        public string ordertype_mst_color { get; set; }
-    }
+        public class OrderListColor
+        {
+            public string ordertype_mst_id { get; set; }
+            public string ordertype_mst_code { get; set; }
+            public string ordertype_mst_name { get; set; }
+            public string ordertype_mst_color { get; set; }
+        }
 
-    public class CheckItemSizeRangeRequest
-    {
-        public string? dataId { get; set; }
-        public string? dataLoginType { get; set; }
-        public string? categoryId { get; set; }
-        public string? itemId { get; set; }
-        public string? sizeId { get; set; }
-    }
+        public class CheckItemSizeRangeRequest
+        {
+            public string? dataId { get; set; }
+            public string? dataLoginType { get; set; }
+            public string? categoryId { get; set; }
+            public string? itemId { get; set; }
+            public string? sizeId { get; set; }
+        }
 
-    public class CheckoutVerifyOtpRequest
-    {
-        public string? dataId { get; set; }
-        public string? otp { get; set; }
-    }
+        public class CheckoutVerifyOtpRequest
+        {
+            public string? dataId { get; set; }
+            public string? otp { get; set; }
+        }
 }

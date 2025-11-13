@@ -1374,5 +1374,153 @@ namespace NewAvatarWebApis.Common
             return resstatus;
         }
 
+        public async Task<List<CartItemWithIllumine>> GetSoliterDiamondAsync(int cart_id, string illumineCollection)
+        {
+            IList<CartItemWithIllumine> CartItemWithIllumineList = new List<CartItemWithIllumine>();
+
+            try
+            {
+                string query = $@"
+                 SELECT c.CartItemID,i.ItemID,i.ItemSoliterSts,i.ItemCtgCommonID,
+                        CASE
+                            WHEN EXISTS (
+                                SELECT 1 
+                                FROM T_STRU_COMMON_ITEM_MST WITH(NOLOCK)
+                                WHERE StruItemID = i.ItemID
+                                  AND StruItemCommonID IN ({illumineCollection})
+                            ) THEN 'Y' 
+                            ELSE 'N'
+                        END AS item_illumine
+                 FROM dbo.T_CART_MST_ITEM c WITH(NOLOCK)
+                 INNER JOIN dbo.T_ITEM_MST i WITH(NOLOCK) ON c.CartItemMstID = i.ItemID
+                 WHERE c.CartMstID = @cart_id";
+
+                using (SqlConnection dbConnection = new SqlConnection(_connection))
+                {
+                    dbConnection.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(query, dbConnection))
+                    {
+                        cmd.Parameters.Add(new SqlParameter("@cart_id", SqlDbType.Int) { Value = cart_id });
+
+                        await using var reader = await cmd.ExecuteReaderAsync();
+                        while (await reader.ReadAsync())
+                        {
+                            CartItemWithIllumineList.Add(new CartItemWithIllumine
+                            {
+                                CartItemID = reader.GetInt32("CartItemID"),
+                                ItemID = reader.GetInt32("ItemID"),
+                                ItemSoliterSts = reader.GetString("ItemSoliterSts"),
+                                ItemCtgCommonID = reader.GetInt32("ItemCtgCommonID"),
+                                item_illumine = reader.GetString("item_illumine")
+                            });
+                        }
+
+                        return (List<CartItemWithIllumine>)CartItemWithIllumineList;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                CartItemWithIllumineList = new List<CartItemWithIllumine>();
+                throw;
+            }
+        }
+
+        public async Task<List<SolitaireStock>> GetSolitaireStockAsync(int cart_id, int item_id, int cart_item_id)
+        {
+            IList<SolitaireStock> stockList = new List<SolitaireStock>();
+
+            try
+            {
+                string query = @"
+                SELECT ISNULL(isAvailableStk, 'N') AS isAvailableStk,CartSoliStkNo
+                FROM dbo.T_CART_ITEM_SOLI_MST WITH(NOLOCK)
+                WHERE CartMstId      = @cart_id
+                AND ItemMstId      = @item_id
+                AND CartItemMstId  = @cart_item_id";
+
+                using (SqlConnection dbConnection = new SqlConnection(_connection))
+                {
+                    await dbConnection.OpenAsync();
+
+                    using (SqlCommand cmd = new SqlCommand(query, dbConnection))
+                    {
+                        cmd.Parameters.Add(new SqlParameter("@cart_id", SqlDbType.Int) { Value = cart_id });
+                        cmd.Parameters.Add(new SqlParameter("@item_id", SqlDbType.Int) { Value = item_id });
+                        cmd.Parameters.Add(new SqlParameter("@cart_item_id", SqlDbType.Int) { Value = cart_item_id });
+
+                        await using var reader = await cmd.ExecuteReaderAsync();
+
+                        while (await reader.ReadAsync())
+                        {
+                            stockList.Add(new SolitaireStock
+                            {
+                                isAvailableStk = reader.GetString("isAvailableStk"),
+                                CartSoliStkNo = reader.GetString("CartSoliStkNo")
+                            });
+                        }
+
+                        return (List<SolitaireStock>)stockList;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                stockList = new List<SolitaireStock>();
+                throw;
+            }
+        }
+
+        public async Task<(string gold, string dollar)> GetGoldDollarValuesAsync()
+        {
+            const string sql = "SELECT Value FROM T_DIA_COMMON_MST WHERE ValidSts = 'Y' ORDER BY (CASE WHEN Value LIKE '%Gold%' THEN 0 ELSE 1 END)";
+
+            await using var conn = new SqlConnection(_connection);
+            await conn.OpenAsync();
+            await using var cmd = new SqlCommand(sql, conn);
+
+            await using var reader = await cmd.ExecuteReaderAsync();
+            var values = new List<string>();
+            while (await reader.ReadAsync())
+                values.Add(reader.GetString(0));
+
+            return (values.Count > 0 ? values[0] : "0", values.Count > 1 ? values[1] : "0");
+        }
+
+        public async Task<bool> IsStoneFreeAsync(string stkNo)
+        {
+            const string sql = @"
+                    SELECT 1 
+                    FROM T_SOLI_DIA_STK_AVAILABLE WITH(NOLOCK) 
+                    WHERE DiaStkNO = @stkNo AND isBookded = 'N'";
+
+            await using var conn = new SqlConnection(_connection);
+            await conn.OpenAsync();
+
+            await using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.Add(new SqlParameter("@stkNo", SqlDbType.VarChar) { Value = stkNo });
+
+            var obj = await cmd.ExecuteScalarAsync();
+            return obj != null;
+        }
+
+        public async Task BookAvailableStonesAsync(IEnumerable<string> packetNos)
+        {
+            if (!packetNos.Any()) return;
+
+            var placeholders = string.Join(",", packetNos.Select((_, i) => $"@p{i}"));
+            var sql = $"UPDATE T_SOLI_DIA_STK_AVAILABLE SET isBookded = 'Y' WHERE DiaStkNO IN ({placeholders})";
+
+            await using var conn = new SqlConnection(_connection);
+            await conn.OpenAsync();
+            await using var cmd = new SqlCommand(sql, conn);
+
+            int index = 0;
+            foreach (var no in packetNos)
+                cmd.Parameters.Add(new SqlParameter($"@p{index++}", SqlDbType.VarChar) { Value = no });
+
+            await cmd.ExecuteNonQueryAsync();
+        }
     }
 }

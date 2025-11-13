@@ -2015,7 +2015,7 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     responseDetails.data = dataReader.GetString(aiIdx);
 
 
-                               
+
 
                             }
                             else
@@ -2996,900 +2996,1252 @@ namespace NewAvatarWebApis.Infrastructure.Services
             return objNoAllotResponse;
         }
 
+        //public async Task<ResponseDetails> CartCheckoutNoAllotNew(CartCheckoutNoAllotNewParams cartcheckoutnoallotnew_params)
+        //{
+        //    var responseDetails = new ResponseDetails();
+        //    try
+        //    {
+        //        string
+        //            resmessage = "";
+        //        int
+        //            resstatus = 0,
+        //            resstatuscode = 400;
+
+        //        using (SqlConnection dbConnection = new SqlConnection(_connection))
+        //        {
+        //            string APP_ENV = "staging";
+
+        //            int CartId = cartcheckoutnoallotnew_params.cart_id > 0 ? cartcheckoutnoallotnew_params.cart_id : 0;
+        //            int DataId = cartcheckoutnoallotnew_params.data_id > 0 ? cartcheckoutnoallotnew_params.data_id : 0;
+
+        //            int cart_order_data_id = cartcheckoutnoallotnew_params.cart_order_data_id > 0 ? cartcheckoutnoallotnew_params.cart_order_data_id : 0;
+        //            int cart_billing_data_id = cartcheckoutnoallotnew_params.cart_billing_data_id > 0 ? cartcheckoutnoallotnew_params.cart_billing_data_id : 0;
+        //            int cart_order_login_type_id = cartcheckoutnoallotnew_params.cart_order_login_type_id > 0 ? cartcheckoutnoallotnew_params.cart_order_login_type_id : 0;
+        //            int cart_billing_login_type_id = cartcheckoutnoallotnew_params.cart_billing_login_type_id > 0 ? cartcheckoutnoallotnew_params.cart_billing_login_type_id : 0;
+        //            string cart_remarks = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.cart_remarks) ? "" : cartcheckoutnoallotnew_params.cart_remarks;
+
+        //            string cart_delivery_date = "";
+        //            DateTime parsed_cart_delivery_date;
+        //            bool isValidCartDeliveryDate = DateTime.TryParseExact(cartcheckoutnoallotnew_params.cart_delivery_date, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsed_cart_delivery_date);
+        //            if (isValidCartDeliveryDate)
+        //            {
+        //                cart_delivery_date = parsed_cart_delivery_date.ToString("yyyy-MM-dd");
+        //            }
+
+        //            string itemall = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.itemall) ? "" : cartcheckoutnoallotnew_params.itemall;
+        //            // int ordertypeid = cartcheckoutnoallotnew_params.ordertypeid;
+        //            var ordertypeid = int.TryParse(cartcheckoutnoallotnew_params.ordertypeid.ToString(), out int parsedValue) ? parsedValue : 2498;
+
+        //            string devicetype = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.devicetype) ? "" : cartcheckoutnoallotnew_params.devicetype;
+        //            string devicename = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.devicename) ? "" : cartcheckoutnoallotnew_params.devicename;
+        //            string appversion = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.appversion) ? "" : cartcheckoutnoallotnew_params.appversion;
+
+        //            CommonHelpers objHelpers = new CommonHelpers();
+        //            brand_data datas = cartcheckoutnoallotnew_params.data;
+
+        //            List<string> kisnaFifty = new List<string>();
+        //            List<string> kisnaHours = new List<string>();
+        //            List<string> kisnaSeven = new List<string>();
+        //            List<string> kisnaTwentyone = new List<string>();
+        //            List<string> kisnaFive = new List<string>();
+
+        //            // Check if 'kisna_data' exists and is not empty
+        //            if (datas != null && datas.kisna_data != null)
+        //            {
+        //                var kisnaData = datas.kisna_data;
+        //                kisnaFifty = kisnaData.fifteen_day;
+        //                kisnaHours = kisnaData.hours;
+        //                kisnaSeven = kisnaData.seven_day;
+        //                kisnaTwentyone = kisnaData.twentyone_day;
+        //                kisnaFive = kisnaData.five_day;
+        //            }
+
+        //            List<string> oroFifteen = new List<string>();
+        //            //List<string> oroFifty = new List<string>();
+        //            List<string> oroHours = new List<string>();
+        //            List<string> oroSeven = new List<string>();
+        //            List<string> oroTwentyOne = new List<string>();
+        //            List<string> oroFive = new List<string>();
+
+        //            // Check if 'oro_data' exists and is not empty
+        //            int oro_data_cnt = 0;
+        //            if (datas != null && datas.oro_data != null)
+        //            {
+        //                var oroData = datas.oro_data;
+        //                oro_data_cnt = datas.oro_data.fifteen_day.Count + datas.oro_data.hours.Count + datas.oro_data.seven_day.Count + datas.oro_data.twentyone_day.Count + datas.oro_data.five_day.Count;
+        //                oroFifteen = oroData.fifteen_day;
+        //                oroHours = oroData.hours;
+        //                oroSeven = oroData.seven_day;
+        //                oroTwentyOne = oroData.twentyone_day;
+        //                oroFive = oroData.five_day;
+        //            }
+
+        //            List<string> kgFifty = new List<string>();
+        //            List<string> kgHours = new List<string>();
+        //            List<string> kgSeven = new List<string>();
+        //            List<string> kgTwentyOne = new List<string>();
+        //            List<string> kgFive = new List<string>();
+
+        //            // Check if 'kisna_gold_data' exists and is not empty
+        //            if (datas != null && datas.kisna_gold_data != null)
+        //            {
+        //                var kgData = datas.kisna_gold_data;
+        //                kgFifty = kgData.fifteen_day;
+        //                kgHours = kgData.hours;
+        //                kgSeven = kgData.seven_day;
+        //                kgTwentyOne = kgData.twentyone_day;
+        //                kgFive = kgData.five_day;
+        //            }
+
+        //            //Silver Coin 999 Data
+        //            List<string> silverFifteen = new List<string>();
+        //            //List<string> silverFifty = new List<string>();
+        //            List<string> silverHours = new List<string>();
+        //            List<string> silverSeven = new List<string>();
+        //            List<string> silverTwentyOne = new List<string>();
+        //            List<string> silverFive = new List<string>();
+
+        //            // Check if 'silver_data' exists and is not empty
+        //            if (datas != null && datas.silver_data != null)
+        //            {
+        //                var silverData = datas.silver_data;
+        //                silverFifteen = silverData.fifteen_day;
+        //                silverHours = silverData.hours;
+        //                silverSeven = silverData.seven_day;
+        //                silverTwentyOne = silverData.twentyone_day;
+        //                silverFive = silverData.five_day;
+        //            }
+
+        //            // Illumine Collection
+        //            List<string> illumineFifteen = new List<string>();
+        //            //List<string> illumineFifty = new List<string>();
+        //            List<string> illumineHours = new List<string>();
+        //            List<string> illumineSeven = new List<string>();
+        //            List<string> illumineTwentyOne = new List<string>();
+        //            List<string> illumineFive = new List<string>();
+
+        //            // Check if 'illumine_data' exists and is not empty
+        //            if (datas != null && datas.illumine_data != null)
+        //            {
+        //                var illumineData = datas.illumine_data;
+        //                illumineFifteen = illumineData.fifteen_day;
+        //                illumineHours = illumineData.hours;
+        //                illumineSeven = illumineData.seven_day;
+        //                illumineTwentyOne = illumineData.twentyone_day;
+        //                illumineFive = illumineData.five_day;
+        //            }
+
+        //            var cartMstItemIds = new List<string>();
+        //            cartMstItemIds.AddRange(kisnaFifty);
+        //            cartMstItemIds.AddRange(kisnaHours);
+        //            cartMstItemIds.AddRange(kisnaSeven);
+        //            cartMstItemIds.AddRange(kisnaTwentyone);
+        //            cartMstItemIds.AddRange(kisnaFive);
+
+        //            // cartMstItemIds.AddRange(oroFifty);
+        //            cartMstItemIds.AddRange(oroFifteen);
+        //            cartMstItemIds.AddRange(oroHours);
+        //            cartMstItemIds.AddRange(oroSeven);
+        //            cartMstItemIds.AddRange(oroTwentyOne);
+        //            cartMstItemIds.AddRange(oroFive);
+
+        //            cartMstItemIds.AddRange(kgFifty);
+        //            cartMstItemIds.AddRange(kgHours);
+        //            cartMstItemIds.AddRange(kgSeven);
+        //            cartMstItemIds.AddRange(kgTwentyOne);
+        //            cartMstItemIds.AddRange(kgFive);
+
+        //            // cartMstItemIds.AddRange(silverFifty);
+        //            cartMstItemIds.AddRange(silverFifteen);
+        //            cartMstItemIds.AddRange(silverHours);
+        //            cartMstItemIds.AddRange(silverSeven);
+        //            cartMstItemIds.AddRange(silverTwentyOne);
+        //            cartMstItemIds.AddRange(silverFive);
+
+        //            // cartMstItemIds.AddRange(illumineFifty);
+        //            cartMstItemIds.AddRange(illumineFifteen);
+        //            cartMstItemIds.AddRange(illumineHours);
+        //            cartMstItemIds.AddRange(illumineSeven);
+        //            cartMstItemIds.AddRange(illumineTwentyOne);
+        //            cartMstItemIds.AddRange(illumineFive);
+
+        //            var filteredCartMstItemIds = cartMstItemIds.Where(id => !string.IsNullOrEmpty(id)).ToList();
+        //            string implodeCartMstItemIds = string.Join(",", filteredCartMstItemIds);
+
+        //            // Checks items are from solitaire collection or not,
+        //            // If so then checks total of those collection's items is grether than or equal to 10,00,000
+        //            IList<CheckItemIsSolitaireComboListing> checkitemissolitairecomboList = new List<CheckItemIsSolitaireComboListing>();
+        //            CheckItemIsSolitaireComboParams checkitemissolitairecomboparams = new CheckItemIsSolitaireComboParams();
+        //            checkitemissolitairecomboparams.cart_id = CartId;
+        //            checkitemissolitairecomboparams.cart_billing_data_id = cart_billing_data_id;
+        //            checkitemissolitairecomboparams.ordertypeid = ordertypeid;
+        //            checkitemissolitairecomboparams.implodeCartMstItemIds = implodeCartMstItemIds;
+        //            checkitemissolitairecomboList = objHelpers.CheckItemIsSolitaireCombo(checkitemissolitairecomboparams);
+
+        //            string msg = string.Empty;
+        //            CheckItemIsSolitaireComboListing isSolitaireCombo = new CheckItemIsSolitaireComboListing();
+        //            if (checkitemissolitairecomboList.Count > 0)
+        //            {
+        //                isSolitaireCombo = checkitemissolitairecomboList[0];
+        //            }
+
+        //            bool is_valid = isSolitaireCombo.is_valid == 0 ? true : false;
+        //            if (!is_valid)
+        //            {
+        //                if (isSolitaireCombo.min_amount == 0 && isSolitaireCombo.cart_price == 0)
+        //                {
+        //                    resmessage = "Cart is empty, Please add items into cart and then checkout.";
+        //                }
+        //                else
+        //                {
+        //                    resmessage = string.Format(
+        //                        "Solitaire combo price ({0}) should be minimum {1}.",
+        //                        isSolitaireCombo.cart_price.ToString("N0"),
+        //                        isSolitaireCombo.min_amount.ToString("N0")
+        //                    );
+        //                }
+        //                // return Ok(new { success = false, message = msg, status_code = 200 });
+        //                responseDetails.success = false;
+        //                responseDetails.message = resmessage;
+        //                responseDetails.status = "200";
+        //                return responseDetails;
+        //            }
+
+        //            // Checks items are from kisna premium or not,
+        //            // If so then checks total of those collection's items is grether than or equal to 10,00,000
+        //            IList<CheckItemIsNewPremiumCollectionListing> checkitemisnewpremiumcollectionList = new List<CheckItemIsNewPremiumCollectionListing>();
+        //            CheckItemIsNewPremiumCollectionParams checkitemisnewpremiumcollectionparams = new CheckItemIsNewPremiumCollectionParams();
+        //            checkitemisnewpremiumcollectionparams.cart_id = CartId;
+        //            checkitemisnewpremiumcollectionparams.cart_billing_data_id = cart_billing_data_id;
+        //            checkitemisnewpremiumcollectionparams.ordertypeid = ordertypeid;
+        //            checkitemisnewpremiumcollectionparams.implodeCartMstItemIds = implodeCartMstItemIds;
+        //            checkitemisnewpremiumcollectionList = objHelpers.CheckItem_IsNewPremiumCollection(checkitemisnewpremiumcollectionparams);
+
+        //            CheckItemIsNewPremiumCollectionListing isKisnaPremium = new CheckItemIsNewPremiumCollectionListing();
+        //            if (checkitemisnewpremiumcollectionList.Count > 0)
+        //            {
+        //                isKisnaPremium = checkitemisnewpremiumcollectionList[0];
+        //            }
+
+        //            is_valid = isKisnaPremium.is_valid == 0 ? true : false;
+        //            if (!is_valid)
+        //            {
+        //                if (isKisnaPremium.min_amount == 0 && isKisnaPremium.cart_price == 0)
+        //                {
+        //                    resmessage = "Cart is empty, Please add items into cart and then checkout.";
+        //                }
+        //                else
+        //                {
+        //                    resmessage = string.Format(
+        //                        "Kisna Premium price ({0}) should be minimum {1}.",
+        //                        isKisnaPremium.cart_price.ToString("N0"),
+        //                        isKisnaPremium.min_amount.ToString("N0")
+        //                    );
+        //                }
+        //                //return Ok(new { success = false, message = msg, status_code = 200 });
+        //                responseDetails.success = false;
+        //                responseDetails.message = resmessage;
+        //                responseDetails.status = "200";
+        //                return responseDetails;
+        //            }
+
+        //            string cmdQuery = DBCommands.CARTCHECKOUTNOALLOTNEW;
+        //            dbConnection.Open();
+
+        //            using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
+        //            {
+        //                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("@DataID", DataId);
+        //                cmd.Parameters.AddWithValue("@CartID", CartId);
+        //                cmd.Parameters.AddWithValue("@OrderTypeID", ordertypeid);
+        //                cmd.Parameters.AddWithValue("@cart_order_login_type_id", cart_order_login_type_id);
+        //                cmd.Parameters.AddWithValue("@cart_billing_login_type_id", cart_billing_login_type_id);
+        //                cmd.Parameters.AddWithValue("@cart_order_data_id", cart_order_data_id);
+        //                cmd.Parameters.AddWithValue("@cart_billing_data_id", cart_billing_data_id);
+        //                cmd.Parameters.AddWithValue("@cart_remarks", cart_remarks);
+        //                cmd.Parameters.AddWithValue("@cart_delivery_date", cart_delivery_date);
+        //                cmd.Parameters.AddWithValue("@oro_data_cnt", oro_data_cnt);
+        //                cmd.Parameters.AddWithValue("@SourceType", "APP");
+        //                cmd.Parameters.AddWithValue("@APP_ENV", "");
+
+        //                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+        //                {
+        //                    DataSet ds = new DataSet();
+        //                    da.Fill(ds);
+
+        //                    if (ds.Tables.Count > 0)
+        //                    {
+        //                        if (ds.Tables[0].Rows.Count > 0)
+        //                        {
+        //                            try
+        //                            {
+        //                                var firstRow = ds.Tables[0].Rows[0];
+        //                                resstatus = firstRow["resstatus"] as int? ?? 0;
+        //                                resstatuscode = firstRow["resstatuscode"] as int? ?? 200;
+        //                                resmessage = firstRow["resmessage"] as string ?? string.Empty;
+        //                                int returntype = firstRow["returntype"] as int? ?? 0;
+
+        //                                if (resstatus == 1 && ds.Tables.Count > 1)
+        //                                {
+        //                                    List<string> totalstoke = new List<string>();
+        //                                    List<int> available = new List<int>();
+        //                                    List<int> notAvailable = new List<int>();
+        //                                    List<string> notArray = new List<string>();
+        //                                    string CartSoliStkNoData;
+        //                                    int tmp_ItemId = 0, tmp_CartItemId = 0;
+
+        //                                    if (returntype == 1) { }
+        //                                    else
+        //                                    {
+        //                                        DataTable dt = new DataTable();
+        //                                        dt = ds.Tables[1].AsEnumerable()
+        //                                            .Where(x => new[] { 4, 21, 22, 25 }.Contains(x.Field<int>("ItemCtgCommonID")))
+        //                                            .CopyToDataTable();
+
+        //                                        for (int i = 0; i < dt.Rows.Count; i++)
+        //                                        {
+        //                                            CartSoliStkNoData = dt.Rows[i]["CartSoliStkNoData"] as string ?? string.Empty;
+        //                                            List<string> soliterStokeList = new List<string>(CartSoliStkNoData.Split(','));
+        //                                            string wsdlUrl = "http://service.hkerp.co/HKE.WCFService.svc?singleWsdl";
+
+        //                                            foreach (var soliterCheck in soliterStokeList)
+        //                                            {
+        //                                                totalstoke.Add(soliterCheck);
+
+        //                                                var soapRequest = $@"
+        //                                                    <s:Envelope xmlns:s=""http://schemas.xmlsoap.org/soap/envelope/"">
+        //                                                        <s:Body>
+        //                                                            <CheckStoneAvailability xmlns=""http://tempuri.org/"">
+        //                                                                <CustomerID>{_customerID}</CustomerID>
+        //                                                                <PacketNo>{soliterCheck}</PacketNo>
+        //                                                            </CheckStoneAvailability>
+        //                                                        </s:Body>
+        //                                                    </s:Envelope>";
+
+        //                                                // string responseXml = await SendSoapRequest(wsdlUrl, soapRequest);
+        //                                                string responseXml = "";
+        //                                                var soapResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<SoapResponse>(responseXml);
+        //                                                if (soapResponse?.Data?[0]?.Status == "Available")
+        //                                                {
+        //                                                    available.Add(1);
+        //                                                }
+        //                                                else
+        //                                                {
+        //                                                    notArray.Add(soliterCheck);
+        //                                                    notAvailable.Add(1);
+        //                                                }
+        //                                            }
+        //                                        }
+
+        //                                        if (notAvailable.Count > 0 && notAvailable.Any())
+        //                                        {
+        //                                            string tags = string.Join(", ", notAvailable);
+        //                                            responseDetails.success = false;
+        //                                            responseDetails.message = $"These diamond stocks are not available: {tags}";
+        //                                            responseDetails.status = "200";
+        //                                            return responseDetails;
+        //                                        }
+        //                                        else
+        //                                        {
+        //                                            for (int i = 0; i < dt.Rows.Count; i++)
+        //                                            {
+        //                                                CartSoliStkNoData = dt.Rows[i]["CartSoliStkNoData"] != DBNull.Value ? Convert.ToString(dt.Rows[i]["CartSoliStkNoData"]) : string.Empty;
+        //                                                tmp_CartItemId = dt.Rows[i]["CartItemID"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["CartItemID"]) : 0;
+        //                                                tmp_ItemId = dt.Rows[i]["ItemID"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["ItemID"]) : 0;
+
+        //                                                string apiUrl = $"https://service.hk.co/StockApprove?user={_customerID}&pkts={CartSoliStkNoData}&remark={tmp_CartItemId}";
+
+        //                                                // Send HTTP Request
+        //                                                //string response = await SendHttpRequest(apiUrl);
+        //                                                string response = "";
+
+        //                                                CartCheckoutNoAllotNewParamsPart2 cartcheckoutnoallotnewpart2_params = new CartCheckoutNoAllotNewParamsPart2();
+        //                                                cartcheckoutnoallotnewpart2_params.cart_id = CartId;
+        //                                                cartcheckoutnoallotnewpart2_params.data_id = DataId;
+        //                                                cartcheckoutnoallotnewpart2_params.CartSoliStkNoData = CartSoliStkNoData;
+        //                                                cartcheckoutnoallotnewpart2_params.DiaBookRespose = response;
+        //                                                cartcheckoutnoallotnewpart2_params.item_id = tmp_ItemId;
+        //                                                cartcheckoutnoallotnewpart2_params.cart_item_id = tmp_CartItemId;
+        //                                                SaveDiamondBookServiceResponse(cartcheckoutnoallotnewpart2_params);
+        //                                            }
+        //                                        }
+        //                                    }
+
+        //                                    int
+        //                                        tmpItemID = 0,
+        //                                        tmpCartItemID = 0,
+        //                                        tmpCartMstID = 0,
+        //                                        tmpCartQty = 0,
+        //                                        tmpItemCtgCommonID = 0,
+        //                                        tmpCartConfCommonID = 0,
+        //                                        tmpItemBrandCommonID = 0,
+        //                                        tmpItemGenderCommonID = 0;
+        //                                    decimal
+        //                                        tmpItemGrossWt = 0,
+        //                                        tmpItemMetalWt = 0,
+        //                                        tmpCartMRPrice = 0,
+        //                                        tmpCartPrice = 0,
+        //                                        tmpCartDPrice = 0,
+        //                                        tmpCartItemMetalWt = 0;
+        //                                    string
+        //                                        tmpItemPlainGold = "",
+        //                                        tmpMstType = "",
+        //                                        tmpisCOOInserted = "",
+        //                                        tmpDataItemInfo = "",
+        //                                        tmpItemIsSRP = "",
+        //                                        tmpItemIsMRP = "",
+        //                                        tmpitem_illumine = "";
+
+        //                                    for (int j = 0; j < ds.Tables[1].Rows.Count; j++)
+        //                                    {
+        //                                        var rowDetails = ds.Tables[1].Rows[j];
+        //                                        tmpItemID = rowDetails["ItemID"] != DBNull.Value ? Convert.ToInt32(rowDetails["ItemID"]) : 0;
+        //                                        tmpCartItemID = rowDetails["CartItemID"] != DBNull.Value ? Convert.ToInt32(rowDetails["CartItemID"]) : 0;
+        //                                        tmpCartMstID = rowDetails["CartMstID"] != DBNull.Value ? Convert.ToInt32(rowDetails["CartMstID"]) : 0;
+        //                                        tmpCartQty = rowDetails["CartQty"] != DBNull.Value ? Convert.ToInt32(rowDetails["CartQty"]) : 0;
+        //                                        tmpItemCtgCommonID = rowDetails["ItemCtgCommonID"] != DBNull.Value ? Convert.ToInt32(rowDetails["ItemCtgCommonID"]) : 0;
+        //                                        tmpCartConfCommonID = rowDetails["CartConfCommonID"] != DBNull.Value ? Convert.ToInt32(rowDetails["CartConfCommonID"]) : 0;
+        //                                        tmpItemBrandCommonID = rowDetails["ItemBrandCommonID"] != DBNull.Value ? Convert.ToInt32(rowDetails["ItemBrandCommonID"]) : 0;
+        //                                        tmpItemGenderCommonID = rowDetails["ItemGenderCommonID"] != DBNull.Value ? Convert.ToInt32(rowDetails["ItemGenderCommonID"]) : 0;
+
+        //                                        tmpItemGrossWt = rowDetails["ItemGrossWt"] != DBNull.Value ? Convert.ToDecimal(rowDetails["ItemGrossWt"]) : 0;
+        //                                        tmpItemMetalWt = rowDetails["ItemMetalWt"] != DBNull.Value ? Convert.ToDecimal(rowDetails["ItemMetalWt"]) : 0;
+
+        //                                        tmpCartMRPrice = rowDetails["CartMRPrice"] != DBNull.Value ? Convert.ToDecimal(rowDetails["CartMRPrice"]) : 0;
+        //                                        tmpCartPrice = rowDetails["CartPrice"] != DBNull.Value ? Convert.ToDecimal(rowDetails["CartPrice"]) : 0;
+        //                                        tmpCartDPrice = rowDetails["CartDPrice"] != DBNull.Value ? Convert.ToDecimal(rowDetails["CartDPrice"]) : 0;
+        //                                        tmpCartItemMetalWt = rowDetails["CartItemMetalWt"] != DBNull.Value ? Convert.ToDecimal(rowDetails["CartItemMetalWt"]) : 0;
+
+        //                                        tmpItemPlainGold = rowDetails["ItemPlainGold"] != DBNull.Value ? Convert.ToString(rowDetails["ItemPlainGold"]) : string.Empty;
+        //                                        tmpMstType = rowDetails["MstType"] != DBNull.Value ? Convert.ToString(rowDetails["MstType"]) : string.Empty;
+        //                                        tmpisCOOInserted = rowDetails["isCOOInserted"] != DBNull.Value ? Convert.ToString(rowDetails["isCOOInserted"]) : string.Empty;
+        //                                        tmpDataItemInfo = rowDetails["DataItemInfo"] != DBNull.Value ? Convert.ToString(rowDetails["DataItemInfo"]) : string.Empty;
+        //                                        tmpItemIsSRP = rowDetails["ItemIsSRP"] != DBNull.Value ? Convert.ToString(rowDetails["ItemIsSRP"]) : string.Empty;
+        //                                        tmpitem_illumine = rowDetails["item_illumine"] != DBNull.Value ? Convert.ToString(rowDetails["item_illumine"]) : string.Empty;
+
+        //                                        IList<CartItemPriceDetailListing> cartItemPriceDetailList_gold = new List<CartItemPriceDetailListing>();
+        //                                        IList<CartItemPriceDetailListing> cartItemPriceDetailList_gold_requiredweight = new List<CartItemPriceDetailListing>();
+        //                                        CartItemPriceDetailListingParams cartitempricedetaillistparams = new CartItemPriceDetailListingParams();
+        //                                        CARTCHECKOUTNOALLOTNEW_UPDATE_CARTMSTITEM_PRICESParams cartcheckouotallotnew_update_cartmstitem_prices_params = new CARTCHECKOUTNOALLOTNEW_UPDATE_CARTMSTITEM_PRICESParams();
+        //                                        ItemDynamicPriceCartParams itemdynamicpricecart_params = new ItemDynamicPriceCartParams();
+
+        //                                        string
+        //                                            design_kt = "",
+        //                                            making_per_gram = "",
+        //                                            labour = "";
+        //                                        decimal
+        //                                            gold_price = 0,
+        //                                            total_goldvalue = 0,
+        //                                            finalGoldValue = 0,
+        //                                            total_labour = 0,
+        //                                            gst_price = 0,
+        //                                            item_price = 0,
+        //                                            total_price = 0,
+        //                                            dp_final_price = 0,
+        //                                            dp_maring_percent = 0,
+        //                                            gold_wt = 0,
+        //                                            diamond_price = 0,
+        //                                            platinum_wt = 0,
+        //                                            platinum = 0,
+        //                                            platinum_price = 0;
+
+        //                                        // order typeid not in (6596, 2499, 20397)
+        //                                        if (returntype == 1)
+        //                                        {
+        //                                            if (tmpMstType == "F")
+        //                                            {
+        //                                                cartitempricedetaillistparams.DataID = cart_billing_data_id;
+        //                                                cartitempricedetaillistparams.ItemID = tmpItemID;
+        //                                                cartitempricedetaillistparams.IsWeightCalcRequired = 0;
+        //                                                cartItemPriceDetailList_gold = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
+
+        //                                                if (cartItemPriceDetailList_gold.Count > 0)
+        //                                                {
+        //                                                    gold_price = cartItemPriceDetailList_gold[0].pure_gold;
+        //                                                    making_per_gram = cartItemPriceDetailList_gold[0].labour;
+        //                                                    total_goldvalue = cartItemPriceDetailList_gold[0].gold_ktprice;
+        //                                                    total_labour = cartItemPriceDetailList_gold[0].labour_price;
+        //                                                    finalGoldValue = cartItemPriceDetailList_gold[0].gold_price;
+        //                                                    item_price = cartItemPriceDetailList_gold[0].item_price;
+        //                                                    total_price = cartItemPriceDetailList_gold[0].total_price;
+        //                                                    design_kt = cartItemPriceDetailList_gold[0].design_kt;
+        //                                                    labour = cartItemPriceDetailList_gold[0].labour;
+        //                                                    gst_price = cartItemPriceDetailList_gold[0].GST;
+        //                                                    dp_final_price = cartItemPriceDetailList_gold[0].dp_final_price;
+        //                                                    gold_wt = cartItemPriceDetailList_gold[0].gold_wt;
+        //                                                    diamond_price = cartItemPriceDetailList_gold[0].diamond_price;
+        //                                                    platinum_wt = cartItemPriceDetailList_gold[0].platinum_wt;
+        //                                                    platinum = cartItemPriceDetailList_gold[0].platinum;
+        //                                                    platinum_price = cartItemPriceDetailList_gold[0].platinum_price;
+        //                                                }
+
+        //                                                if (tmpItemPlainGold == "Y")
+        //                                                {
+        //                                                    GoldDynamicPriceCartParams golddynamicpricecartparams = new GoldDynamicPriceCartParams();
+        //                                                    golddynamicpricecartparams.DataId = cart_billing_data_id;
+        //                                                    golddynamicpricecartparams.ItemId = tmpItemID;
+        //                                                    golddynamicpricecartparams.CartItemId = tmpCartItemID;
+        //                                                    golddynamicpricecartparams.CartMstId = tmpCartMstID;
+        //                                                    golddynamicpricecartparams.CartQty = tmpCartQty;
+        //                                                    golddynamicpricecartparams.gold_price = gold_price;
+        //                                                    golddynamicpricecartparams.making_per_gram = making_per_gram;
+        //                                                    golddynamicpricecartparams.total_goldvalue = total_goldvalue;
+        //                                                    golddynamicpricecartparams.total_labour = total_labour;
+        //                                                    golddynamicpricecartparams.finalGoldValue = finalGoldValue;
+        //                                                    golddynamicpricecartparams.item_price = item_price;
+        //                                                    golddynamicpricecartparams.total_price = total_price;
+        //                                                    golddynamicpricecartparams.gst_price = gst_price;
+        //                                                    golddynamicpricecartparams.dp_final_price = dp_final_price;
+        //                                                    golddynamicpricecartparams.design_kt = design_kt;
+        //                                                    golddynamicpricecartparams.labour = labour;
+        //                                                    GoldDynamicPriceCart(golddynamicpricecartparams);
+        //                                                }
+
+        //                                                if (tmpItemIsMRP == "Y" && tmpitem_illumine == "N" && tmpisCOOInserted == "N")
+        //                                                {
+        //                                                    itemdynamicpricecart_params.DataID = cart_billing_data_id;
+        //                                                    itemdynamicpricecart_params.ItemID = tmpItemID;
+        //                                                    itemdynamicpricecart_params.CartID = CartId;
+        //                                                    itemdynamicpricecart_params.CartItemID = tmpCartItemID;
+        //                                                    itemdynamicpricecart_params.diamond_price = diamond_price;
+        //                                                    itemdynamicpricecart_params.gold_wt = gold_wt;
+        //                                                    itemdynamicpricecart_params.pure_gold = gold_price;
+        //                                                    itemdynamicpricecart_params.gold_ktprice = total_goldvalue;
+        //                                                    itemdynamicpricecart_params.gold_price = finalGoldValue;
+        //                                                    itemdynamicpricecart_params.platinum_wt = platinum_wt;
+        //                                                    itemdynamicpricecart_params.platinum = platinum;
+        //                                                    itemdynamicpricecart_params.platinum_price = platinum_price;
+        //                                                    itemdynamicpricecart_params.labour_price = total_labour;
+        //                                                    objHelpers.ItemDynamicPriceCart(itemdynamicpricecart_params);
+
+        //                                                    cartitempricedetaillistparams.DataID = cart_billing_data_id;
+        //                                                    cartitempricedetaillistparams.ItemID = tmpItemID;
+        //                                                    cartitempricedetaillistparams.SizeID = tmpCartConfCommonID;
+        //                                                    cartitempricedetaillistparams.CategoryID = tmpItemCtgCommonID;
+        //                                                    cartitempricedetaillistparams.ItemBrandCommonID = tmpItemBrandCommonID;
+        //                                                    cartitempricedetaillistparams.ItemGrossWt = tmpItemGrossWt;
+        //                                                    cartitempricedetaillistparams.ItemMetalWt = tmpItemMetalWt;
+        //                                                    cartitempricedetaillistparams.ItemGenderCommonID = tmpItemGenderCommonID;
+        //                                                    cartitempricedetaillistparams.IsWeightCalcRequired = 1;
+
+        //                                                    cartItemPriceDetailList_gold_requiredweight = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
+
+        //                                                    if (cartItemPriceDetailList_gold_requiredweight.Count > 0)
+        //                                                    {
+        //                                                        total_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].total_price, 0);
+        //                                                        dp_final_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].dp_final_price, 0);
+        //                                                        dp_maring_percent = cartItemPriceDetailList_gold_requiredweight[0].dp_maring_percent;
+
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 3;
+        //                                                        SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
+        //                                                    }
+        //                                                }
+        //                                            }
+        //                                            else
+        //                                            {
+        //                                                cartitempricedetaillistparams.DataID = cart_billing_data_id;
+        //                                                cartitempricedetaillistparams.ItemID = tmpItemID;
+        //                                                cartitempricedetaillistparams.IsWeightCalcRequired = 0;
+        //                                                cartItemPriceDetailList_gold = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
+
+        //                                                if (cartItemPriceDetailList_gold.Count > 0)
+        //                                                {
+        //                                                    total_price = Math.Round(cartItemPriceDetailList_gold[0].total_price, 0);
+        //                                                    dp_final_price = Math.Round(cartItemPriceDetailList_gold[0].dp_final_price, 0);
+        //                                                    dp_maring_percent = cartItemPriceDetailList_gold[0].dp_maring_percent;
+        //                                                    diamond_price = cartItemPriceDetailList_gold[0].diamond_price;
+        //                                                    gold_wt = cartItemPriceDetailList_gold[0].gold_wt;
+        //                                                    gold_price = cartItemPriceDetailList_gold[0].pure_gold;
+        //                                                    total_goldvalue = cartItemPriceDetailList_gold[0].gold_ktprice;
+        //                                                    finalGoldValue = cartItemPriceDetailList_gold[0].gold_price;
+        //                                                    platinum_wt = cartItemPriceDetailList_gold[0].platinum_wt;
+        //                                                    platinum = cartItemPriceDetailList_gold[0].platinum;
+        //                                                    platinum_price = cartItemPriceDetailList_gold[0].platinum_price;
+        //                                                    total_labour = cartItemPriceDetailList_gold[0].labour_price;
+        //                                                }
+
+        //                                                if (tmpItemPlainGold == "Y" && tmpisCOOInserted == "N")
+        //                                                {
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 2;
+        //                                                    SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
+        //                                                }
+        //                                                else
+        //                                                {
+        //                                                    if (tmpDataItemInfo == "Y" && tmpItemIsSRP == "Y")
+        //                                                    {
+        //                                                        tmpItemIsMRP = "Y";
+        //                                                    }
+        //                                                    if (((tmpItemIsMRP == "Y" && tmpisCOOInserted == "N") || tmpItemIsSRP == "Y") && tmpitem_illumine == "N")
+        //                                                    {
+        //                                                        itemdynamicpricecart_params.DataID = cart_billing_data_id;
+        //                                                        itemdynamicpricecart_params.ItemID = tmpItemID;
+        //                                                        itemdynamicpricecart_params.CartID = CartId;
+        //                                                        itemdynamicpricecart_params.CartItemID = tmpCartItemID;
+        //                                                        itemdynamicpricecart_params.diamond_price = diamond_price;
+        //                                                        itemdynamicpricecart_params.gold_wt = gold_wt;
+        //                                                        itemdynamicpricecart_params.pure_gold = gold_price;
+        //                                                        itemdynamicpricecart_params.gold_ktprice = total_goldvalue;
+        //                                                        itemdynamicpricecart_params.gold_price = finalGoldValue;
+        //                                                        itemdynamicpricecart_params.platinum_wt = platinum_wt;
+        //                                                        itemdynamicpricecart_params.platinum = platinum;
+        //                                                        itemdynamicpricecart_params.platinum_price = platinum_price;
+        //                                                        itemdynamicpricecart_params.labour_price = total_labour;
+        //                                                        objHelpers.ItemDynamicPriceCart(itemdynamicpricecart_params);
+
+        //                                                        cartitempricedetaillistparams.DataID = cart_billing_data_id;
+        //                                                        cartitempricedetaillistparams.ItemID = tmpItemID;
+        //                                                        cartitempricedetaillistparams.SizeID = tmpCartConfCommonID;
+        //                                                        cartitempricedetaillistparams.CategoryID = tmpItemCtgCommonID;
+        //                                                        cartitempricedetaillistparams.ItemBrandCommonID = tmpItemBrandCommonID;
+        //                                                        cartitempricedetaillistparams.ItemGrossWt = tmpItemGrossWt;
+        //                                                        cartitempricedetaillistparams.ItemMetalWt = tmpItemMetalWt;
+        //                                                        cartitempricedetaillistparams.ItemGenderCommonID = tmpItemGenderCommonID;
+        //                                                        cartitempricedetaillistparams.IsWeightCalcRequired = 1;
+
+        //                                                        cartItemPriceDetailList_gold_requiredweight = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
+        //                                                        if (cartItemPriceDetailList_gold_requiredweight.Count > 0)
+        //                                                        {
+        //                                                            total_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].total_price, 0);
+        //                                                            dp_final_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].dp_final_price, 0);
+        //                                                            dp_maring_percent = cartItemPriceDetailList_gold_requiredweight[0].dp_maring_percent;
+        //                                                        }
+
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 3;
+        //                                                        SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
+
+        //                                                    }
+        //                                                    else
+        //                                                    {
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = tmpCartMRPrice;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = tmpCartPrice;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = tmpCartDPrice;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemMetalWt = tmpCartItemMetalWt;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 4;
+        //                                                        SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
+        //                                                    }
+        //                                                }
+        //                                            }
+        //                                        }
+        //                                        else
+        //                                        {
+        //                                            // order typeid in (6596, 2499, 20397)
+        //                                            cartitempricedetaillistparams.DataID = cart_billing_data_id;
+        //                                            cartitempricedetaillistparams.ItemID = tmpItemID;
+        //                                            cartitempricedetaillistparams.IsWeightCalcRequired = 0;
+        //                                            cartItemPriceDetailList_gold = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
+
+        //                                            if (cartItemPriceDetailList_gold.Count > 0)
+        //                                            {
+        //                                                gold_price = cartItemPriceDetailList_gold[0].pure_gold;
+        //                                                making_per_gram = cartItemPriceDetailList_gold[0].labour;
+        //                                                total_goldvalue = cartItemPriceDetailList_gold[0].gold_ktprice;
+        //                                                total_labour = cartItemPriceDetailList_gold[0].labour_price;
+        //                                                finalGoldValue = cartItemPriceDetailList_gold[0].gold_price;
+        //                                                item_price = cartItemPriceDetailList_gold[0].item_price;
+        //                                                total_price = cartItemPriceDetailList_gold[0].total_price;
+        //                                                design_kt = cartItemPriceDetailList_gold[0].design_kt;
+        //                                                labour = cartItemPriceDetailList_gold[0].labour;
+        //                                                gst_price = cartItemPriceDetailList_gold[0].GST;
+        //                                                dp_final_price = cartItemPriceDetailList_gold[0].dp_final_price;
+        //                                                gold_wt = cartItemPriceDetailList_gold[0].gold_wt;
+        //                                                diamond_price = cartItemPriceDetailList_gold[0].diamond_price;
+        //                                                platinum_wt = cartItemPriceDetailList_gold[0].platinum_wt;
+        //                                                platinum = cartItemPriceDetailList_gold[0].platinum;
+        //                                                platinum_price = cartItemPriceDetailList_gold[0].platinum_price;
+        //                                            }
+
+        //                                            // order typeid in (6596, 2499, 20397)
+        //                                            if (tmpItemPlainGold == "Y")
+        //                                            {
+        //                                                GoldDynamicPriceCartParams golddynamicpricecartparams = new GoldDynamicPriceCartParams();
+        //                                                golddynamicpricecartparams.DataId = cart_billing_data_id;
+        //                                                golddynamicpricecartparams.ItemId = tmpItemID;
+        //                                                golddynamicpricecartparams.CartItemId = tmpCartItemID;
+        //                                                golddynamicpricecartparams.CartMstId = tmpCartMstID;
+        //                                                golddynamicpricecartparams.CartQty = tmpCartQty;
+        //                                                golddynamicpricecartparams.gold_price = gold_price;
+        //                                                golddynamicpricecartparams.making_per_gram = making_per_gram;
+        //                                                golddynamicpricecartparams.total_goldvalue = total_goldvalue;
+        //                                                golddynamicpricecartparams.total_labour = total_labour;
+        //                                                golddynamicpricecartparams.finalGoldValue = finalGoldValue;
+        //                                                golddynamicpricecartparams.item_price = item_price;
+        //                                                golddynamicpricecartparams.total_price = total_price;
+        //                                                golddynamicpricecartparams.gst_price = gst_price;
+        //                                                golddynamicpricecartparams.dp_final_price = dp_final_price;
+        //                                                golddynamicpricecartparams.design_kt = design_kt;
+        //                                                golddynamicpricecartparams.labour = labour;
+        //                                                GoldDynamicPriceCart(golddynamicpricecartparams);
+        //                                            }
+
+        //                                            if (tmpMstType == "F" && tmpItemPlainGold == "Y" && tmpisCOOInserted == "N")
+        //                                            {
+        //                                                cartitempricedetaillistparams.DataID = cart_billing_data_id;
+        //                                                cartitempricedetaillistparams.ItemID = tmpItemID;
+        //                                                cartitempricedetaillistparams.SizeID = tmpCartConfCommonID;
+        //                                                cartitempricedetaillistparams.CategoryID = tmpItemCtgCommonID;
+        //                                                cartitempricedetaillistparams.ItemBrandCommonID = tmpItemBrandCommonID;
+        //                                                cartitempricedetaillistparams.ItemGrossWt = tmpItemGrossWt;
+        //                                                cartitempricedetaillistparams.ItemMetalWt = tmpItemMetalWt;
+        //                                                cartitempricedetaillistparams.ItemGenderCommonID = tmpItemGenderCommonID;
+        //                                                cartitempricedetaillistparams.IsWeightCalcRequired = 1;
+
+        //                                                cartItemPriceDetailList_gold_requiredweight = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
+        //                                                if (cartItemPriceDetailList_gold_requiredweight.Count > 0)
+        //                                                {
+        //                                                    total_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].total_price, 0);
+        //                                                    dp_final_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].dp_final_price, 0);
+        //                                                    dp_maring_percent = cartItemPriceDetailList_gold_requiredweight[0].dp_maring_percent;
+
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 1;
+        //                                                    SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
+        //                                                }
+        //                                            }
+        //                                            else if (tmpItemPlainGold == "Y" && tmpisCOOInserted == "N")
+        //                                            {
+        //                                                if (cartItemPriceDetailList_gold.Count > 0)
+        //                                                {
+        //                                                    total_price = Math.Round(cartItemPriceDetailList_gold[0].total_price, 0);
+        //                                                    dp_final_price = Math.Round(cartItemPriceDetailList_gold[0].dp_final_price, 0);
+        //                                                    dp_maring_percent = cartItemPriceDetailList_gold[0].dp_maring_percent;
+
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 2;
+        //                                                    SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
+        //                                                }
+        //                                            }
+        //                                            else
+        //                                            {
+        //                                                if (tmpDataItemInfo == "Y" && tmpItemIsSRP == "Y")
+        //                                                {
+        //                                                    tmpItemIsMRP = "Y";
+        //                                                }
+        //                                                if (((tmpItemIsMRP == "Y" && tmpisCOOInserted == "N") || tmpItemIsSRP == "Y") && tmpitem_illumine == "N")
+        //                                                {
+        //                                                    itemdynamicpricecart_params.DataID = cart_billing_data_id;
+        //                                                    itemdynamicpricecart_params.ItemID = tmpItemID;
+        //                                                    itemdynamicpricecart_params.CartID = CartId;
+        //                                                    itemdynamicpricecart_params.CartItemID = tmpCartItemID;
+        //                                                    itemdynamicpricecart_params.diamond_price = diamond_price;
+        //                                                    itemdynamicpricecart_params.gold_wt = gold_wt;
+        //                                                    itemdynamicpricecart_params.pure_gold = gold_price;
+        //                                                    itemdynamicpricecart_params.gold_ktprice = total_goldvalue;
+        //                                                    itemdynamicpricecart_params.gold_price = finalGoldValue;
+        //                                                    itemdynamicpricecart_params.platinum_wt = platinum_wt;
+        //                                                    itemdynamicpricecart_params.platinum = platinum;
+        //                                                    itemdynamicpricecart_params.platinum_price = platinum_price;
+        //                                                    itemdynamicpricecart_params.labour_price = total_labour;
+        //                                                    objHelpers.ItemDynamicPriceCart(itemdynamicpricecart_params);
+
+        //                                                    if (cartItemPriceDetailList_gold_requiredweight.Count > 0)
+        //                                                    {
+        //                                                        total_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].total_price, 0);
+        //                                                        dp_final_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].dp_final_price, 0);
+        //                                                        dp_maring_percent = cartItemPriceDetailList_gold_requiredweight[0].dp_maring_percent;
+
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
+        //                                                        cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 3;
+        //                                                        SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
+        //                                                    }
+        //                                                }
+        //                                                else
+        //                                                {
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = tmpCartMRPrice;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = tmpCartPrice;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = tmpCartDPrice;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemMetalWt = tmpCartItemMetalWt;
+        //                                                    cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 4;
+        //                                                    SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
+        //                                                }
+        //                                            }
+        //                                        }
+        //                                    }
+
+        //                                    CartCheckoutNoAllotNewSaveNewCartMstParams cartcheckoutnoallotnew_savenew_cartmst_params = new CartCheckoutNoAllotNewSaveNewCartMstParams();
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.DataID = DataId;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.CartID = CartId;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.OrderTypeID = ordertypeid;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.cart_order_login_type_id = cart_order_login_type_id;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.cart_billing_login_type_id = cart_billing_login_type_id;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.cart_order_data_id = cart_order_data_id;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.cart_billing_data_id = cart_billing_data_id;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.cart_remarks = cart_remarks;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.cart_delivery_date = cart_delivery_date;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.itemall = itemall;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.SourceType = "APP";
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.devicetype = "WEB";
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.devicename = "";
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.appversion = "";
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.APP_ENV = APP_ENV;
+
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.oroseven_cnt = oroSeven.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.orosevenString = string.Join(",", oroSeven);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.orofifty_cnt = oroFifteen.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.orofiftyString = string.Join(",", oroFive);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.orohours_cnt = oroHours.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.orohoursString = string.Join(",", oroHours);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.orotwentyone_cnt = oroTwentyOne.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.orotwentyoneString = string.Join(",", oroTwentyOne);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.orofive_cnt = oroFive.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.orofiveString = string.Join(",", oroFive);
+
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnaseven_cnt = kisnaSeven.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnasevenString = string.Join(",", kisnaSeven);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnafifty_cnt = kisnaFifty.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnafiftyString = string.Join(",", kisnaFifty);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnahours_cnt = kisnaHours.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnahoursString = string.Join(",", kisnaHours);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnatwentyone_cnt = kisnaTwentyone.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnatwentyoneString = string.Join(",", kisnaTwentyone);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnafive_cnt = kisnaFive.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kisnafiveString = string.Join(",", kisnaFive);
+
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kgseven_cnt = kgSeven.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kgsevenString = string.Join(",", kgSeven);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kgfifty_cnt = kgFifty.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kgfiftyString = string.Join(",", kgFifty);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kghours_cnt = kgHours.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kghoursString = string.Join(",", kgHours);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kgtwentyone_cnt = kgTwentyOne.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kgtwentyoneString = string.Join(",", kgTwentyOne);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kgfive_cnt = kgFive.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.kgfiveString = string.Join(",", kgFive);
+
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silverseven_cnt = silverSeven.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silversevenString = string.Join(",", silverSeven);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silverfifty_cnt = silverFifteen.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silverfiftyString = string.Join(",", silverFifteen);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silverhours_cnt = silverHours.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silverhoursString = string.Join(",", silverHours);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silvertwentyone_cnt = silverTwentyOne.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silvertwentyoneString = string.Join(",", silverTwentyOne);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silverfive_cnt = silverFive.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.silverfiveString = string.Join(",", silverFive);
+
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illumineseven_cnt = illumineSeven.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illuminesevenString = string.Join(",", illumineSeven);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illuminefifty_cnt = illumineFifteen.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illuminefiftyString = string.Join(",", illumineFifteen);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illuminehours_cnt = illumineHours.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illuminehoursString = string.Join(",", illumineHours);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illuminetwentyone_cnt = illumineTwentyOne.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illuminetwentyoneString = string.Join(",", illumineTwentyOne);
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illuminefive_cnt = illumineFive.Count;
+        //                                    cartcheckoutnoallotnew_savenew_cartmst_params.illuminefiveString = string.Join(",", illumineFive);
+
+        //                                    var resNoAllotResponse = new NoAllotResponse();
+        //                                    resNoAllotResponse = SaveCartCheckoutNoAllotNew_CartMstNew(cartcheckoutnoallotnew_savenew_cartmst_params);
+        //                                    resstatus = resNoAllotResponse.status;
+        //                                    resstatuscode = resNoAllotResponse.status_code;
+        //                                    resmessage = resNoAllotResponse.message;
+        //                                }
+        //                            }
+        //                            catch (Exception ex)
+        //                            {
+        //                                resstatus = 0;
+        //                                resstatuscode = 200;
+        //                                resmessage = $"SQL error: {ex.Message}";
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //        responseDetails.success = (resstatus == 1 ? true : false);
+        //        responseDetails.message = resmessage;
+        //        responseDetails.status = resstatuscode.ToString();
+        //        return responseDetails;
+        //    }
+        //    catch (SqlException sqlEx)
+        //    {
+        //        //return BadRequest(sqlEx.Message);
+        //        responseDetails.success = false;
+        //        responseDetails.message = $"SQL error: {sqlEx.Message}";
+        //        responseDetails.status = "400";
+        //        return responseDetails;
+        //    }
+        //}
+
         public async Task<ResponseDetails> CartCheckoutNoAllotNew(CartCheckoutNoAllotNewParams cartcheckoutnoallotnew_params)
         {
             var responseDetails = new ResponseDetails();
             try
             {
-                string
-                    resmessage = "";
-                int
-                    resstatus = 0,
-                    resstatuscode = 400;
+
+                int CartId = cartcheckoutnoallotnew_params.cart_id;
+                int DataId = cartcheckoutnoallotnew_params.data_id;
+                int cart_order_data_id = cartcheckoutnoallotnew_params.cart_order_data_id;
+                int cart_billing_data_id = cartcheckoutnoallotnew_params.cart_billing_data_id;
+                int cart_order_login_type_id = cartcheckoutnoallotnew_params.cart_order_login_type_id;
+                int cart_billing_login_type_id = cartcheckoutnoallotnew_params.cart_billing_login_type_id;
+                var ordertypeid = int.TryParse(cartcheckoutnoallotnew_params.ordertypeid.ToString(), out int parsedValue) ? parsedValue : 2498;
+
+                string cart_remarks = cartcheckoutnoallotnew_params.cart_remarks ?? "";
+                string? cart_delivery_date = null;
+                if (DateTime.TryParseExact(cartcheckoutnoallotnew_params.cart_delivery_date, "dd-MM-yyyy",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt))
+                {
+                    cart_delivery_date = dt.ToString("yyyy-MM-dd");
+                }
+
+                string itemall = cartcheckoutnoallotnew_params.itemall ?? "";
+                string devicetype = cartcheckoutnoallotnew_params.devicetype ?? "";
+                string devicename = cartcheckoutnoallotnew_params.devicename ?? "";
+                string appversion = cartcheckoutnoallotnew_params.appversion ?? "";
+                int? consumer_form_id = cartcheckoutnoallotnew_params.consumer_form_id;
+
+                var datas = cartcheckoutnoallotnew_params.data ?? new brand_data();
+
+                // === 2. Build JSON for @datas parameter ===
+                var jsonDatas = new
+                {
+                    kisna_data = new
+                    {
+                        fifteen_day = FilterList(datas.kisna_data?.fifteen_day ?? new List<string>()),
+                        hours = FilterList(datas.kisna_data?.hours ?? new List<string>()),
+                        seven_day = FilterList(datas.kisna_data?.seven_day ?? new List<string>()),
+                        twentyone_day = FilterList(datas.kisna_data?.twentyone_day ?? new List<string>()),
+                        five_day = FilterList(datas.kisna_data?.five_day ?? new List<string>()),
+                        ten_day = FilterList(datas.kisna_data?.ten_day ?? new List<string>()),
+                        twenty_day = FilterList(datas.kisna_data?.twenty_day ?? new List<string>()),
+                        twentyfive_day = FilterList(datas.kisna_data?.twentyfive_day ?? new List<string>()),
+                        twelve_day = FilterList(datas.kisna_data?.twelve_day ?? new List<string>()),
+                        thirty_day = FilterList(datas.kisna_data?.thirty_day ?? new List<string>())
+                    },
+                    oro_data = new
+                    {
+                        fifteen_day = FilterList(datas.oro_data?.fifteen_day ?? new List<string>()),
+                        hours = FilterList(datas.oro_data?.hours ?? new List<string>()),
+                        seven_day = FilterList(datas.oro_data?.seven_day ?? new List<string>()),
+                        twentyone_day = FilterList(datas.oro_data?.twentyone_day ?? new List<string>()),
+                        five_day = FilterList(datas.oro_data?.five_day ?? new List<string>()),
+                        ten_day = FilterList(datas.oro_data?.ten_day ?? new List<string>()),
+                        twenty_day = FilterList(datas.oro_data?.twenty_day ?? new List<string>()),
+                        twentyfive_day = FilterList(datas.oro_data?.twentyfive_day ?? new List<string>()),
+                        twelve_day = FilterList(datas.oro_data?.twelve_day ?? new List<string>()),
+                        thirty_day = FilterList(datas.oro_data?.thirty_day ?? new List<string>())
+                    },
+                    kisna_gold_data = new
+                    {
+                        fifteen_day = FilterList(datas.kisna_gold_data?.fifteen_day ?? new List<string>()),
+                        hours = FilterList(datas.kisna_gold_data?.hours ?? new List<string>()),
+                        seven_day = FilterList(datas.kisna_gold_data?.seven_day ?? new List<string>()),
+                        twentyone_day = FilterList(datas.kisna_gold_data?.twentyone_day ?? new List<string>()),
+                        five_day = FilterList(datas.kisna_gold_data?.five_day ?? new List<string>()),
+                        ten_day = FilterList(datas.kisna_gold_data?.ten_day ?? new List<string>()),
+                        twenty_day = FilterList(datas.kisna_gold_data?.twenty_day ?? new List<string>()),
+                        twentyfive_day = FilterList(datas.kisna_gold_data?.twentyfive_day ?? new List<string>()),
+                        twelve_day = FilterList(datas.kisna_gold_data?.twelve_day ?? new List<string>()),
+                        thirty_day = FilterList(datas.kisna_gold_data?.thirty_day ?? new List<string>())
+                    },
+                    silver_data = new
+                    {
+                        fifteen_day = FilterList(datas.silver_data?.fifteen_day ?? new List<string>()),
+                        hours = FilterList(datas.silver_data?.hours ?? new List<string>()),
+                        seven_day = FilterList(datas.silver_data?.seven_day ?? new List<string>()),
+                        twentyone_day = FilterList(datas.silver_data?.twentyone_day ?? new List<string>()),
+                        five_day = FilterList(datas.silver_data?.five_day ?? new List<string>()),
+                        ten_day = FilterList(datas.silver_data?.ten_day ?? new List<string>()),
+                        twenty_day = FilterList(datas.silver_data?.twenty_day ?? new List<string>()),
+                        twentyfive_day = FilterList(datas.silver_data?.twentyfive_day ?? new List<string>()),
+                        twelve_day = FilterList(datas.silver_data?.twelve_day ?? new List<string>()),
+                        thirty_day = FilterList(datas.silver_data?.thirty_day ?? new List<string>())
+                    },
+                    illumine_data = new
+                    {
+                        fifteen_day = FilterList(datas.illumine_data?.fifteen_day ?? new List<string>()),
+                        hours = FilterList(datas.illumine_data?.hours ?? new List<string>()),
+                        seven_day = FilterList(datas.illumine_data?.seven_day ?? new List<string>()),
+                        twentyone_day = FilterList(datas.illumine_data?.twentyone_day ?? new List<string>()),
+                        five_day = FilterList(datas.illumine_data?.five_day ?? new List<string>()),
+                        ten_day = FilterList(datas.illumine_data?.ten_day ?? new List<string>()),
+                        twenty_day = FilterList(datas.illumine_data?.twenty_day ?? new List<string>()),
+                        twentyfive_day = FilterList(datas.illumine_data?.twentyfive_day ?? new List<string>()),
+                        twelve_day = FilterList(datas.illumine_data?.twelve_day ?? new List<string>()),
+                        thirty_day = FilterList(datas.illumine_data?.thirty_day ?? new List<string>())
+                    }
+                };
+
+                string datasJson = JsonConvert.SerializeObject(jsonDatas);
+
+                var solitaireResult = await CheckSolitaireDiamondAvailability(cart_id: CartId, data_id: DataId);
+
+                if (!solitaireResult.success)
+                {
+                    // Diamond not available ? abort the whole checkout
+                    responseDetails.success = false;
+                    responseDetails.message = solitaireResult.message;
+                    responseDetails.status = "400";
+                    return responseDetails;
+                }
 
                 using (SqlConnection dbConnection = new SqlConnection(_connection))
                 {
-                    string APP_ENV = "staging";
-
-                    int CartId = cartcheckoutnoallotnew_params.cart_id > 0 ? cartcheckoutnoallotnew_params.cart_id : 0;
-                    int DataId = cartcheckoutnoallotnew_params.data_id > 0 ? cartcheckoutnoallotnew_params.data_id : 0;
-
-                    int cart_order_data_id = cartcheckoutnoallotnew_params.cart_order_data_id > 0 ? cartcheckoutnoallotnew_params.cart_order_data_id : 0;
-                    int cart_billing_data_id = cartcheckoutnoallotnew_params.cart_billing_data_id > 0 ? cartcheckoutnoallotnew_params.cart_billing_data_id : 0;
-                    int cart_order_login_type_id = cartcheckoutnoallotnew_params.cart_order_login_type_id > 0 ? cartcheckoutnoallotnew_params.cart_order_login_type_id : 0;
-                    int cart_billing_login_type_id = cartcheckoutnoallotnew_params.cart_billing_login_type_id > 0 ? cartcheckoutnoallotnew_params.cart_billing_login_type_id : 0;
-                    string cart_remarks = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.cart_remarks) ? "" : cartcheckoutnoallotnew_params.cart_remarks;
-
-                    string cart_delivery_date = "";
-                    DateTime parsed_cart_delivery_date;
-                    bool isValidCartDeliveryDate = DateTime.TryParseExact(cartcheckoutnoallotnew_params.cart_delivery_date, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsed_cart_delivery_date);
-                    if (isValidCartDeliveryDate)
-                    {
-                        cart_delivery_date = parsed_cart_delivery_date.ToString("yyyy-MM-dd");
-                    }
-
-                    string itemall = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.itemall) ? "" : cartcheckoutnoallotnew_params.itemall;
-                    // int ordertypeid = cartcheckoutnoallotnew_params.ordertypeid;
-                    var ordertypeid = int.TryParse(cartcheckoutnoallotnew_params.ordertypeid.ToString(), out int parsedValue) ? parsedValue : 2498;
-
-                    string devicetype = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.devicetype) ? "" : cartcheckoutnoallotnew_params.devicetype;
-                    string devicename = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.devicename) ? "" : cartcheckoutnoallotnew_params.devicename;
-                    string appversion = string.IsNullOrWhiteSpace(cartcheckoutnoallotnew_params.appversion) ? "" : cartcheckoutnoallotnew_params.appversion;
-
-                    CommonHelpers objHelpers = new CommonHelpers();
-                    brand_data datas = cartcheckoutnoallotnew_params.data;
-
-                    List<string> kisnaFifty = new List<string>();
-                    List<string> kisnaHours = new List<string>();
-                    List<string> kisnaSeven = new List<string>();
-                    List<string> kisnaTwentyone = new List<string>();
-                    List<string> kisnaFive = new List<string>();
-
-                    // Check if 'kisna_data' exists and is not empty
-                    if (datas != null && datas.kisna_data != null)
-                    {
-                        var kisnaData = datas.kisna_data;
-                        kisnaFifty = kisnaData.fifteen_day;
-                        kisnaHours = kisnaData.hours;
-                        kisnaSeven = kisnaData.seven_day;
-                        kisnaTwentyone = kisnaData.twentyone_day;
-                        kisnaFive = kisnaData.five_day;
-                    }
-
-                    List<string> oroFifteen = new List<string>();
-                    //List<string> oroFifty = new List<string>();
-                    List<string> oroHours = new List<string>();
-                    List<string> oroSeven = new List<string>();
-                    List<string> oroTwentyOne = new List<string>();
-                    List<string> oroFive = new List<string>();
-
-                    // Check if 'oro_data' exists and is not empty
-                    int oro_data_cnt = 0;
-                    if (datas != null && datas.oro_data != null)
-                    {
-                        var oroData = datas.oro_data;
-                        oro_data_cnt = datas.oro_data.fifteen_day.Count + datas.oro_data.hours.Count + datas.oro_data.seven_day.Count + datas.oro_data.twentyone_day.Count + datas.oro_data.five_day.Count;
-                        oroFifteen = oroData.fifteen_day;
-                        oroHours = oroData.hours;
-                        oroSeven = oroData.seven_day;
-                        oroTwentyOne = oroData.twentyone_day;
-                        oroFive = oroData.five_day;
-                    }
-
-                    List<string> kgFifty = new List<string>();
-                    List<string> kgHours = new List<string>();
-                    List<string> kgSeven = new List<string>();
-                    List<string> kgTwentyOne = new List<string>();
-                    List<string> kgFive = new List<string>();
-
-                    // Check if 'kisna_gold_data' exists and is not empty
-                    if (datas != null && datas.kisna_gold_data != null)
-                    {
-                        var kgData = datas.kisna_gold_data;
-                        kgFifty = kgData.fifteen_day;
-                        kgHours = kgData.hours;
-                        kgSeven = kgData.seven_day;
-                        kgTwentyOne = kgData.twentyone_day;
-                        kgFive = kgData.five_day;
-                    }
-
-                    //Silver Coin 999 Data
-                    List<string> silverFifteen = new List<string>();
-                    //List<string> silverFifty = new List<string>();
-                    List<string> silverHours = new List<string>();
-                    List<string> silverSeven = new List<string>();
-                    List<string> silverTwentyOne = new List<string>();
-                    List<string> silverFive = new List<string>();
-
-                    // Check if 'silver_data' exists and is not empty
-                    if (datas != null && datas.silver_data != null)
-                    {
-                        var silverData = datas.silver_data;
-                        silverFifteen = silverData.fifteen_day;
-                        silverHours = silverData.hours;
-                        silverSeven = silverData.seven_day;
-                        silverTwentyOne = silverData.twentyone_day;
-                        silverFive = silverData.five_day;
-                    }
-
-                    // Illumine Collection
-                    List<string> illumineFifteen = new List<string>();
-                    //List<string> illumineFifty = new List<string>();
-                    List<string> illumineHours = new List<string>();
-                    List<string> illumineSeven = new List<string>();
-                    List<string> illumineTwentyOne = new List<string>();
-                    List<string> illumineFive = new List<string>();
-
-                    // Check if 'illumine_data' exists and is not empty
-                    if (datas != null && datas.illumine_data != null)
-                    {
-                        var illumineData = datas.illumine_data;
-                        illumineFifteen = illumineData.fifteen_day;
-                        illumineHours = illumineData.hours;
-                        illumineSeven = illumineData.seven_day;
-                        illumineTwentyOne = illumineData.twentyone_day;
-                        illumineFive = illumineData.five_day;
-                    }
-
-                    var cartMstItemIds = new List<string>();
-                    cartMstItemIds.AddRange(kisnaFifty);
-                    cartMstItemIds.AddRange(kisnaHours);
-                    cartMstItemIds.AddRange(kisnaSeven);
-                    cartMstItemIds.AddRange(kisnaTwentyone);
-                    cartMstItemIds.AddRange(kisnaFive);
-
-                    // cartMstItemIds.AddRange(oroFifty);
-                    cartMstItemIds.AddRange(oroFifteen);
-                    cartMstItemIds.AddRange(oroHours);
-                    cartMstItemIds.AddRange(oroSeven);
-                    cartMstItemIds.AddRange(oroTwentyOne);
-                    cartMstItemIds.AddRange(oroFive);
-
-                    cartMstItemIds.AddRange(kgFifty);
-                    cartMstItemIds.AddRange(kgHours);
-                    cartMstItemIds.AddRange(kgSeven);
-                    cartMstItemIds.AddRange(kgTwentyOne);
-                    cartMstItemIds.AddRange(kgFive);
-
-                    // cartMstItemIds.AddRange(silverFifty);
-                    cartMstItemIds.AddRange(silverFifteen);
-                    cartMstItemIds.AddRange(silverHours);
-                    cartMstItemIds.AddRange(silverSeven);
-                    cartMstItemIds.AddRange(silverTwentyOne);
-                    cartMstItemIds.AddRange(silverFive);
-
-                    // cartMstItemIds.AddRange(illumineFifty);
-                    cartMstItemIds.AddRange(illumineFifteen);
-                    cartMstItemIds.AddRange(illumineHours);
-                    cartMstItemIds.AddRange(illumineSeven);
-                    cartMstItemIds.AddRange(illumineTwentyOne);
-                    cartMstItemIds.AddRange(illumineFive);
-
-                    var filteredCartMstItemIds = cartMstItemIds.Where(id => !string.IsNullOrEmpty(id)).ToList();
-                    string implodeCartMstItemIds = string.Join(",", filteredCartMstItemIds);
-
-                    // Checks items are from solitaire collection or not,
-                    // If so then checks total of those collection's items is grether than or equal to 10,00,000
-                    IList<CheckItemIsSolitaireComboListing> checkitemissolitairecomboList = new List<CheckItemIsSolitaireComboListing>();
-                    CheckItemIsSolitaireComboParams checkitemissolitairecomboparams = new CheckItemIsSolitaireComboParams();
-                    checkitemissolitairecomboparams.cart_id = CartId;
-                    checkitemissolitairecomboparams.cart_billing_data_id = cart_billing_data_id;
-                    checkitemissolitairecomboparams.ordertypeid = ordertypeid;
-                    checkitemissolitairecomboparams.implodeCartMstItemIds = implodeCartMstItemIds;
-                    checkitemissolitairecomboList = objHelpers.CheckItemIsSolitaireCombo(checkitemissolitairecomboparams);
-
-                    string msg = string.Empty;
-                    CheckItemIsSolitaireComboListing isSolitaireCombo = new CheckItemIsSolitaireComboListing();
-                    if (checkitemissolitairecomboList.Count > 0)
-                    {
-                        isSolitaireCombo = checkitemissolitairecomboList[0];
-                    }
-
-                    bool is_valid = isSolitaireCombo.is_valid == 0 ? true : false;
-                    if (!is_valid)
-                    {
-                        if (isSolitaireCombo.min_amount == 0 && isSolitaireCombo.cart_price == 0)
-                        {
-                            resmessage = "Cart is empty, Please add items into cart and then checkout.";
-                        }
-                        else
-                        {
-                            resmessage = string.Format(
-                                "Solitaire combo price ({0}) should be minimum {1}.",
-                                isSolitaireCombo.cart_price.ToString("N0"),
-                                isSolitaireCombo.min_amount.ToString("N0")
-                            );
-                        }
-                        // return Ok(new { success = false, message = msg, status_code = 200 });
-                        responseDetails.success = false;
-                        responseDetails.message = resmessage;
-                        responseDetails.status = "200";
-                        return responseDetails;
-                    }
-
-                    // Checks items are from kisna premium or not,
-                    // If so then checks total of those collection's items is grether than or equal to 10,00,000
-                    IList<CheckItemIsNewPremiumCollectionListing> checkitemisnewpremiumcollectionList = new List<CheckItemIsNewPremiumCollectionListing>();
-                    CheckItemIsNewPremiumCollectionParams checkitemisnewpremiumcollectionparams = new CheckItemIsNewPremiumCollectionParams();
-                    checkitemisnewpremiumcollectionparams.cart_id = CartId;
-                    checkitemisnewpremiumcollectionparams.cart_billing_data_id = cart_billing_data_id;
-                    checkitemisnewpremiumcollectionparams.ordertypeid = ordertypeid;
-                    checkitemisnewpremiumcollectionparams.implodeCartMstItemIds = implodeCartMstItemIds;
-                    checkitemisnewpremiumcollectionList = objHelpers.CheckItem_IsNewPremiumCollection(checkitemisnewpremiumcollectionparams);
-
-                    CheckItemIsNewPremiumCollectionListing isKisnaPremium = new CheckItemIsNewPremiumCollectionListing();
-                    if (checkitemisnewpremiumcollectionList.Count > 0)
-                    {
-                        isKisnaPremium = checkitemisnewpremiumcollectionList[0];
-                    }
-
-                    is_valid = isKisnaPremium.is_valid == 0 ? true : false;
-                    if (!is_valid)
-                    {
-                        if (isKisnaPremium.min_amount == 0 && isKisnaPremium.cart_price == 0)
-                        {
-                            resmessage = "Cart is empty, Please add items into cart and then checkout.";
-                        }
-                        else
-                        {
-                            resmessage = string.Format(
-                                "Kisna Premium price ({0}) should be minimum {1}.",
-                                isKisnaPremium.cart_price.ToString("N0"),
-                                isKisnaPremium.min_amount.ToString("N0")
-                            );
-                        }
-                        //return Ok(new { success = false, message = msg, status_code = 200 });
-                        responseDetails.success = false;
-                        responseDetails.message = resmessage;
-                        responseDetails.status = "200";
-                        return responseDetails;
-                    }
-
                     string cmdQuery = DBCommands.CARTCHECKOUTNOALLOTNEW;
-                    dbConnection.Open();
+                    await dbConnection.OpenAsync();
 
                     using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
                     {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@DataID", DataId);
-                        cmd.Parameters.AddWithValue("@CartID", CartId);
-                        cmd.Parameters.AddWithValue("@OrderTypeID", ordertypeid);
-                        cmd.Parameters.AddWithValue("@cart_order_login_type_id", cart_order_login_type_id);
-                        cmd.Parameters.AddWithValue("@cart_billing_login_type_id", cart_billing_login_type_id);
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@cart_id", CartId);
+                        cmd.Parameters.AddWithValue("@data_id", DataId);
                         cmd.Parameters.AddWithValue("@cart_order_data_id", cart_order_data_id);
                         cmd.Parameters.AddWithValue("@cart_billing_data_id", cart_billing_data_id);
-                        cmd.Parameters.AddWithValue("@cart_remarks", cart_remarks);
-                        cmd.Parameters.AddWithValue("@cart_delivery_date", cart_delivery_date);
-                        cmd.Parameters.AddWithValue("@oro_data_cnt", oro_data_cnt);
-                        cmd.Parameters.AddWithValue("@SourceType", "APP");
-                        cmd.Parameters.AddWithValue("@APP_ENV", "");
+                        cmd.Parameters.AddWithValue("@cart_order_login_type_id", cart_order_login_type_id);
+                        cmd.Parameters.AddWithValue("@cart_billing_login_type_id", cart_billing_login_type_id);
+                        cmd.Parameters.AddWithValue("@ordertypeid", ordertypeid);
+                        cmd.Parameters.AddWithValue("@cart_remarks", cart_remarks ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@cart_delivery_date", cart_delivery_date ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@itemall", itemall ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@devicetype", devicetype ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@devicename", devicename ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@appversion", appversion ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@consumer_form_id", consumer_form_id ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@datas", datasJson);
 
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+
+                        using (SqlDataReader dataReader = await cmd.ExecuteReaderAsync())
                         {
-                            DataSet ds = new DataSet();
-                            da.Fill(ds);
-
-                            if (ds.Tables.Count > 0)
+                            if (await dataReader.ReadAsync())
                             {
-                                if (ds.Tables[0].Rows.Count > 0)
-                                {
-                                    try
-                                    {
-                                        var firstRow = ds.Tables[0].Rows[0];
-                                        resstatus = firstRow["resstatus"] as int? ?? 0;
-                                        resstatuscode = firstRow["resstatuscode"] as int? ?? 200;
-                                        resmessage = firstRow["resmessage"] as string ?? string.Empty;
-                                        int returntype = firstRow["returntype"] as int? ?? 0;
+                                if (dataReader["success"] != DBNull.Value)
+                                    responseDetails.success = Convert.ToBoolean(dataReader["success"]);
 
-                                        if (resstatus == 1 && ds.Tables.Count > 1)
-                                        {
-                                            List<string> totalstoke = new List<string>();
-                                            List<int> available = new List<int>();
-                                            List<int> notAvailable = new List<int>();
-                                            List<string> notArray = new List<string>();
-                                            string CartSoliStkNoData;
-                                            int tmp_ItemId = 0, tmp_CartItemId = 0;
-
-                                            if (returntype == 1) { }
-                                            else
-                                            {
-                                                DataTable dt = new DataTable();
-                                                dt = ds.Tables[1].AsEnumerable()
-                                                    .Where(x => new[] { 4, 21, 22, 25 }.Contains(x.Field<int>("ItemCtgCommonID")))
-                                                    .CopyToDataTable();
-
-                                                for (int i = 0; i < dt.Rows.Count; i++)
-                                                {
-                                                    CartSoliStkNoData = dt.Rows[i]["CartSoliStkNoData"] as string ?? string.Empty;
-                                                    List<string> soliterStokeList = new List<string>(CartSoliStkNoData.Split(','));
-                                                    string wsdlUrl = "http://service.hkerp.co/HKE.WCFService.svc?singleWsdl";
-
-                                                    foreach (var soliterCheck in soliterStokeList)
-                                                    {
-                                                        totalstoke.Add(soliterCheck);
-
-                                                        var soapRequest = $@"
-                                                            <s:Envelope xmlns:s=""http://schemas.xmlsoap.org/soap/envelope/"">
-                                                                <s:Body>
-                                                                    <CheckStoneAvailability xmlns=""http://tempuri.org/"">
-                                                                        <CustomerID>{_customerID}</CustomerID>
-                                                                        <PacketNo>{soliterCheck}</PacketNo>
-                                                                    </CheckStoneAvailability>
-                                                                </s:Body>
-                                                            </s:Envelope>";
-
-                                                        // string responseXml = await SendSoapRequest(wsdlUrl, soapRequest);
-                                                        string responseXml = "";
-                                                        var soapResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<SoapResponse>(responseXml);
-                                                        if (soapResponse?.Data?[0]?.Status == "Available")
-                                                        {
-                                                            available.Add(1);
-                                                        }
-                                                        else
-                                                        {
-                                                            notArray.Add(soliterCheck);
-                                                            notAvailable.Add(1);
-                                                        }
-                                                    }
-                                                }
-
-                                                if (notAvailable.Count > 0 && notAvailable.Any())
-                                                {
-                                                    string tags = string.Join(", ", notAvailable);
-                                                    responseDetails.success = false;
-                                                    responseDetails.message = $"These diamond stocks are not available: {tags}";
-                                                    responseDetails.status = "200";
-                                                    return responseDetails;
-                                                }
-                                                else
-                                                {
-                                                    for (int i = 0; i < dt.Rows.Count; i++)
-                                                    {
-                                                        CartSoliStkNoData = dt.Rows[i]["CartSoliStkNoData"] != DBNull.Value ? Convert.ToString(dt.Rows[i]["CartSoliStkNoData"]) : string.Empty;
-                                                        tmp_CartItemId = dt.Rows[i]["CartItemID"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["CartItemID"]) : 0;
-                                                        tmp_ItemId = dt.Rows[i]["ItemID"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["ItemID"]) : 0;
-
-                                                        string apiUrl = $"https://service.hk.co/StockApprove?user={_customerID}&pkts={CartSoliStkNoData}&remark={tmp_CartItemId}";
-
-                                                        // Send HTTP Request
-                                                        //string response = await SendHttpRequest(apiUrl);
-                                                        string response = "";
-
-                                                        CartCheckoutNoAllotNewParamsPart2 cartcheckoutnoallotnewpart2_params = new CartCheckoutNoAllotNewParamsPart2();
-                                                        cartcheckoutnoallotnewpart2_params.cart_id = CartId;
-                                                        cartcheckoutnoallotnewpart2_params.data_id = DataId;
-                                                        cartcheckoutnoallotnewpart2_params.CartSoliStkNoData = CartSoliStkNoData;
-                                                        cartcheckoutnoallotnewpart2_params.DiaBookRespose = response;
-                                                        cartcheckoutnoallotnewpart2_params.item_id = tmp_ItemId;
-                                                        cartcheckoutnoallotnewpart2_params.cart_item_id = tmp_CartItemId;
-                                                        SaveDiamondBookServiceResponse(cartcheckoutnoallotnewpart2_params);
-                                                    }
-                                                }
-                                            }
-
-                                            int
-                                                tmpItemID = 0,
-                                                tmpCartItemID = 0,
-                                                tmpCartMstID = 0,
-                                                tmpCartQty = 0,
-                                                tmpItemCtgCommonID = 0,
-                                                tmpCartConfCommonID = 0,
-                                                tmpItemBrandCommonID = 0,
-                                                tmpItemGenderCommonID = 0;
-                                            decimal
-                                                tmpItemGrossWt = 0,
-                                                tmpItemMetalWt = 0,
-                                                tmpCartMRPrice = 0,
-                                                tmpCartPrice = 0,
-                                                tmpCartDPrice = 0,
-                                                tmpCartItemMetalWt = 0;
-                                            string
-                                                tmpItemPlainGold = "",
-                                                tmpMstType = "",
-                                                tmpisCOOInserted = "",
-                                                tmpDataItemInfo = "",
-                                                tmpItemIsSRP = "",
-                                                tmpItemIsMRP = "",
-                                                tmpitem_illumine = "";
-
-                                            for (int j = 0; j < ds.Tables[1].Rows.Count; j++)
-                                            {
-                                                var rowDetails = ds.Tables[1].Rows[j];
-                                                tmpItemID = rowDetails["ItemID"] != DBNull.Value ? Convert.ToInt32(rowDetails["ItemID"]) : 0;
-                                                tmpCartItemID = rowDetails["CartItemID"] != DBNull.Value ? Convert.ToInt32(rowDetails["CartItemID"]) : 0;
-                                                tmpCartMstID = rowDetails["CartMstID"] != DBNull.Value ? Convert.ToInt32(rowDetails["CartMstID"]) : 0;
-                                                tmpCartQty = rowDetails["CartQty"] != DBNull.Value ? Convert.ToInt32(rowDetails["CartQty"]) : 0;
-                                                tmpItemCtgCommonID = rowDetails["ItemCtgCommonID"] != DBNull.Value ? Convert.ToInt32(rowDetails["ItemCtgCommonID"]) : 0;
-                                                tmpCartConfCommonID = rowDetails["CartConfCommonID"] != DBNull.Value ? Convert.ToInt32(rowDetails["CartConfCommonID"]) : 0;
-                                                tmpItemBrandCommonID = rowDetails["ItemBrandCommonID"] != DBNull.Value ? Convert.ToInt32(rowDetails["ItemBrandCommonID"]) : 0;
-                                                tmpItemGenderCommonID = rowDetails["ItemGenderCommonID"] != DBNull.Value ? Convert.ToInt32(rowDetails["ItemGenderCommonID"]) : 0;
-
-                                                tmpItemGrossWt = rowDetails["ItemGrossWt"] != DBNull.Value ? Convert.ToDecimal(rowDetails["ItemGrossWt"]) : 0;
-                                                tmpItemMetalWt = rowDetails["ItemMetalWt"] != DBNull.Value ? Convert.ToDecimal(rowDetails["ItemMetalWt"]) : 0;
-
-                                                tmpCartMRPrice = rowDetails["CartMRPrice"] != DBNull.Value ? Convert.ToDecimal(rowDetails["CartMRPrice"]) : 0;
-                                                tmpCartPrice = rowDetails["CartPrice"] != DBNull.Value ? Convert.ToDecimal(rowDetails["CartPrice"]) : 0;
-                                                tmpCartDPrice = rowDetails["CartDPrice"] != DBNull.Value ? Convert.ToDecimal(rowDetails["CartDPrice"]) : 0;
-                                                tmpCartItemMetalWt = rowDetails["CartItemMetalWt"] != DBNull.Value ? Convert.ToDecimal(rowDetails["CartItemMetalWt"]) : 0;
-
-                                                tmpItemPlainGold = rowDetails["ItemPlainGold"] != DBNull.Value ? Convert.ToString(rowDetails["ItemPlainGold"]) : string.Empty;
-                                                tmpMstType = rowDetails["MstType"] != DBNull.Value ? Convert.ToString(rowDetails["MstType"]) : string.Empty;
-                                                tmpisCOOInserted = rowDetails["isCOOInserted"] != DBNull.Value ? Convert.ToString(rowDetails["isCOOInserted"]) : string.Empty;
-                                                tmpDataItemInfo = rowDetails["DataItemInfo"] != DBNull.Value ? Convert.ToString(rowDetails["DataItemInfo"]) : string.Empty;
-                                                tmpItemIsSRP = rowDetails["ItemIsSRP"] != DBNull.Value ? Convert.ToString(rowDetails["ItemIsSRP"]) : string.Empty;
-                                                tmpitem_illumine = rowDetails["item_illumine"] != DBNull.Value ? Convert.ToString(rowDetails["item_illumine"]) : string.Empty;
-
-                                                IList<CartItemPriceDetailListing> cartItemPriceDetailList_gold = new List<CartItemPriceDetailListing>();
-                                                IList<CartItemPriceDetailListing> cartItemPriceDetailList_gold_requiredweight = new List<CartItemPriceDetailListing>();
-                                                CartItemPriceDetailListingParams cartitempricedetaillistparams = new CartItemPriceDetailListingParams();
-                                                CARTCHECKOUTNOALLOTNEW_UPDATE_CARTMSTITEM_PRICESParams cartcheckouotallotnew_update_cartmstitem_prices_params = new CARTCHECKOUTNOALLOTNEW_UPDATE_CARTMSTITEM_PRICESParams();
-                                                ItemDynamicPriceCartParams itemdynamicpricecart_params = new ItemDynamicPriceCartParams();
-
-                                                string
-                                                    design_kt = "",
-                                                    making_per_gram = "",
-                                                    labour = "";
-                                                decimal
-                                                    gold_price = 0,
-                                                    total_goldvalue = 0,
-                                                    finalGoldValue = 0,
-                                                    total_labour = 0,
-                                                    gst_price = 0,
-                                                    item_price = 0,
-                                                    total_price = 0,
-                                                    dp_final_price = 0,
-                                                    dp_maring_percent = 0,
-                                                    gold_wt = 0,
-                                                    diamond_price = 0,
-                                                    platinum_wt = 0,
-                                                    platinum = 0,
-                                                    platinum_price = 0;
-
-                                                // order typeid not in (6596, 2499, 20397)
-                                                if (returntype == 1)
-                                                {
-                                                    if (tmpMstType == "F")
-                                                    {
-                                                        cartitempricedetaillistparams.DataID = cart_billing_data_id;
-                                                        cartitempricedetaillistparams.ItemID = tmpItemID;
-                                                        cartitempricedetaillistparams.IsWeightCalcRequired = 0;
-                                                        cartItemPriceDetailList_gold = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
-
-                                                        if (cartItemPriceDetailList_gold.Count > 0)
-                                                        {
-                                                            gold_price = cartItemPriceDetailList_gold[0].pure_gold;
-                                                            making_per_gram = cartItemPriceDetailList_gold[0].labour;
-                                                            total_goldvalue = cartItemPriceDetailList_gold[0].gold_ktprice;
-                                                            total_labour = cartItemPriceDetailList_gold[0].labour_price;
-                                                            finalGoldValue = cartItemPriceDetailList_gold[0].gold_price;
-                                                            item_price = cartItemPriceDetailList_gold[0].item_price;
-                                                            total_price = cartItemPriceDetailList_gold[0].total_price;
-                                                            design_kt = cartItemPriceDetailList_gold[0].design_kt;
-                                                            labour = cartItemPriceDetailList_gold[0].labour;
-                                                            gst_price = cartItemPriceDetailList_gold[0].GST;
-                                                            dp_final_price = cartItemPriceDetailList_gold[0].dp_final_price;
-                                                            gold_wt = cartItemPriceDetailList_gold[0].gold_wt;
-                                                            diamond_price = cartItemPriceDetailList_gold[0].diamond_price;
-                                                            platinum_wt = cartItemPriceDetailList_gold[0].platinum_wt;
-                                                            platinum = cartItemPriceDetailList_gold[0].platinum;
-                                                            platinum_price = cartItemPriceDetailList_gold[0].platinum_price;
-                                                        }
-
-                                                        if (tmpItemPlainGold == "Y")
-                                                        {
-                                                            GoldDynamicPriceCartParams golddynamicpricecartparams = new GoldDynamicPriceCartParams();
-                                                            golddynamicpricecartparams.DataId = cart_billing_data_id;
-                                                            golddynamicpricecartparams.ItemId = tmpItemID;
-                                                            golddynamicpricecartparams.CartItemId = tmpCartItemID;
-                                                            golddynamicpricecartparams.CartMstId = tmpCartMstID;
-                                                            golddynamicpricecartparams.CartQty = tmpCartQty;
-                                                            golddynamicpricecartparams.gold_price = gold_price;
-                                                            golddynamicpricecartparams.making_per_gram = making_per_gram;
-                                                            golddynamicpricecartparams.total_goldvalue = total_goldvalue;
-                                                            golddynamicpricecartparams.total_labour = total_labour;
-                                                            golddynamicpricecartparams.finalGoldValue = finalGoldValue;
-                                                            golddynamicpricecartparams.item_price = item_price;
-                                                            golddynamicpricecartparams.total_price = total_price;
-                                                            golddynamicpricecartparams.gst_price = gst_price;
-                                                            golddynamicpricecartparams.dp_final_price = dp_final_price;
-                                                            golddynamicpricecartparams.design_kt = design_kt;
-                                                            golddynamicpricecartparams.labour = labour;
-                                                            GoldDynamicPriceCart(golddynamicpricecartparams);
-                                                        }
-
-                                                        if (tmpItemIsMRP == "Y" && tmpitem_illumine == "N" && tmpisCOOInserted == "N")
-                                                        {
-                                                            itemdynamicpricecart_params.DataID = cart_billing_data_id;
-                                                            itemdynamicpricecart_params.ItemID = tmpItemID;
-                                                            itemdynamicpricecart_params.CartID = CartId;
-                                                            itemdynamicpricecart_params.CartItemID = tmpCartItemID;
-                                                            itemdynamicpricecart_params.diamond_price = diamond_price;
-                                                            itemdynamicpricecart_params.gold_wt = gold_wt;
-                                                            itemdynamicpricecart_params.pure_gold = gold_price;
-                                                            itemdynamicpricecart_params.gold_ktprice = total_goldvalue;
-                                                            itemdynamicpricecart_params.gold_price = finalGoldValue;
-                                                            itemdynamicpricecart_params.platinum_wt = platinum_wt;
-                                                            itemdynamicpricecart_params.platinum = platinum;
-                                                            itemdynamicpricecart_params.platinum_price = platinum_price;
-                                                            itemdynamicpricecart_params.labour_price = total_labour;
-                                                            objHelpers.ItemDynamicPriceCart(itemdynamicpricecart_params);
-
-                                                            cartitempricedetaillistparams.DataID = cart_billing_data_id;
-                                                            cartitempricedetaillistparams.ItemID = tmpItemID;
-                                                            cartitempricedetaillistparams.SizeID = tmpCartConfCommonID;
-                                                            cartitempricedetaillistparams.CategoryID = tmpItemCtgCommonID;
-                                                            cartitempricedetaillistparams.ItemBrandCommonID = tmpItemBrandCommonID;
-                                                            cartitempricedetaillistparams.ItemGrossWt = tmpItemGrossWt;
-                                                            cartitempricedetaillistparams.ItemMetalWt = tmpItemMetalWt;
-                                                            cartitempricedetaillistparams.ItemGenderCommonID = tmpItemGenderCommonID;
-                                                            cartitempricedetaillistparams.IsWeightCalcRequired = 1;
-
-                                                            cartItemPriceDetailList_gold_requiredweight = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
-
-                                                            if (cartItemPriceDetailList_gold_requiredweight.Count > 0)
-                                                            {
-                                                                total_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].total_price, 0);
-                                                                dp_final_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].dp_final_price, 0);
-                                                                dp_maring_percent = cartItemPriceDetailList_gold_requiredweight[0].dp_maring_percent;
-
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 3;
-                                                                SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
-                                                            }
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        cartitempricedetaillistparams.DataID = cart_billing_data_id;
-                                                        cartitempricedetaillistparams.ItemID = tmpItemID;
-                                                        cartitempricedetaillistparams.IsWeightCalcRequired = 0;
-                                                        cartItemPriceDetailList_gold = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
-
-                                                        if (cartItemPriceDetailList_gold.Count > 0)
-                                                        {
-                                                            total_price = Math.Round(cartItemPriceDetailList_gold[0].total_price, 0);
-                                                            dp_final_price = Math.Round(cartItemPriceDetailList_gold[0].dp_final_price, 0);
-                                                            dp_maring_percent = cartItemPriceDetailList_gold[0].dp_maring_percent;
-                                                            diamond_price = cartItemPriceDetailList_gold[0].diamond_price;
-                                                            gold_wt = cartItemPriceDetailList_gold[0].gold_wt;
-                                                            gold_price = cartItemPriceDetailList_gold[0].pure_gold;
-                                                            total_goldvalue = cartItemPriceDetailList_gold[0].gold_ktprice;
-                                                            finalGoldValue = cartItemPriceDetailList_gold[0].gold_price;
-                                                            platinum_wt = cartItemPriceDetailList_gold[0].platinum_wt;
-                                                            platinum = cartItemPriceDetailList_gold[0].platinum;
-                                                            platinum_price = cartItemPriceDetailList_gold[0].platinum_price;
-                                                            total_labour = cartItemPriceDetailList_gold[0].labour_price;
-                                                        }
-
-                                                        if (tmpItemPlainGold == "Y" && tmpisCOOInserted == "N")
-                                                        {
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 2;
-                                                            SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
-                                                        }
-                                                        else
-                                                        {
-                                                            if (tmpDataItemInfo == "Y" && tmpItemIsSRP == "Y")
-                                                            {
-                                                                tmpItemIsMRP = "Y";
-                                                            }
-                                                            if (((tmpItemIsMRP == "Y" && tmpisCOOInserted == "N") || tmpItemIsSRP == "Y") && tmpitem_illumine == "N")
-                                                            {
-                                                                itemdynamicpricecart_params.DataID = cart_billing_data_id;
-                                                                itemdynamicpricecart_params.ItemID = tmpItemID;
-                                                                itemdynamicpricecart_params.CartID = CartId;
-                                                                itemdynamicpricecart_params.CartItemID = tmpCartItemID;
-                                                                itemdynamicpricecart_params.diamond_price = diamond_price;
-                                                                itemdynamicpricecart_params.gold_wt = gold_wt;
-                                                                itemdynamicpricecart_params.pure_gold = gold_price;
-                                                                itemdynamicpricecart_params.gold_ktprice = total_goldvalue;
-                                                                itemdynamicpricecart_params.gold_price = finalGoldValue;
-                                                                itemdynamicpricecart_params.platinum_wt = platinum_wt;
-                                                                itemdynamicpricecart_params.platinum = platinum;
-                                                                itemdynamicpricecart_params.platinum_price = platinum_price;
-                                                                itemdynamicpricecart_params.labour_price = total_labour;
-                                                                objHelpers.ItemDynamicPriceCart(itemdynamicpricecart_params);
-
-                                                                cartitempricedetaillistparams.DataID = cart_billing_data_id;
-                                                                cartitempricedetaillistparams.ItemID = tmpItemID;
-                                                                cartitempricedetaillistparams.SizeID = tmpCartConfCommonID;
-                                                                cartitempricedetaillistparams.CategoryID = tmpItemCtgCommonID;
-                                                                cartitempricedetaillistparams.ItemBrandCommonID = tmpItemBrandCommonID;
-                                                                cartitempricedetaillistparams.ItemGrossWt = tmpItemGrossWt;
-                                                                cartitempricedetaillistparams.ItemMetalWt = tmpItemMetalWt;
-                                                                cartitempricedetaillistparams.ItemGenderCommonID = tmpItemGenderCommonID;
-                                                                cartitempricedetaillistparams.IsWeightCalcRequired = 1;
-
-                                                                cartItemPriceDetailList_gold_requiredweight = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
-                                                                if (cartItemPriceDetailList_gold_requiredweight.Count > 0)
-                                                                {
-                                                                    total_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].total_price, 0);
-                                                                    dp_final_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].dp_final_price, 0);
-                                                                    dp_maring_percent = cartItemPriceDetailList_gold_requiredweight[0].dp_maring_percent;
-                                                                }
-
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 3;
-                                                                SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
-
-                                                            }
-                                                            else
-                                                            {
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = tmpCartMRPrice;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = tmpCartPrice;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = tmpCartDPrice;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemMetalWt = tmpCartItemMetalWt;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 4;
-                                                                SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    // order typeid in (6596, 2499, 20397)
-                                                    cartitempricedetaillistparams.DataID = cart_billing_data_id;
-                                                    cartitempricedetaillistparams.ItemID = tmpItemID;
-                                                    cartitempricedetaillistparams.IsWeightCalcRequired = 0;
-                                                    cartItemPriceDetailList_gold = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
-
-                                                    if (cartItemPriceDetailList_gold.Count > 0)
-                                                    {
-                                                        gold_price = cartItemPriceDetailList_gold[0].pure_gold;
-                                                        making_per_gram = cartItemPriceDetailList_gold[0].labour;
-                                                        total_goldvalue = cartItemPriceDetailList_gold[0].gold_ktprice;
-                                                        total_labour = cartItemPriceDetailList_gold[0].labour_price;
-                                                        finalGoldValue = cartItemPriceDetailList_gold[0].gold_price;
-                                                        item_price = cartItemPriceDetailList_gold[0].item_price;
-                                                        total_price = cartItemPriceDetailList_gold[0].total_price;
-                                                        design_kt = cartItemPriceDetailList_gold[0].design_kt;
-                                                        labour = cartItemPriceDetailList_gold[0].labour;
-                                                        gst_price = cartItemPriceDetailList_gold[0].GST;
-                                                        dp_final_price = cartItemPriceDetailList_gold[0].dp_final_price;
-                                                        gold_wt = cartItemPriceDetailList_gold[0].gold_wt;
-                                                        diamond_price = cartItemPriceDetailList_gold[0].diamond_price;
-                                                        platinum_wt = cartItemPriceDetailList_gold[0].platinum_wt;
-                                                        platinum = cartItemPriceDetailList_gold[0].platinum;
-                                                        platinum_price = cartItemPriceDetailList_gold[0].platinum_price;
-                                                    }
-
-                                                    // order typeid in (6596, 2499, 20397)
-                                                    if (tmpItemPlainGold == "Y")
-                                                    {
-                                                        GoldDynamicPriceCartParams golddynamicpricecartparams = new GoldDynamicPriceCartParams();
-                                                        golddynamicpricecartparams.DataId = cart_billing_data_id;
-                                                        golddynamicpricecartparams.ItemId = tmpItemID;
-                                                        golddynamicpricecartparams.CartItemId = tmpCartItemID;
-                                                        golddynamicpricecartparams.CartMstId = tmpCartMstID;
-                                                        golddynamicpricecartparams.CartQty = tmpCartQty;
-                                                        golddynamicpricecartparams.gold_price = gold_price;
-                                                        golddynamicpricecartparams.making_per_gram = making_per_gram;
-                                                        golddynamicpricecartparams.total_goldvalue = total_goldvalue;
-                                                        golddynamicpricecartparams.total_labour = total_labour;
-                                                        golddynamicpricecartparams.finalGoldValue = finalGoldValue;
-                                                        golddynamicpricecartparams.item_price = item_price;
-                                                        golddynamicpricecartparams.total_price = total_price;
-                                                        golddynamicpricecartparams.gst_price = gst_price;
-                                                        golddynamicpricecartparams.dp_final_price = dp_final_price;
-                                                        golddynamicpricecartparams.design_kt = design_kt;
-                                                        golddynamicpricecartparams.labour = labour;
-                                                        GoldDynamicPriceCart(golddynamicpricecartparams);
-                                                    }
-
-                                                    if (tmpMstType == "F" && tmpItemPlainGold == "Y" && tmpisCOOInserted == "N")
-                                                    {
-                                                        cartitempricedetaillistparams.DataID = cart_billing_data_id;
-                                                        cartitempricedetaillistparams.ItemID = tmpItemID;
-                                                        cartitempricedetaillistparams.SizeID = tmpCartConfCommonID;
-                                                        cartitempricedetaillistparams.CategoryID = tmpItemCtgCommonID;
-                                                        cartitempricedetaillistparams.ItemBrandCommonID = tmpItemBrandCommonID;
-                                                        cartitempricedetaillistparams.ItemGrossWt = tmpItemGrossWt;
-                                                        cartitempricedetaillistparams.ItemMetalWt = tmpItemMetalWt;
-                                                        cartitempricedetaillistparams.ItemGenderCommonID = tmpItemGenderCommonID;
-                                                        cartitempricedetaillistparams.IsWeightCalcRequired = 1;
-
-                                                        cartItemPriceDetailList_gold_requiredweight = objHelpers.GetCartItemPriceDetails(cartitempricedetaillistparams);
-                                                        if (cartItemPriceDetailList_gold_requiredweight.Count > 0)
-                                                        {
-                                                            total_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].total_price, 0);
-                                                            dp_final_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].dp_final_price, 0);
-                                                            dp_maring_percent = cartItemPriceDetailList_gold_requiredweight[0].dp_maring_percent;
-
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 1;
-                                                            SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
-                                                        }
-                                                    }
-                                                    else if (tmpItemPlainGold == "Y" && tmpisCOOInserted == "N")
-                                                    {
-                                                        if (cartItemPriceDetailList_gold.Count > 0)
-                                                        {
-                                                            total_price = Math.Round(cartItemPriceDetailList_gold[0].total_price, 0);
-                                                            dp_final_price = Math.Round(cartItemPriceDetailList_gold[0].dp_final_price, 0);
-                                                            dp_maring_percent = cartItemPriceDetailList_gold[0].dp_maring_percent;
-
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 2;
-                                                            SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        if (tmpDataItemInfo == "Y" && tmpItemIsSRP == "Y")
-                                                        {
-                                                            tmpItemIsMRP = "Y";
-                                                        }
-                                                        if (((tmpItemIsMRP == "Y" && tmpisCOOInserted == "N") || tmpItemIsSRP == "Y") && tmpitem_illumine == "N")
-                                                        {
-                                                            itemdynamicpricecart_params.DataID = cart_billing_data_id;
-                                                            itemdynamicpricecart_params.ItemID = tmpItemID;
-                                                            itemdynamicpricecart_params.CartID = CartId;
-                                                            itemdynamicpricecart_params.CartItemID = tmpCartItemID;
-                                                            itemdynamicpricecart_params.diamond_price = diamond_price;
-                                                            itemdynamicpricecart_params.gold_wt = gold_wt;
-                                                            itemdynamicpricecart_params.pure_gold = gold_price;
-                                                            itemdynamicpricecart_params.gold_ktprice = total_goldvalue;
-                                                            itemdynamicpricecart_params.gold_price = finalGoldValue;
-                                                            itemdynamicpricecart_params.platinum_wt = platinum_wt;
-                                                            itemdynamicpricecart_params.platinum = platinum;
-                                                            itemdynamicpricecart_params.platinum_price = platinum_price;
-                                                            itemdynamicpricecart_params.labour_price = total_labour;
-                                                            objHelpers.ItemDynamicPriceCart(itemdynamicpricecart_params);
-
-                                                            if (cartItemPriceDetailList_gold_requiredweight.Count > 0)
-                                                            {
-                                                                total_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].total_price, 0);
-                                                                dp_final_price = Math.Round(cartItemPriceDetailList_gold_requiredweight[0].dp_final_price, 0);
-                                                                dp_maring_percent = cartItemPriceDetailList_gold_requiredweight[0].dp_maring_percent;
-
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = total_price;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = total_price;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = dp_final_price;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.FranMarginCurDP = dp_maring_percent;
-                                                                cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 3;
-                                                                SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemID = tmpCartItemID;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartMRPrice = tmpCartMRPrice;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartPrice = tmpCartPrice;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartDPrice = tmpCartDPrice;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.CartItemMetalWt = tmpCartItemMetalWt;
-                                                            cartcheckouotallotnew_update_cartmstitem_prices_params.FlagValue = 4;
-                                                            SaveCartMstItemPrices(cartcheckouotallotnew_update_cartmstitem_prices_params);
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            CartCheckoutNoAllotNewSaveNewCartMstParams cartcheckoutnoallotnew_savenew_cartmst_params = new CartCheckoutNoAllotNewSaveNewCartMstParams();
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.DataID = DataId;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.CartID = CartId;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.OrderTypeID = ordertypeid;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.cart_order_login_type_id = cart_order_login_type_id;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.cart_billing_login_type_id = cart_billing_login_type_id;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.cart_order_data_id = cart_order_data_id;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.cart_billing_data_id = cart_billing_data_id;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.cart_remarks = cart_remarks;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.cart_delivery_date = cart_delivery_date;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.itemall = itemall;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.SourceType = "APP";
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.devicetype = "WEB";
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.devicename = "";
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.appversion = "";
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.APP_ENV = APP_ENV;
-
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.oroseven_cnt = oroSeven.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.orosevenString = string.Join(",", oroSeven);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.orofifty_cnt = oroFifteen.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.orofiftyString = string.Join(",", oroFive);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.orohours_cnt = oroHours.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.orohoursString = string.Join(",", oroHours);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.orotwentyone_cnt = oroTwentyOne.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.orotwentyoneString = string.Join(",", oroTwentyOne);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.orofive_cnt = oroFive.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.orofiveString = string.Join(",", oroFive);
-
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnaseven_cnt = kisnaSeven.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnasevenString = string.Join(",", kisnaSeven);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnafifty_cnt = kisnaFifty.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnafiftyString = string.Join(",", kisnaFifty);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnahours_cnt = kisnaHours.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnahoursString = string.Join(",", kisnaHours);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnatwentyone_cnt = kisnaTwentyone.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnatwentyoneString = string.Join(",", kisnaTwentyone);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnafive_cnt = kisnaFive.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kisnafiveString = string.Join(",", kisnaFive);
-
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kgseven_cnt = kgSeven.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kgsevenString = string.Join(",", kgSeven);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kgfifty_cnt = kgFifty.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kgfiftyString = string.Join(",", kgFifty);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kghours_cnt = kgHours.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kghoursString = string.Join(",", kgHours);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kgtwentyone_cnt = kgTwentyOne.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kgtwentyoneString = string.Join(",", kgTwentyOne);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kgfive_cnt = kgFive.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.kgfiveString = string.Join(",", kgFive);
-
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silverseven_cnt = silverSeven.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silversevenString = string.Join(",", silverSeven);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silverfifty_cnt = silverFifteen.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silverfiftyString = string.Join(",", silverFifteen);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silverhours_cnt = silverHours.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silverhoursString = string.Join(",", silverHours);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silvertwentyone_cnt = silverTwentyOne.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silvertwentyoneString = string.Join(",", silverTwentyOne);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silverfive_cnt = silverFive.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.silverfiveString = string.Join(",", silverFive);
-
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illumineseven_cnt = illumineSeven.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illuminesevenString = string.Join(",", illumineSeven);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illuminefifty_cnt = illumineFifteen.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illuminefiftyString = string.Join(",", illumineFifteen);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illuminehours_cnt = illumineHours.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illuminehoursString = string.Join(",", illumineHours);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illuminetwentyone_cnt = illumineTwentyOne.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illuminetwentyoneString = string.Join(",", illumineTwentyOne);
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illuminefive_cnt = illumineFive.Count;
-                                            cartcheckoutnoallotnew_savenew_cartmst_params.illuminefiveString = string.Join(",", illumineFive);
-
-                                            var resNoAllotResponse = new NoAllotResponse();
-                                            resNoAllotResponse = SaveCartCheckoutNoAllotNew_CartMstNew(cartcheckoutnoallotnew_savenew_cartmst_params);
-                                            resstatus = resNoAllotResponse.status;
-                                            resstatuscode = resNoAllotResponse.status_code;
-                                            resmessage = resNoAllotResponse.message;
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        resstatus = 0;
-                                        resstatuscode = 200;
-                                        resmessage = $"SQL error: {ex.Message}";
-                                    }
-                                }
+                                if (dataReader["message"] != DBNull.Value)
+                                    responseDetails.message = dataReader["message"].ToString();
+                            }
+                            else
+                            {
+                                responseDetails.success = false;
+                                responseDetails.message = "No data found.";
+                                responseDetails.status = "200";
                             }
                         }
                     }
                 }
 
-                responseDetails.success = (resstatus == 1 ? true : false);
-                responseDetails.message = resmessage;
-                responseDetails.status = resstatuscode.ToString();
                 return responseDetails;
             }
-            catch (SqlException sqlEx)
+            catch (Exception)
             {
-                //return BadRequest(sqlEx.Message);
+                // Log exception
                 responseDetails.success = false;
-                responseDetails.message = $"SQL error: {sqlEx.Message}";
-                responseDetails.status = "400";
+                responseDetails.message = "An error occurred during checkout.";
+                responseDetails.status = "500";
                 return responseDetails;
             }
+        }
+
+        public async Task<(bool success, string message)> CheckSolitaireDiamondAvailability(int cart_id, int data_id)
+        {
+            var totalstoke = new List<string>();
+            const string ILLUMINE_COLLECTION = "20169";
+            var objHelpers = new CommonHelpers();
+
+            var result = new StockCheckResult
+            {
+                AvailableCount = 0,
+                NotAvailableCount = 0,
+                NotAvailablePacketNos = new List<string>()
+            };
+
+            try
+            {
+                var soliter_diamond = await objHelpers.GetSoliterDiamondAsync(cart_id, ILLUMINE_COLLECTION);
+                if (soliter_diamond?.Any() == true)
+                {
+                    foreach (var item in soliter_diamond)
+                    {
+                        if (item.ItemSoliterSts == "Y" || item.item_illumine == "Y")
+                        {
+                            var validCategories = new[] { 4, 21, 22, 25, 20748, 27991, 2405 };
+                            if (!validCategories.Contains(item.ItemCtgCommonID)) continue;
+
+                            int item_id = item.ItemID;
+                            int cart_item_id = item.CartItemID;
+
+                            SaveSolitaireStatus(new CartCheckoutNoAllotWebSaveSolitaireStatusParams
+                            {
+                                DataID = data_id,
+                                CartID = cart_id,
+                                CartItemID = cart_item_id,
+                                Stage = "Solitaire Item Available",
+                                SourceType = "APP"
+                            });
+
+                            // === Check Stock ===
+                            var soliter_stoke = await objHelpers.GetSolitaireStockAsync(cart_id, item_id, cart_item_id);
+                            if (soliter_stoke?.Any() == true)
+                            {
+                                foreach (var stock in soliter_stoke)
+                                {
+                                    if (stock.isAvailableStk == "N")
+                                    {
+                                        var soapXml = await SoapHelper.CheckStoneAvailabilityAsync(stock.CartSoliStkNo);
+                                        var res_result = SoapHelper.ParseSoapResponse(soapXml);
+
+                                        if (res_result?.Data?.Length > 0 && res_result.Data[0].Status == "Available")
+                                            result.AvailableCount++;
+                                        else
+                                        {
+                                            result.NotAvailablePacketNos.Add(stock.CartSoliStkNo);
+                                            result.NotAvailableCount++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        bool isFree = await objHelpers.IsStoneFreeAsync(stock.CartSoliStkNo);
+                                        if (isFree)
+                                            result.AvailableCount++;
+                                        else
+                                        {
+                                            result.NotAvailablePacketNos.Add(stock.CartSoliStkNo);
+                                            result.NotAvailableCount++;
+                                        }
+                                    }
+                                    totalstoke.Add(stock.CartSoliStkNo);
+                                }
+
+                                var id_data = string.Join(",", totalstoke);
+                                SaveSolitaireStatus(new CartCheckoutNoAllotWebSaveSolitaireStatusParams
+                                {
+                                    DataID = data_id,
+                                    CartID = cart_id,
+                                    CartItemID = cart_item_id,
+                                    Stage = "Check Diamond Available",
+                                    DiaStkNo = id_data,
+                                    SourceType = "APP"
+                                });
+                            }
+                        }
+                    }
+                }
+
+                // === 2. If any not available ? return error ===
+                if (result.NotAvailableCount > 0)
+                {
+                    var tags = string.Join(", ", result.NotAvailablePacketNos);
+                    return (false, $"This Diamond stoke are not available {tags}");
+                }
+                else
+                {
+                    if (soliter_diamond?.Any() == true)
+                    {
+                        foreach (var item in soliter_diamond)
+                        {
+                            if (item.ItemSoliterSts == "Y" && item.item_illumine == "Y")
+                            {
+                                var allowedCategories = new[] { 4, 21, 22, 25, 20748, 27991, 2405 };
+                                if (!allowedCategories.Contains(item.ItemCtgCommonID)) continue;
+
+                                int item_id_local = item.ItemID;
+                                int cart_item_id_local = item.CartItemID;
+                                string remark = cart_item_id_local.ToString();
+
+                                var (goldValue, dollarValue) = await objHelpers.GetGoldDollarValuesAsync();
+
+                                var soliter_stoke = await objHelpers.GetSolitaireStockAsync(cart_id, item_id_local, cart_item_id_local);
+                                var needApprove = new List<string>();
+                                var alreadyAvailable = new List<string>();
+
+                                if (soliter_stoke?.Any() == true)
+                                {
+                                    foreach (var s in soliter_stoke)
+                                    {
+                                        if (s.isAvailableStk == "N")
+                                            needApprove.Add(s.CartSoliStkNo);
+                                        else
+                                            alreadyAvailable.Add(s.CartSoliStkNo);
+                                    }
+                                }
+
+                                string? apiResponse = null;
+                                string? bookedIds = null;
+
+                                if (needApprove.Any())
+                                {
+                                    var ids = string.Join(",", needApprove);
+                                    var soapHelper = new SoapHelper();
+                                    apiResponse = await soapHelper.CallStockApproveAsync(ids, remark);
+                                    bookedIds = ids;
+                                }
+
+                                if (alreadyAvailable.Any())
+                                {
+                                    await objHelpers.BookAvailableStonesAsync(alreadyAvailable);
+                                    bookedIds = string.Join(",", alreadyAvailable);
+                                }
+
+                                SaveDiamondBookServiceResponse(new CartCheckoutNoAllotNewParamsPart2
+                                {
+                                    cart_id = cart_id,
+                                    data_id = data_id,
+                                    CartSoliStkNoData = bookedIds!,
+                                    DiaBookRespose = apiResponse!,
+                                    item_id = item_id_local,
+                                    cart_item_id = cart_item_id_local
+                                });
+
+                                SaveSolitaireStatus(new CartCheckoutNoAllotWebSaveSolitaireStatusParams
+                                {
+                                    DataID = data_id,
+                                    CartID = cart_id,
+                                    CartItemID = cart_item_id_local,
+                                    Stage = "Book Diamond Available",
+                                    DiaStkNo = bookedIds!,
+                                    SourceType = "APP"
+                                });
+                            }
+
+                        }
+                    }
+                }
+                return (true, "All diamonds are available and booked.");
+            }
+            catch (Exception)
+            {
+                return (false, "An error occurred while checking diamond availability.");
+            }
+        }
+
+        private List<string> FilterList(List<string> list)
+        {
+            return list?
+                .Where(x => int.TryParse(x, out _))
+                .Select(x => x.Trim())
+                .Where(x => !string.IsNullOrEmpty(x))
+                .ToList() ?? new List<string>();
         }
 
         public async Task<ResponseDetails> CartItemDelete(CartItemDeleteParams cartitemdelete_params)

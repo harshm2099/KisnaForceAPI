@@ -166,6 +166,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
         //CART
         public const string DIAMOND_CERTIFICATES_PRICE_FILTER_DIST = "Diamond_Certificates_price_filter_dist";
         public const string CARTCHECKOUTALLOTNEW = "usp_cartCheckOutAllotNew";
+        public const string CARTCHECKOUTNOALLOTNEW = "usp_cartCheckOutNoAllotNew";
         //
 
         //SOLI CATE
@@ -290,7 +291,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
         public const string CUSTOMERMARGIN_ADDUPDATE = "CUSTOMERMARGIN_ADDUPDATE";
         //public const string CARTCHECKOUTALLOTNEW = "CARTCHECKOUTALLOTNEW";
         public const string GOLDDYNAMICPRICECART = "GOLDDYNAMICPRICECART";
-        public const string CARTCHECKOUTNOALLOTNEW = "CARTCHECKOUTNOALLOTNEW";
+        //public const string CARTCHECKOUTNOALLOTNEW = "CARTCHECKOUTNOALLOTNEW";
         public const string CARTCHECKOUTNOALLOTNEW_SAVEDIABOOKRESPONSE = "CARTCHECKOUTNOALLOTNEW_SAVEDIABOOKRESPONSE";
         public const string CARTCHECKOUTNOALLOTNEW_SAVECARTMST = "CARTCHECKOUTNOALLOTNEW_SAVECARTMST";
         public const string CARTCHECKOUTNOALLOTNEW_UPDATE_CARTMSTITEM_PRICES = "CARTCHECKOUTNOALLOTNEW_UPDATE_CARTMSTITEM_PRICES";
