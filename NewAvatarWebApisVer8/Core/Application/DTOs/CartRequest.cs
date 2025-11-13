@@ -420,7 +420,7 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public string SourceType { get; set; }
             public brand_data data { get; set; }
             public int? consumer_form_id { get; set; }
-    }
+        }
 
         public class CartCheckoutNoAllotNew
         {
@@ -431,10 +431,12 @@ namespace NewAvatarWebApis.Core.Application.DTOs
         {
             public int cart_id { get; set; }
             public int data_id { get; set; }
-            public string CartSoliStkNoData { get; set; }
-            public string DiaBookRespose { get; set; }
+            public string CartSoliStkNoData { get; set; } = string.Empty;
+            public string DiaBookRespose { get; set; } = string.Empty;
             public int item_id { get; set; }
             public int cart_item_id { get; set; }
+            public decimal? GoldValue { get; set; }
+            public decimal? DollarValue { get; set; }
         }
 
         public class CARTCHECKOUTNOALLOTNEW_UPDATE_CARTMSTITEM_PRICESParams

@@ -4210,8 +4210,11 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                     CartSoliStkNoData = bookedIds!,
                                     DiaBookRespose = apiResponse!,
                                     item_id = item_id_local,
-                                    cart_item_id = cart_item_id_local
+                                    cart_item_id = cart_item_id_local,
+                                    GoldValue = Convert.ToDecimal(goldValue),
+                                    DollarValue = Convert.ToDecimal(dollarValue)
                                 });
+
 
                                 SaveSolitaireStatus(new CartCheckoutNoAllotWebSaveSolitaireStatusParams
                                 {
