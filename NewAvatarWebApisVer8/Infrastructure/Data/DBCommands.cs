@@ -122,6 +122,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
         public const string PopularItems = "usp_PopularItems";
         public const string PopularItemsFilter = "usp_PopularItemFilter";
         public const string PieceVerify = "usp_PieceVerify";
+        public const string PieceVerifyExcel = "usp_PieceVerifyExcel";
         public const string CappingItemList = "usp_CappingItemList";
         public const string TopRecommandedItems = "usp_TopRecommendedItems";
         public const string ItemViewList = "usp_ItemList";

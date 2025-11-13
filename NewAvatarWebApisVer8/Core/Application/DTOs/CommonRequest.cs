@@ -433,6 +433,14 @@ namespace NewAvatarWebApis.Models
         public string? DataLoginType { get; set; }
     }
 
+    public class PieceVerifyExcelRequest
+    {
+        public string? DataId { get; set; }
+        public string? DataLoginType { get; set; }
+        public string? IgiNumbers { get; set; }
+        public string? BagNumbers { get; set; }
+    }
+
     public class TopRecommandedItemsRequest
     {
         public string? DataId { get; set; }

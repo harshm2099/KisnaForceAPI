@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Exchange.WebServices.Data;
+using Microsoft.Extensions.Configuration;
 using NewAvatarWebApis.Common;
 using NewAvatarWebApis.Core.Application.Common;
 using NewAvatarWebApis.Core.Application.DTOs;
@@ -9,11 +10,13 @@ using NewAvatarWebApis.Infrastructure.Data;
 using NewAvatarWebApis.Infrastructure.Services.Interfaces;
 using NewAvatarWebApis.Models;
 using Newtonsoft.Json;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Text.Json;
 using Xunit.Abstractions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace NewAvatarWebApis.Infrastructure.Services
@@ -21,6 +24,12 @@ namespace NewAvatarWebApis.Infrastructure.Services
     public class CommonService : ICommonService
     {
         public string _connection = DBCommands.CONNECTION_STRING;
+        private readonly IExcelService _excelService;
+
+        public CommonService(IExcelService excelService)
+        {
+            _excelService = excelService;
+        }
         public async Task<ResponseDetails> GetKisnaItemList(KisnaItemListingParams kisnaitemlistparams)
         {
             int current_page = kisnaitemlistparams.page;
@@ -12452,6 +12461,143 @@ namespace NewAvatarWebApis.Infrastructure.Services
         //        return responseDetails;
         //    }
         //}
+
+        public async Task<ResponseDetails> PieceVerifyExcel(PieceVerifyExcelRequest param)
+        {
+            var responseDetails = new ResponseDetails();
+            IList<PieceVerifyExcelResponse> pieceVerify = new List<PieceVerifyExcelResponse>();
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(_connection))
+                {
+                    string cmdQuery = DBCommands.PieceVerifyExcel;
+                    await dbConnection.OpenAsync();
+
+                    using (SqlCommand cmd = new SqlCommand(cmdQuery, dbConnection))
+                    {
+                        string? dataId = string.IsNullOrWhiteSpace(param.DataId) ? null : param.DataId;
+                        string? dataLoginType = string.IsNullOrWhiteSpace(param.DataLoginType) ? null : param.DataLoginType;
+                        string? igiNumbers = string.IsNullOrWhiteSpace(param.IgiNumbers) ? null : param.IgiNumbers;
+                        string? bagNumbers = string.IsNullOrWhiteSpace(param.BagNumbers) ? null : param.BagNumbers;
+
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandTimeout = 120;
+
+                        cmd.Parameters.AddWithValue("@data_id", dataId);
+                        cmd.Parameters.AddWithValue("@data_login_type", dataLoginType);
+                        cmd.Parameters.AddWithValue("@igi_numbers", igiNumbers);
+                        cmd.Parameters.AddWithValue("@bag_numbers", bagNumbers);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
+
+                            if (ds.Tables.Count > 0)
+                            {
+                                if (ds.Tables[0].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                                    {
+                                        try
+                                        {
+                                            var rowdetails = ds.Tables[0].Rows[i];
+                                            string? Date = rowdetails["Date"] != DBNull.Value ? Convert.ToString(rowdetails["Date"]) : string.Empty;
+                                            string? ItemName = rowdetails["Item Name"] != DBNull.Value ? Convert.ToString(rowdetails["Item Name"]) : string.Empty;
+                                            string? ItemDesc = rowdetails["Item Desc"] != DBNull.Value ? Convert.ToString(rowdetails["Item Desc"]) : string.Empty;
+                                            string? BagDiamondQuality = rowdetails["Bag Diamond Quality"] != DBNull.Value ? Convert.ToString(rowdetails["Bag Diamond Quality"]) : string.Empty;
+                                            string? CurrentDiamondQuality = rowdetails["Current Diamond Quality"] != DBNull.Value ? Convert.ToString(rowdetails["Current Diamond Quality"]) : string.Empty;
+                                            string? BagMRP = rowdetails["Bag MRP"] != DBNull.Value ? Convert.ToString(rowdetails["Bag MRP"]) : string.Empty;
+                                            string? CurrentMRP = rowdetails["Current MRP"] != DBNull.Value ? Convert.ToString(rowdetails["Current MRP"]) : string.Empty;
+                                            string? BagBrand = rowdetails["Bag Brand"] != DBNull.Value ? Convert.ToString(rowdetails["Bag Brand"]) : string.Empty;
+                                            string? CurrentBrand = rowdetails["Current Brand"] != DBNull.Value ? Convert.ToString(rowdetails["Current Brand"]) : string.Empty;
+                                            string? BagQuantity = rowdetails["Bag Quantity"] != DBNull.Value ? Convert.ToString(rowdetails["Bag Quantity"]) : string.Empty;
+                                            string? CurrentQuantity = rowdetails["Current Quantity"] != DBNull.Value ? Convert.ToString(rowdetails["Current Quantity"]) : string.Empty;
+                                            string? BagTotalWeight = rowdetails["Bag Total Weight"] != DBNull.Value ? Convert.ToString(rowdetails["Bag Total Weight"]) : string.Empty;
+                                            string? CurrentTotalWeight = rowdetails["Current Total Weight"] != DBNull.Value ? Convert.ToString(rowdetails["Current Total Weight"]) : string.Empty;
+                                            string? BagDiamondWeight = rowdetails["Bag Diamond Weight"] != DBNull.Value ? Convert.ToString(rowdetails["Bag Diamond Weight"]) : string.Empty;
+                                            string? CurrentDiamondWeight = rowdetails["Current Diamond Weight"] != DBNull.Value ? Convert.ToString(rowdetails["Current Diamond Weight"]) : string.Empty;
+                                            string? IGINo = rowdetails["IGINo"] != DBNull.Value ? Convert.ToString(rowdetails["IGINo"]) : string.Empty;
+                                            string? Bagno = rowdetails["Bagno"] != DBNull.Value ? Convert.ToString(rowdetails["Bagno"]) : string.Empty;
+                                            string? HUID = rowdetails["HUID"] != DBNull.Value ? Convert.ToString(rowdetails["HUID"]) : string.Empty;
+                                            string? Lab = rowdetails["Lab"] != DBNull.Value ? Convert.ToString(rowdetails["Lab"]) : string.Empty;
+                                            string? ItemIsSRP = rowdetails["ItemIsSRP"] != DBNull.Value ? Convert.ToString(rowdetails["ItemIsSRP"]) : string.Empty;
+                                            string? COCD = rowdetails["COCD"] != DBNull.Value ? Convert.ToString(rowdetails["COCD"]) : string.Empty;
+
+                                            pieceVerify.Add(new PieceVerifyExcelResponse
+                                            {
+                                                Date = Date,
+                                                ItemName = ItemName,
+                                                ItemDesc = ItemDesc,
+                                                BagDiamondQuality = BagDiamondQuality,
+                                                CurrentDiamondQuality = CurrentDiamondQuality,
+                                                BagMRP = BagMRP,
+                                                CurrentMRP = CurrentMRP,
+                                                BagBrand = BagBrand,
+                                                CurrentBrand = CurrentBrand,
+                                                BagQuantity = BagQuantity,
+                                                CurrentQuantity = CurrentQuantity,
+                                                BagTotalWeight = BagTotalWeight,
+                                                CurrentTotalWeight = CurrentTotalWeight,
+                                                BagDiamondWeight = BagDiamondWeight,
+                                                CurrentDiamondWeight = CurrentDiamondWeight,
+                                                IGINo = IGINo,
+                                                Bagno = Bagno,
+                                                HUID = HUID,
+                                                Lab = Lab,
+                                                ItemIsSRP = ItemIsSRP,
+                                                COCD = COCD,
+                                            });
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (pieceVerify.Any())
+                {
+                    // Generate Excel file
+                    var fileResult = await _excelService.CreatePieceVerifyExcelAsync(pieceVerify);
+
+                    if (fileResult.Success)
+                    {
+                        responseDetails.success = true;
+                        responseDetails.message = "Successfully";
+                        responseDetails.status = "200";
+                        responseDetails.data = pieceVerify;
+                        responseDetails.file_path = fileResult.FilePath;
+                    }
+                    else
+                    {
+                        responseDetails.success = false;
+                        responseDetails.message = fileResult.Message;
+                        responseDetails.status = "400";
+                        responseDetails.data = pieceVerify;
+                    }
+                }
+                else
+                {
+                    responseDetails.success = false;
+                    responseDetails.message = "No data found";
+                    responseDetails.status = "200";
+                    responseDetails.data = new List<PieceVerifyExcelResponse>();
+                }
+                return responseDetails;
+            }
+            catch (Exception ex)
+            {
+                responseDetails.success = false;
+                responseDetails.message = $"Error: {ex.Message}";
+                responseDetails.status = "400";
+                responseDetails.data = new List<PieceVerifyExcelResponse>();
+                return responseDetails;
+            }
+        }
 
         public async Task<ResponseDetails> TopRecommandedItems(TopRecommandedItemsRequest param)
         {

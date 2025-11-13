@@ -238,4 +238,37 @@
             public string? viewName { get; set; }
             public string? viewId { get; set; }
         }
-    }
+
+        public class PieceVerifyExcelResponse
+        {
+            public string? Date { get; set; }
+            public string? ItemName { get; set; }
+            public string? ItemDesc { get; set; }
+            public string? BagDiamondQuality { get; set; }
+            public string? CurrentDiamondQuality { get; set; }
+            public string? BagMRP { get; set; }
+            public string? CurrentMRP { get; set; }
+            public string? BagBrand { get; set; }
+            public string? CurrentBrand { get; set; }
+            public string? BagQuantity { get; set; }
+            public string? CurrentQuantity { get; set; }
+            public string? BagTotalWeight { get; set; }
+            public string? CurrentTotalWeight { get; set; }
+            public string? BagDiamondWeight { get; set; }
+            public string? CurrentDiamondWeight { get; set; }
+            public string? IGINo { get; set; }
+            public string? Bagno { get; set; }
+            public string? HUID { get; set; }
+            public string? Lab { get; set; }
+            public string? ItemIsSRP { get; set; }
+            public string? COCD { get; set; }
+        }
+
+        public class FileResponse
+        {
+            public bool Success { get; set; }
+            public string Message { get; set; } = string.Empty;
+            public string FilePath { get; set; } = string.Empty;
+            public string FileName { get; set; } = string.Empty;
+        }
+}

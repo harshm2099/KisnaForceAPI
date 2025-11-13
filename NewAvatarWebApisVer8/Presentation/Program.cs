@@ -28,6 +28,7 @@ builder.Services.AddCors(options =>
 
 // Adding Dependency Injection
 builder.Services.AddScoped<IOtpService, OtpService>();
+builder.Services.AddScoped<IExcelService, ExcelService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICollectionService, CollectionService>();

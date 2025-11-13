@@ -68,6 +68,7 @@ namespace NewAvatarWebApis.Infrastructure.Services.Interfaces
         public Task<ResponseDetails> StockWiseItemData(StockWiseItemDataRequest param);
         public Task<ResponseDetails> PopularItems(PopularItemsRequest param);
         public Task<ResponseDetails> PopularItemsFilter(PopularItemsFilterRequest request);
+        public Task<ResponseDetails> PieceVerifyExcel(PieceVerifyExcelRequest param);
         public Task<ResponseDetails> TopRecommandedItems(TopRecommandedItemsRequest param);
     }
 }
