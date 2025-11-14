@@ -109,6 +109,16 @@
         public string? ItemTypeCommonID { get; set; }
         public string? ItemNosePinScrewSts { get; set; }
         public string? ImagePath { get; set; }
+        public string? Weight { get; set; }
+        public string? SelectedColor { get; set; }
+        public string? SelectedSize { get; set; }
+        public string? SelectedColor1 { get; set; }
+        public string? SelectedSize1 { get; set; }
+        public string? FieldName { get; set; }
+        public string? ColorName { get; set; }
+        public string? DefaultColorName { get; set; }
+        public string? DefaultColorCode { get; set; }
+        public string?  DefaultSizeName { get; set; }
         public object? SizeList { get; set; }
         public object? ColorList { get; set; }
         public object? ItemsColorSizeList { get; set; }
