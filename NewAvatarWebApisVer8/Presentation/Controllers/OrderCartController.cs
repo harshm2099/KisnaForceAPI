@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NewAvatarWebApis.Core.Application.DTOs;
+using NewAvatarWebApis.Core.Application.Responses;
 using NewAvatarWebApis.Infrastructure.Services.Interfaces;
 using NewAvatarWebApis.Models;
 
@@ -51,6 +52,13 @@ namespace NewAvatarWebApis.Presentation.Controllers
         public async Task<ResponseDetails> CartSingleCancel(CartSingleCancelListingParams cartsinglecancel_params)
         {
             var result = await _orderCartService.CartSingleCancel(cartsinglecancel_params);
+            return result;
+        }
+
+        [HttpPost("order-Item-cancel")]
+        public async Task<ReturnResponse> OrderItemCancel(OrderItemCancelRequest param)
+        {
+            var result = await _orderCartService.OrderItemCancel(param);
             return result;
         }
     }
