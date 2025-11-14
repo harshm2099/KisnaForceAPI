@@ -339,12 +339,101 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                             string? itemTypeCommonID = rowdetails["ItemTypeCommonID"] != DBNull.Value ? Convert.ToString(rowdetails["ItemTypeCommonID"]) : string.Empty;
                                             string? itemNosePinScrewSts = rowdetails["ItemNosePinScrewSts"] != DBNull.Value ? Convert.ToString(rowdetails["ItemNosePinScrewSts"]) : string.Empty;
                                             string? imagePath = rowdetails["image_path"] != DBNull.Value ? Convert.ToString(rowdetails["image_path"]) : string.Empty;
+                                            string? weight = rowdetails["weight"] != DBNull.Value ? Convert.ToString(rowdetails["weight"]) : string.Empty;
+                                            string? selectedColor = rowdetails["selectedColor"] != DBNull.Value ? Convert.ToString(rowdetails["selectedColor"]) : string.Empty;
+                                            string? selectedSize = rowdetails["selectedSize"] != DBNull.Value ? Convert.ToString(rowdetails["selectedSize"]) : string.Empty;
+                                            string? selectedColor1 = rowdetails["selectedColor1"] != DBNull.Value ? Convert.ToString(rowdetails["selectedColor1"]) : string.Empty;
+                                            string? selectedSize1 = rowdetails["selectedSize1"] != DBNull.Value ? Convert.ToString(rowdetails["selectedSize1"]) : string.Empty;
+                                            string? fieldName = rowdetails["field_name"] != DBNull.Value ? Convert.ToString(rowdetails["field_name"]) : string.Empty;
+                                            string? colorName = rowdetails["color_name"] != DBNull.Value ? Convert.ToString(rowdetails["color_name"]) : string.Empty;
+                                            string? defaultColorName = rowdetails["default_color_name"] != DBNull.Value ? Convert.ToString(rowdetails["default_color_name"]) : string.Empty;
+                                            string? defaultColorCode = rowdetails["default_color_code"] != DBNull.Value ? Convert.ToString(rowdetails["default_color_code"]) : string.Empty;
+                                            string? defaultSizeName = rowdetails["default_size_name"] != DBNull.Value ? Convert.ToString(rowdetails["default_size_name"]) : string.Empty;
                                             string? sizeList = rowdetails["sizeList"] != DBNull.Value ? Convert.ToString(rowdetails["sizeList"]) : string.Empty;
                                             string? colorList = rowdetails["colorList"] != DBNull.Value ? Convert.ToString(rowdetails["colorList"]) : string.Empty;
                                             string? itemsColorSizeList = rowdetails["itemsColorSizeList"] != DBNull.Value ? Convert.ToString(rowdetails["itemsColorSizeList"]) : string.Empty;
                                             string? itemOrderInstructionList = rowdetails["itemOrderInstructionList"] != DBNull.Value ? Convert.ToString(rowdetails["itemOrderInstructionList"]) : string.Empty;
                                             string? itemOrderCustomInstructionList = rowdetails["itemOrderCustomInstructionList"] != DBNull.Value ? Convert.ToString(rowdetails["itemOrderCustomInstructionList"]) : string.Empty;
                                             string? itemImagesColor = rowdetails["item_images_color"] != DBNull.Value ? Convert.ToString(rowdetails["item_images_color"]) : string.Empty;
+
+                                            List<Dictionary<string, object>> sizeListDynamic = new List<Dictionary<string, object>>();
+                                            List<Dictionary<string, object>> colorListDynamic = new List<Dictionary<string, object>>();
+                                            List<Dictionary<string, object>> itemsColorSizeListDynamic = new List<Dictionary<string, object>>();
+                                            List<Dictionary<string, object>> itemOrderInstructionListDynamic = new List<Dictionary<string, object>>();
+                                            List<Dictionary<string, object>> itemOrderCustomInstructionListDynamic = new List<Dictionary<string, object>>();
+                                            List<Dictionary<string, object>> itemImagesColorDynamic = new List<Dictionary<string, object>>();
+
+                                            if (!string.IsNullOrEmpty(sizeList))
+                                            {
+                                                try
+                                                {
+                                                    sizeListDynamic = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(sizeList);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Error deserializing sizeList: " + ex.Message);
+                                                }
+                                            }
+
+                                            if (!string.IsNullOrEmpty(colorList))
+                                            {
+                                                try
+                                                {
+                                                    colorListDynamic = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(colorList);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Error deserializing colorList: " + ex.Message);
+                                                }
+                                            }
+
+                                            if (!string.IsNullOrEmpty(itemsColorSizeList))
+                                            {
+                                                try
+                                                {
+                                                    itemsColorSizeListDynamic = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(itemsColorSizeList);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Error deserializing itemsColorSizeList: " + ex.Message);
+                                                }
+                                            }
+
+                                            if (!string.IsNullOrEmpty(itemOrderInstructionList))
+                                            {
+                                                try
+                                                {
+                                                    itemOrderInstructionListDynamic = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(itemOrderInstructionList);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Error deserializing itemOrderInstructionList: " + ex.Message);
+                                                }
+                                            }
+
+                                            if (!string.IsNullOrEmpty(itemOrderCustomInstructionList))
+                                            {
+                                                try
+                                                {
+                                                    itemOrderCustomInstructionListDynamic = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(itemOrderCustomInstructionList);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Error deserializing itemOrderCustomInstructionList: " + ex.Message);
+                                                }
+                                            }
+
+                                            if (!string.IsNullOrEmpty(itemImagesColor))
+                                            {
+                                                try
+                                                {
+                                                    itemImagesColorDynamic = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(itemImagesColor);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Error deserializing itemImagesColor: " + ex.Message);
+                                                }
+                                            }
 
                                             ordertrackingitemdetaillist.Add(new OrderTrackingItemDetailDataResponse
                                             {
@@ -423,12 +512,22 @@ namespace NewAvatarWebApis.Infrastructure.Services
                                                 ItemTypeCommonID = itemTypeCommonID,
                                                 ItemNosePinScrewSts = itemNosePinScrewSts,
                                                 ImagePath = imagePath,
-                                                SizeList = sizeList,
-                                                ColorList = colorList,
-                                                ItemsColorSizeList = itemsColorSizeList,
-                                                ItemOrderInstructionList = itemOrderInstructionList,
-                                                ItemOrderCustomInstructionList = itemOrderCustomInstructionList,
-                                                ItemImagesColor = itemImagesColor
+                                                Weight = weight,
+                                                SelectedColor = selectedColor,
+                                                SelectedSize = selectedSize,
+                                                SelectedColor1 = selectedColor1,
+                                                SelectedSize1 = selectedSize1,
+                                                FieldName = fieldName,
+                                                ColorName = colorName,
+                                                DefaultColorName = defaultColorName,
+                                                DefaultColorCode = defaultColorCode,
+                                                DefaultSizeName = defaultSizeName,
+                                                SizeList = sizeListDynamic,
+                                                ColorList = colorListDynamic,
+                                                ItemsColorSizeList = itemsColorSizeListDynamic,
+                                                ItemOrderInstructionList = itemOrderInstructionListDynamic,
+                                                ItemOrderCustomInstructionList = itemOrderCustomInstructionListDynamic,
+                                                ItemImagesColor = itemImagesColorDynamic
                                             });
                                         }
                                         catch (Exception ex)
