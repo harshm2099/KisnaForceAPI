@@ -1,4 +1,5 @@
 ﻿using NewAvatarWebApis.Core.Application.DTOs;
+using NewAvatarWebApis.Core.Application.Responses;
 using NewAvatarWebApis.Models;
 
 namespace NewAvatarWebApis.Infrastructure.Services.Interfaces
@@ -14,5 +15,7 @@ namespace NewAvatarWebApis.Infrastructure.Services.Interfaces
         public Task<ResponseDetails> CartCancel(CartCancelListingParams cartcancel_params);
 
         public Task<ResponseDetails> CartSingleCancel(CartSingleCancelListingParams cartsinglecancel_params);
+
+        public Task<ReturnResponse> OrderItemCancel(OrderItemCancelRequest param);
     }
 }

@@ -321,6 +321,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
         public const string ORDERASSIGNLIST = "OrderAssignList";
         public const string CARTCANCEL = "CartCancel";
         public const string CARTSINGLECANCEL = "CartSingleCancel";
+        public const string OrderItemCancel = "usp_OrderItemCancel";
         public const string GETCOLORBULK = "GETCOLORBULK";
         public const string GETCATEGORYSIZEBULK = "GETCATEGORYSIZEBULK";
         public const string GETITEMSIZEBULKBY_SIZEID = "GETITEMSIZEBULKBY_SIZEID";
