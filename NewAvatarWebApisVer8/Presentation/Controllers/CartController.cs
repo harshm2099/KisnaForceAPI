@@ -140,5 +140,12 @@ namespace NewAvatarWebApis.Presentation.Controllers
             var result = await _cartService.CheckItemSizeRange(param);
             return result;
         }
+
+        [HttpPost("cart-item-list")]
+        public async Task<ResponseDetails> CartItemList(CartItemListRequest param)
+        {
+            var result = await _cartService.CartItemList(param);
+            return result;
+        }
     }
 }

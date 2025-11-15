@@ -9,6 +9,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
     public class DBCommands
     {
         public static string CONNECTION_STRING = "Data Source=13.203.163.138;Initial Catalog=hkdb_data_bkp;User Id=admin;Password=$Developer$123;TrustServerCertificate=True;";
+        //public static string CONNECTION_STRING = "Data Source=192.168.151.20;Initial Catalog=hkdb_data_bkp;User Id=sa;Password=sa@123;TrustServerCertificate=True;";
         public static string CustomerID = "b19f6709-deb6-4da6-8c74-6f2ea9e49f3f";
 
         public const string LOGIN_MST = "LOGIN_PROC";
@@ -26,6 +27,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
         public const string CHANGE_PASSWORD = "CHANGE_PASSWORD";
 
         public const string BRAND_MST = "CRUD_BRAND";
+        public const string BRANDCRUD = "Brand_CRUD";
         public const string ZONE_MST = "CRUD_ZONE";
         public const string CATEGORY_MST = "CRUD_CATEGORY";
         public const string REGION_MST = "CRUD_REGION";
@@ -191,6 +193,7 @@ namespace NewAvatarWebApis.Infrastructure.Data
         public const string CART_ORDERTYPELIST = "usp_OrderTypeList";
         public const string CheckItemSizeRange = "usp_CheckItemSizeRange";
         public const string CheckoutVerifyOtp = "usp_checkoutVerifyOtp";
+        public const string CartItemList = "usp_CartItemsList";
 
         //Other API
         public const string VerifyProduct = "VerifyProduct";

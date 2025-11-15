@@ -858,4 +858,13 @@ namespace NewAvatarWebApis.Core.Application.DTOs
             public string? dataId { get; set; }
             public string? otp { get; set; }
         }
+
+        public class CartItemListRequest
+        {
+            public string? cartId { get; set; }
+            public string? dataId { get; set; }
+            public string? cartStatus { get; set; }
+            public string? sortId { get; set; }
+            public string? dataLoginType { get; set; }
+    }
 }
