@@ -59,5 +59,7 @@ namespace NewAvatarWebApis.Infrastructure.Services.Interfaces
         public Task<OrderListResponse> OrderList(OrderListParams orderlistparams);
 
         public Task<ReturnResponse> CheckItemSizeRange(CheckItemSizeRangeRequest param);
+
+        public Task<ResponseDetails> CartItemList(CartItemListRequest param);
     }
 }
